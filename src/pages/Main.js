@@ -1,7 +1,8 @@
-import { MainTitleWrapper, MainTitle, MainLogo, MainAddClub, MyClunbList, SectionTitle } from "./styled/Main.styled";
+import { MainTitleWrapper, MainTitle, MainLogo, MainAddClub, MyClubList, SectionTitle, LatestClub } from "./styled/Main.styled";
 import logo from "../static/img/logo.png"
 import Button from '@mui/material/Button';
 import ClubCard from "../components/common/ClubCard";
+import ListBasic from "../components/common/ListBasic";
 
 export default function Main(){
     return(
@@ -17,7 +18,7 @@ export default function Main(){
             <MainAddClub>
                 <Button variant='outlined'style={{width: '100%', height:'50px'}} >내 모임 만들기</Button>
             </MainAddClub>
-            <MyClunbList>
+            <MyClubList>
                 <SectionTitle>
                     내가 가입한 모임
                 </SectionTitle>
@@ -25,7 +26,13 @@ export default function Main(){
                     <ClubCard/>
                     <ClubCard/>
                 </div>
-            </MyClunbList>
+            </MyClubList>
+            <LatestClub>
+                <SectionTitle>
+                    최근 개설된 모임
+                </SectionTitle>
+                <ListBasic/>
+            </LatestClub>
         </div>        
     );
 }

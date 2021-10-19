@@ -18,10 +18,13 @@ export const MainLogo = styled.div`
 export const MainAddClub = styled.div`    
 `;
 
-export const MyClunbList = styled.div`
+export const MyClubList = styled.div`
     
 `;
 
 export const SectionTitle = styled.h4`
     color: gray;
+`;
+
+export const LatestClub = styled.div`
 `;
