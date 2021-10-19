@@ -19,7 +19,7 @@ const BottomNav = () => {
             <div>
                 <Link to='/search' className='nav-link'>
                     <IconButton size="small">
-                        <FontAwesomeIcon icon="magnifying-glass" onMouseOver/>
+                        <FontAwesomeIcon icon="magnifying-glass"/>
                     </IconButton>                    
                 </Link>
             </div>
