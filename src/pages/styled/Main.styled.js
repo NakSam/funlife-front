@@ -27,4 +27,5 @@ export const SectionTitle = styled.h4`
 `;
 
 export const LatestClub = styled.div`
+    margin: 0px 10px 0px 0px;
 `;
