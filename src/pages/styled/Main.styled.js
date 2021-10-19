@@ -14,3 +14,14 @@ export const MainLogo = styled.div`
     margin: 0 0 auto auto;
     float:right;
 `;
+
+export const MainAddClub = styled.div`    
+`;
+
+export const MyClunbList = styled.div`
+    
+`;
+
+export const SectionTitle = styled.h4`
+    color: gray;
+`;
