@@ -3,6 +3,7 @@ import './styled/Navbar.css'
 import '../../static/icons/FontAwesome'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import IconButton from '@mui/material/IconButton';
 
 
 const BottomNav = () => {
@@ -10,22 +11,30 @@ const BottomNav = () => {
         <nav className="wrapper">
             <div>
                 <Link to='/home' className='nav-link'>
-                    <FontAwesomeIcon icon="house"/>
+                    <IconButton size="small">
+                        <FontAwesomeIcon icon="house"/>
+                    </IconButton>
                 </Link>                
             </div>
             <div>
                 <Link to='/search' className='nav-link'>
-                    <FontAwesomeIcon icon="magnifying-glass"/>
+                    <IconButton size="small">
+                        <FontAwesomeIcon icon="magnifying-glass" onMouseOver/>
+                    </IconButton>                    
                 </Link>
             </div>
             <div>
                 <Link to='/messenger' className='nav-link'>
-                    <FontAwesomeIcon icon="comment"/>
+                    <IconButton size="small">
+                        <FontAwesomeIcon icon="comment"/>
+                    </IconButton>
                 </Link>
             </div>
             <div>
                 <Link to='/userinfo' className='nav-link'>
-                    <FontAwesomeIcon icon="user"/>
+                    <IconButton size="small">
+                        <FontAwesomeIcon icon="user"/>
+                    </IconButton>
                 </Link>
             </div>            
         </nav>
