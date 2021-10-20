@@ -1,35 +1,44 @@
-.topnav {
-    overflow: hidden;
+.clubName {
+  font-weight: 600;
 }
-  
-a {
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+
+.topnav {
+  overflow: hidden;
 }
 
 .invitation {
-    float: left;
-    color: #ffb300;
+  float: left;
+  color: #ffb300;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px 14px 0px;
+  transition: 0.3s;
+  font-size: 17px;
 }
 
 .setting {
     float: right;
     color: #60584c;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 0px 14px 0px;
+    transition: 0.3s;
+    font-size: 17px;
 }
 
 /* Style the tab */
-.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-  }
+.tabName {
+  margin-bottom: 0px;
+}
   
   /* Style the buttons inside the tab */
-  .tab button {
-    background-color: inherit;
-    float: left;
+  .tablinks {
+    width: 50%;
+    background-color: #ffcc00;
     border: none;
     outline: none;
     cursor: pointer;
@@ -39,40 +48,103 @@ a {
   }
   
   /* Change background color of buttons on hover */
-  .tab button:hover {
-    background-color: #ddd;
+  .tablinks:hover {
+    background-color: #ffb300;
   }
   
   /* Create an active/current tablink class */
-  .tab button.active {
+  .tablinks.active {
     background-color: #ccc;
   }
   
   /* Style the tab content */
   .tabcontent {
-    /* display: none; */
     padding: 6px 12px;
-    border: 1px solid #ccc;
     border-top: none;
   }
 
-  .button {
+  .calendar {
+    margin-left: 20px;
+  }
+  .cardBox {
+    border-bottom: 1px solid #f0f2f4;
+    padding-bottom: 14px;
+    padding-top: 14px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .finance {
+    width: 80%;
+    background-color: #ffcc00;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    border-radius: 25px;
+    border-style: hidden;
+  }
+
+  .pay {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+  }
+
+  .finance button {
+    width: 33.3%;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .balance {
+    font-weight: 600;
+  }
+
+  .clubIntroTitle { 
+    font-size: 17px;
+    font-weight: 600
+  }
+
+  .clubIntroDetail {
+    padding-top: 14px;
+    border-bottom: 1px solid #f0f2f4;
+  }
+
+  .category {
     background-color: #ddd;
     border: none;
     color: black;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: block;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 16px;
   }
   
-  .button:hover {
+  .category:hover {
     background-color: #f1f1f1;
   }
 
   .location {
     padding-left: 0px;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px 14px 0px;
+    transition: 0.3s;
+    font-size: 17px;
+    display: block;
+  }
+
+  .introStatistics{
+    padding-top: 14px
+  }
+
+  .introSubTitle {
+    font-size: 17px;
+    font-weight: 600;
   }
