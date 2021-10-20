@@ -5,6 +5,7 @@ import { modalStatus } from "../../states/state";
 export default function SearchResultList({ searchData }){
     const { data } = useSearchList(searchData);  
     const [ showModal, setShowModal] = useRecoilState(modalStatus);
+
     return(
         <div>
             <ul>
