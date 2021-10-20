@@ -9,6 +9,7 @@ import ClubDetail from "./pages/ClubDetail";
 import Navbar from "./components/common/Navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppWrapper } from "./App.styled";
+import ClubModal from "./components/common/ClubModal";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,7 @@ export default function App() {
             <Route path="/clubdetail" component={ClubDetail} />
           </Switch>   
           <Navbar />
+          <ClubModal />
         </AppWrapper>
       </RecoilRoot>
     </QueryClientProvider>
