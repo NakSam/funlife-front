@@ -1,12 +1,9 @@
-import { useSetRecoilState } from "recoil";
-import { searchStatus } from "../../states/state";
-import { CategoryList, LocationList } from "../consts/search";
+import { CategoryList, LocationList } from "../../consts/search";
 import { SelectBox1, SelectBox2, SearchInputBox, SearchInput, SearchButton } from "./styled/SearchBox.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { InputLabel, Select, MenuItem } from "@mui/material";
 
 export default function SearchBox({ searchData, setSearchData }){
-    const setSearch = useSetRecoilState(searchStatus);
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -15,7 +12,6 @@ export default function SearchBox({ searchData, setSearchData }){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSearch(true);
         setSearchData(searchData);
     }
 
