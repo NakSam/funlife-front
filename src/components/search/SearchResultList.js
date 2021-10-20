@@ -1,16 +1,19 @@
-import { useRecoilValue } from "recoil";
-import { searchState } from "../../states/state";
+import { useRecoilState } from "recoil";
 import useSearchList from "../../hooks/useSearchList";
+import { modalStatus } from "../../states/state";
 
 export default function SearchResultList({ searchData }){
-    const { data } = useSearchList(searchData);
-    console.log(data);
+    const { data } = useSearchList(searchData);  
+    const [ showModal, setShowModal] = useRecoilState(modalStatus);
+
     return(
         <div>
             <ul>
-               {/* {data.map((item) => {
-                   <li>{item}</li>
-               })} */}
+                {data && Object.entries(data).map((item) => {
+                    return (
+                        <li key={item[1].id} onClick={() => setShowModal({show: !showModal.show, clubId:1})}>{item[1].name}</li>
+                    )
+                })}
             </ul>
         </div>
     );
