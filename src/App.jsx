@@ -25,7 +25,7 @@ export default function App() {
       <RecoilRoot>
         <AppWrapper>
           <Switch>
-            <Route path="/home" component={Main} />
+            <Route path="/home" component={Main} exact/>
             <Route path="/search" component={Search} />
             <Route path="/messenger" component={Messenger}/>
             <Route path="/userinfo" component={UserInfo}/>

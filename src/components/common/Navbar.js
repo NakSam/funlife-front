@@ -10,28 +10,28 @@ const BottomNav = () => {
     return (
         <nav className="wrapper">
             <div>
-                <Link to='/home' className='nav-link'>
+                <Link to='/home'>
                     <IconButton size="small">
                         <FontAwesomeIcon icon="house"/>
                     </IconButton>
                 </Link>                
             </div>
             <div>
-                <Link to='/search' className='nav-link'>
+                <Link to='/search'>
                     <IconButton size="small">
                         <FontAwesomeIcon icon="magnifying-glass"/>
                     </IconButton>                    
                 </Link>
             </div>
             <div>
-                <Link to='/messenger' className='nav-link'>
+                <Link to='/messenger'>
                     <IconButton size="small">
                         <FontAwesomeIcon icon="comment"/>
                     </IconButton>
                 </Link>
             </div>
             <div>
-                <Link to='/userinfo' className='nav-link'>
+                <Link to='/userinfo'>
                     <IconButton size="small">
                         <FontAwesomeIcon icon="user"/>
                     </IconButton>
