@@ -23,9 +23,10 @@ export const MyClubList = styled.div`
 `;
 
 export const SectionTitle = styled.h4`
+    margin: 20px 0px 10px 0px;
     color: gray;
 `;
 
 export const LatestClub = styled.div`
-    margin: 0px 10px 0px 0px;
+    margin: 0px 0px 40px 0px;
 `;

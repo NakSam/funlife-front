@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 
 const ListBasic = ({data}) => {
     return(
-        <div style={{display:"flex"}}>
+        <div style={{display:"flex", margin:"5px 0px 5px 0px"}}>
             <div>
                 <img alt="book" style={{width: "170px", borderRadius:"10px"}} src={data.thumbnail} />
             </div>
