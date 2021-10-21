@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import axiosUtils from "../utils/axiosUtils";
+import Modal from 'react-modal';
 
 const useTabs = (initialTabs, allTabs) => {
     const [contentIndex, setContentIndex] = useState(initialTabs);
@@ -13,6 +15,16 @@ const useTabs = (initialTabs, allTabs) => {
 };
 
 export default function ClubDetail(){
+    // 바인딩
+    const [club, setClub] = React.useState(0);
+
+    React.useEffect(() => {
+        axiosUtils.get('/club/search/' + '2').then((response) => {
+          setClub(response.data);
+        });
+    }, []);
+    // 바인딩
+
     const [value, onChange] = useState(new Date());
 
     const content = [
@@ -24,17 +36,18 @@ export default function ClubDetail(){
             <div id="Information" class="tabcontent">
                 <div class="clubIntroDetail">
                     <h2 class="clubIntroTitle">모임 소개</h2>
-                    <p>캘리그라피 초보라면 누구나 환영합니다~^^</p>
-                    <button class="category">캘리그라피/서예</button>
-                    <button class="location"><FontAwesomeIcon icon="fa-solid fa-location-dot" /> 부산광역시 북구</button>
+                    <p>{club.description}</p>
+                    <button class="category">{club.category}</button>
+                    <button class="location"><FontAwesomeIcon icon="fa-solid fa-location-dot" /> {club.location}</button>
                 </div>
     
                 <div class="introStatistics">
                     <h2 class="introSubTitle">이 모임의 활동 정보</h2>
+                    <img src={club.image} />
                     <ul>
-                        <li>개설일 2017년 1월</li>
-                        <li>멤버 67 명</li>
-                        <li>회비 10000원/월</li>
+                        <li>리더 {club.clubMaster}</li>
+                        <li>멤버 {club.memberNum}</li>
+                        <li>회비 {club.dues}원</li>
                     </ul>
                 </div>
             </div>
@@ -57,12 +70,20 @@ export default function ClubDetail(){
       
     const { contentItem, contentChange } = useTabs(0, content);
 
+    // 모달
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+ 
     return(
         <div>
-            <h1 class="clubName">초보 캘리스터디</h1>
+            <h1 class="clubName">{club.name}</h1>
 
             <div class="topnav">
-                <button class="invitation"><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</button>
+                <button class="invitation" onClick={()=> setModalIsOpen(true)}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</button>
+                <Modal isOpen={modalIsOpen}>
+                    This is Modal content
+                    <button onClick={()=> setModalIsOpen(false)}>Modal Open</button>
+                </Modal>
+                {/* 모임 설정 */}
                 <button class="setting"><FontAwesomeIcon icon="fa-solid fa-gear" /> 모임 설정</button>
             </div>
 
