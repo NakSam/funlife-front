@@ -56,14 +56,14 @@ const newClubSample = [
 export default function Main(){
     const sampleList = newClubSample.map((data)=><ListBasic data={data}/>);
         
-    // 바인딩
+    // 내가 가입한 모임
     const [myClubList, setMyClubList] = React.useState(0);
     React.useEffect(() => {
         axiosUtils.get("/club/myClub").then((response) => {
             setMyClubList(response.data);
         });
     }, []);
-    // 바인딩
+    // 내가 가입한 모임
 
     // 내 모임 만들기
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -85,18 +85,7 @@ export default function Main(){
         console.log(Category);
         console.log(Location);
         console.log(Description);
-    
-        let body = {
-            category: Category,
-            description: Description,
-            image: "abc",
-            location: Location,
-            maxMemberNum: 100,
-            memberNum: 1,
-            name: Name,
-            ownerId: 1
-        };
-    
+        
         axios({
             method:"post",
             url:'http://naksam.169.56.174.130.nip.io:80/club/register',
