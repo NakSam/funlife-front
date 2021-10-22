@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-app
+  name: deploy-funlife
 spec:
   selector:
     matchLabels:
-      app: app
+      app: funlife
       ver: v1
   replicas: 2
   template:
     metadata:
-      name: pod-app
+      name: pod-funlife
       labels:
-        app: app
+        app: funlife
         ver: v1
     spec:
       containers:
@@ -20,7 +20,7 @@ spec:
           image: rkdals213/funlife-front
           imagePullPolicy: Always
           ports:
-            - name: port-app
+            - name: port-funlife
               containerPort: 10001
           resources:
             requests:

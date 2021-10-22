@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: app-config
+  name: funlife-config
 data:
   # servlet
   SERVLET_CONTEXT_PATH: /app

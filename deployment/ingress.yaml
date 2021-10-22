@@ -12,11 +12,11 @@ spec:
     - host: naksam.169.56.174.130.nip.io
       http:
         paths:
-          - path: /app
+          - path: /funlife
             pathType: PreFix
             frontend:
               service:
-                name: app
+                name: funlife
                 port:
                   number: 8080
           - path: /club
