@@ -12,7 +12,9 @@ export default function Search(){
                 <SearchTitle>모임 찾기</SearchTitle>
             </SearchTitleWrapper>
             <SearchBox searchData={searchData} setSearchData={setSearchData} />
-            <SearchResultList searchData={searchData} />
+            <div style={{marginBottom:"40px"}}>
+                <SearchResultList searchData={searchData} />
+            </div>
         </div>
     );
 }

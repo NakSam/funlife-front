@@ -16,7 +16,7 @@ export default function SearchBox({ searchData, setSearchData }){
     }
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{marginBottom:"2rem"}}>
             <SelectBox1 size="small">
                 <InputLabel id="category">카테고리</InputLabel>
                 <Select
