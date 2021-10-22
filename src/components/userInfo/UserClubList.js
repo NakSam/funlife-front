@@ -2,15 +2,19 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../static/icons/FontAwesome';
 import { Button } from "@mui/material";
-import { useRecoilState } from "recoil";
-import { modalStatus } from "../../states/state";
+import ClubDetail from "../../pages/ClubDetail";
+
+function test11(clubId){
+    console.log(clubId);
+    return window.location.replace("/clubDetail/?clubId="+clubId);
+}
 
 const UserClubList = ({data}) => {
-    const [ showModal, setShowModal] = useRecoilState(modalStatus);
+    
     return(
         data && Object.entries(data).map((item) => {
             return (
-                <div style={{display:"flex"}} key={item[1].id} onClick={() => setShowModal({show: !showModal.show, clubId:item[1].id})}>
+                <div style={{display:"flex"}} key={item[1].id} name="clubId" value={item[1].id} onClick={() => test11(item[1].id)}>
                     <div >
                         <img alt="book" style={{width: "170px", borderRadius:"10px"}} src={item[1].image} />
                     </div>

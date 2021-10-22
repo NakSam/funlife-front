@@ -9,7 +9,6 @@ export default function ClubModal(){
     
     const handleClose = () => setShowModal({...showModal, show: !showModal.show});
     const handleClubApply = () => setShowModal({...showModal, show: !showModal.show});
-    console.log("김형준바보");
     return(
         <Modal show={showModal.show} onHide={handleClose}>
             <ModalHeader closeButton>
