@@ -79,7 +79,7 @@ export default function ClubDetail(){
 
             <div class="topnav">
                 <button class="invitation" onClick={()=> setModalIsOpen(true)}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</button>
-                <Modal isOpen={modalIsOpen}>
+                <Modal isOpen={modalIsOpen} ariaHideApp={false}>
                     This is Modal content
                     <button onClick={()=> setModalIsOpen(false)}>Modal Open</button>
                 </Modal>
