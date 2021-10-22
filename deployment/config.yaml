@@ -4,5 +4,5 @@ metadata:
   name: funlife-config
 data:
   # servlet
-  SERVLET_CONTEXT_PATH: /app
+  SERVLET_CONTEXT_PATH: /funlife
   CLUB_PORT: "8080"  
