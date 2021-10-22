@@ -97,24 +97,17 @@ export default function Main(){
             ownerId: 1
         };
     
-        axios
-          .post("https://naksam.169.56.174.130.nip.io​/club​/register", body)
-          .then((res) => console.log(res));
-    };
-
-    const getNewClub = () => {
         axios({
             method:"post",
-            // url:'http://naksam.169.56.174.130.nip.io:80/club/home'
             url:'http://naksam.169.56.174.130.nip.io:80/club/register',
             data:{
-                category: "스포츠",
-                description: "string",
+                category: Category,
+                description: Description,
                 image: "https://naksam.s3.ap-northeast-2.amazonaws.com/img/gym_1920.jpg",
-                location: "강남구",
-                maxMemberNum: 10,
-                memberNum: 2,
-                name: "KB강남 스포츠",
+                location: Location,
+                maxMemberNum: 100,
+                memberNum: 1,
+                name: Name,
                 ownerId: 1
               }
           })
@@ -123,8 +116,8 @@ export default function Main(){
           })
           .catch((error) => {
             
-          })    
-    }
+          })
+    };
     // 내 모임 만들기
 
     return(
@@ -142,7 +135,7 @@ export default function Main(){
             </MainAddClub>
             <Modal isOpen={modalIsOpen} ariaHideApp={false}>
                 {/*onSubmit={submitHandler}*/} 
-                <form onSubmit={getNewClub}>
+                <form onSubmit={submitHandler}>
                     <label>모임 이름</label><br />
                     <input type="text" value={Name} onChange={nameHandler}/><br />
                     <label>카테고리</label><br />
