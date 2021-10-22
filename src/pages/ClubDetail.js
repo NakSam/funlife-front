@@ -26,7 +26,7 @@ export default function ClubDetail(e){
     console.log(query.get("clubId"));
 
     React.useEffect(() => {
-        axiosUtils.get('/club/search/' + 1).then((response) => {
+        axiosUtils.get('/club/search/' + query.get("clubId")).then((response) => {
           setClub(response.data);
         });
     }, []);

@@ -7,20 +7,20 @@ const ListBasic = ({data}) => {
     return(
         data && Object.entries(data).map((item) => {
             return(
-                <div style={{display:"flex", margin:"5px 0px 5px 0px"}}>
+                <div style={{display:"flex", margin:"5px 0px 5px 0px"}} key={item[1].id} >
                     <div>
                         <img alt="book" style={{width: "170px", borderRadius:"10px"}} src={item[1].image} />
                     </div>
                     <div style={{margin:"0px 0px 0px 5px"}}>
                         <div className="location" style={{margin:"0px 5px 5px 5px", fontSize:"10px"}}>
-                            <div style={{padding:"2px"}}>{item[1].location}</div>
+                            <span style={{padding:"2px"}}>{item[1].location}</span>
                         </div>
                         <div className="clubTitle" style={{margin:"5px"}}>
-                            <div>{item[1].name}</div>
+                            <span>{item[1].name}</span>
                         </div>
                         <div className="personCount" style={{margin:"5px"}}>
                             <FontAwesomeIcon icon="users"/>
-                            <div>{item[1].memberNum} / {item[1].maxMemberNum}인</div>
+                            <span>{item[1].memberNum} / {item[1].maxMemberNum}인</span>
                         </div>
                         
                         <div className="tagCategory">

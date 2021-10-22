@@ -19,14 +19,14 @@ const UserClubList = ({data}) => {
                     </div>
                     <div style={{margin:"0px 0px 0px 5px"}}>
                         <div className="location" style={{margin:"0px 5px 5px 5px", fontSize:"10px"}}>
-                            <text style={{padding:"2px"}}>{item[1].location}</text>
+                            <span style={{padding:"2px"}}>{item[1].location}</span>
                         </div>
                         <div className="clubTitle" style={{margin:"5px"}}>
-                            <text>{item[1].name}</text>
+                            <span>{item[1].name}</span>
                         </div>
                         <div className="personCount" style={{margin:"5px"}}>
                             <FontAwesomeIcon icon="users"/>
-                            <text>{item[1].memberNum} / {item[1].maxMemberNum}인</text>
+                            <span>{item[1].memberNum} / {item[1].maxMemberNum}인</span>
                         </div>
                         
                         <div className="tagCategory">
