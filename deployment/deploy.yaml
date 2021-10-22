@@ -16,7 +16,7 @@ spec:
         ver: v1
     spec:
       containers:
-        - name: wallet
+        - name: funlife
           image: rkdals213/funlife-front
           imagePullPolicy: Always
           ports:
