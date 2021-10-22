@@ -5,6 +5,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import axiosUtils from "../utils/axiosUtils";
 import Modal from 'react-modal';
+import { useLocation } from "react-router-dom";
 
 const useTabs = (initialTabs, allTabs) => {
     const [contentIndex, setContentIndex] = useState(initialTabs);
@@ -14,12 +15,18 @@ const useTabs = (initialTabs, allTabs) => {
     };
 };
 
-export default function ClubDetail(){
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+
+export default function ClubDetail(e){
+    let query = useQuery();
     // 바인딩
     const [club, setClub] = React.useState(0);
+    console.log(query.get("clubId"));
 
     React.useEffect(() => {
-        axiosUtils.get('/club/search/' + '2').then((response) => {
+        axiosUtils.get('/club/search/' + 1).then((response) => {
           setClub(response.data);
         });
     }, []);
