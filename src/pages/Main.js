@@ -19,7 +19,7 @@ export default function Main(){
             setMyClubList(response.data);
         });
     }, []);
-    // 내가 가입한 모임
+    // 내가 .가입한 모임
 
     // 내 모임 만들기
     const [modalIsOpen, setModalIsOpen] = useState(false);

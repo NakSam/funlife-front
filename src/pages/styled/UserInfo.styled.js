@@ -98,4 +98,5 @@ export const UserClubTitle = styled.h5`
 
 export const UserClubWrapper = styled.div`
     min-height: 5rem;
+    margin: 0px 0px 40px 0px;
 `;

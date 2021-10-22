@@ -12,7 +12,7 @@ const ListBasic = ({data}) => {
                         <img alt="book" style={{width: "170px", borderRadius:"10px"}} src={item[1].image} />
                     </div>
                     <div style={{margin:"0px 0px 0px 5px"}}>
-                        <div className="location" style={{margin:"0px 5px 5px 5px", fontSize:"10px"}}>
+                        <div style={{margin:"0px 5px 5px 5px", fontSize:"10px"}}>
                             <span style={{padding:"2px"}}>{item[1].location}</span>
                         </div>
                         <div className="clubTitle" style={{margin:"5px"}}>

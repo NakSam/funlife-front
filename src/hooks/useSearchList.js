@@ -13,5 +13,6 @@ const fetchGetSearchResult = async (searchDic) => {
             clubname : searchDic.clubname,
         },
     });
+    console.log("search    " + data);
     return data;
 };
