@@ -14,14 +14,14 @@ export default function UserInfo() {
     //     password: "1q2w3e4r"
     // });
     // console.log(document.cookie);
-    const [userInfo, setUserInfo] = React.useState(0);
+    const [userInfo, setUserInfo] = React.useState("");
     React.useEffect(() => {
         axiosUtils.get("/user/detail").then((response) => {
             setUserInfo(response.data);
         });
     }, []);
     
-    const [myClubList, setMyClubList] = React.useState(0);
+    const [myClubList, setMyClubList] = React.useState("");
     React.useEffect(() => {
         axiosUtils.get("/club/myClub").then((response) => {
             setMyClubList(response.data);

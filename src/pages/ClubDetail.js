@@ -22,7 +22,7 @@ function useQuery() {
 export default function ClubDetail(e){
     let query = useQuery();
     // 바인딩
-    const [club, setClub] = React.useState(0);
+    const [club, setClub] = React.useState("");
     console.log(query.get("clubId"));
 
     React.useEffect(() => {
