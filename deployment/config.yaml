@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  # servlet
+  SERVLET_CONTEXT_PATH: /app
+  CLUB_PORT: "8080"  

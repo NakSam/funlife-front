@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: funlife
+  labels:
+    app: funlife
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: funlife
+
