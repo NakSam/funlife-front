@@ -9,11 +9,12 @@ import axios from "axios";
 import UserClubList from "../components/userInfo/UserClubList";
 import { UserClubWrapper} from "./styled/UserInfo.styled";
 import Modal from 'react-modal';
+import { Route } from "react-router-dom";
 
 export default function Main(){
         
     // 내가 가입한 모임
-    const [myClubList, setMyClubList] = React.useState(0);
+    const [myClubList, setMyClubList] = React.useState("");
     React.useEffect(() => {
         axiosUtils.get("/club/myClub").then((response) => {
             setMyClubList(response.data);
@@ -65,7 +66,7 @@ export default function Main(){
     };
     // 내 모임 만들기
 
-    const [newClubList, setNewClubList] = React.useState(0);
+    const [newClubList, setNewClubList] = React.useState("");
     React.useEffect(() => {
         axiosUtils.get("/club/home").then((response) => {
             setNewClubList(response.data);
@@ -73,7 +74,12 @@ export default function Main(){
     }, []);//최근 개설된 모임
 
     return(
-        <div>    
+        <div>
+            {/* 로그인 버튼 라우트 어떻게 쓰는거여*/}
+            <Router>
+                <Route path="/login" component={Login}/>
+            </Router>
+            {/* 로그인 버튼 */}
             <MainTitleWrapper>
                 <MainLogo>
                     <img width="100%" height="100%" alt="" src={logo} />
