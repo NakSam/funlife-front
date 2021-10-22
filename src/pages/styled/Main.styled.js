@@ -10,9 +10,9 @@ export const MainTitle = styled.h3`
 `;
 
 export const MainLogo = styled.div`
+    height:8rem;
     display:block;
-    margin: 0 0 auto auto;
-    float:right;
+    margin: 0 auto;
 `;
 
 export const MainAddClub = styled.div`    
