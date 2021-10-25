@@ -3,10 +3,13 @@ import { modalStatus } from "../../states/state";
 import { Modal, Col, Button } from "react-bootstrap";
 import { ModalHeader, ModalImg, ModalLocWrapper, ModalTitle, ModalLocIcon, ModalLoc, ModalCatBadge, ModalImgWrapper, ModalRow, ModalCol, ModalColLabel } from "./styled/LIstModal.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useClubModal from "../../hooks/useClubModal";
 
 export default function ClubModal(){
     const [ showModal, setShowModal ] = useRecoilState(modalStatus);
-    
+    const { data } = useClubModal(showModal);
+    console.log(data);
+
     const handleClose = () => setShowModal({...showModal, show: !showModal.show});
     const handleClubApply = () => setShowModal({...showModal, show: !showModal.show});
     return(
