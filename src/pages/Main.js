@@ -85,11 +85,6 @@ export default function Main(){
 
     return(
         <div>
-            {/* 로그인 버튼 라우트 어떻게 쓰는거여*/}
-            {/* <Router>
-                <Route path="/login" component={Login}/>
-            </Router> */}
-            {/* 로그인 버튼 */}
             <MainTitleWrapper>
                 <MainLogo>
                     <img width="100%" height="100%" alt="" src={logo} />
