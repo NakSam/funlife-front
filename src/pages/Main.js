@@ -9,9 +9,19 @@ import axios from "axios";
 import UserClubList from "../components/userInfo/UserClubList";
 import { UserClubWrapper} from "./styled/UserInfo.styled";
 import Modal from 'react-modal';
-import { Route } from "react-router-dom";
+import cookie from "react-cookies";
 
 export default function Main(){
+    
+    const login = () => {
+        axios.post("http://naksam.169.56.174.130.nip.io/user/session/login", {
+            email: "qwe@google.com",
+            password: "1q2w3e4r"
+        }).then(() => {
+            console.log(cookie.load("naksam"));
+        })
+    }
+
         
     // 내가 가입한 모임
     const [myClubList, setMyClubList] = React.useState("");
@@ -85,6 +95,7 @@ export default function Main(){
                     <img width="100%" height="100%" alt="" src={logo} />
                 </MainLogo>
             </MainTitleWrapper>
+            <button onClick={login}>로그인</button>
             <MainAddClub>
                 <Button variant='outlined'style={{width: '100%', height:'50px'}} onClick={()=> setModalIsOpen(true)}>내 모임 만들기</Button>
             </MainAddClub>
