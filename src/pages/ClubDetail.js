@@ -6,6 +6,8 @@ import 'react-calendar/dist/Calendar.css';
 import axiosUtils from "../utils/axiosUtils";
 import Modal from 'react-modal';
 import { useLocation } from "react-router-dom";
+import Invitation from '../components/clubdetail/InviteModal';
+import InviteModal from '../components/clubdetail/InviteModal';
 
 const useTabs = (initialTabs, allTabs) => {
     const [contentIndex, setContentIndex] = useState(initialTabs);
@@ -21,7 +23,7 @@ function useQuery() {
 
 export default function ClubDetail(e){
     let query = useQuery();
-    // 바인딩
+    // club detail
     const [club, setClub] = React.useState("");
     console.log(query.get("clubId"));
 
@@ -30,7 +32,7 @@ export default function ClubDetail(e){
           setClub(response.data);
         });
     }, []);
-    // 바인딩
+    // club detail
 
     const [value, onChange] = useState(new Date());
 
@@ -78,31 +80,52 @@ export default function ClubDetail(e){
     const { contentItem, contentChange } = useTabs(0, content);
 
     // 모달
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [transferModalIsOpen, setTransferModalIsOpen] = useState(false);
+    const [payModalIsOpen, setPayModalIsOpen] = useState(false);
+    const [calculateModalIsOpen, setCalculateModalIsOpen] = useState(false);
  
     return(
         <div>
+            {/* 모임 이름 */}
             <h1 class="clubName">{club.name}</h1>
 
             <div class="topnav">
-                <button class="invitation" onClick={()=> setModalIsOpen(true)}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</button>
-                <Modal isOpen={modalIsOpen} ariaHideApp={false}>
-                    This is Modal content
-                    <button onClick={()=> setModalIsOpen(false)}>Modal Open</button>
-                </Modal>
+                {/* 초대 */}
+                <InviteModal  name={club.name}/>
+
                 {/* 모임 설정 */}
                 <button class="setting"><FontAwesomeIcon icon="fa-solid fa-gear" /> 모임 설정</button>
             </div>
 
+            {/* 클럽 지갑 */}
             <div class="cardBox">
                 <div class="finance">
                     <h3 class="balance">45,600,000,000 <FontAwesomeIcon icon="fa-solid fa-p" /></h3>
-                    <button class="transfer">송금</button>
-                    <button class="pay">결제</button>
-                    <button class="calculate">정산</button>
+                    
+                    {/* 송금 */}
+                    <button class="transfer" onClick={()=> setTransferModalIsOpen(true)}>송금</button>
+                    <Modal isOpen={transferModalIsOpen} ariaHideApp={false}>
+                        This is Modal content1
+                        <button onClick={()=> setTransferModalIsOpen(false)}>Modal Open</button>
+                    </Modal>
+
+                    {/* 결제 */}
+                    <button class="pay" onClick={()=> setPayModalIsOpen(true)}>결제</button>
+                    <Modal isOpen={payModalIsOpen} ariaHideApp={false}>
+                        This is Modal content2
+                        <button onClick={()=> setPayModalIsOpen(false)}>Modal Open</button>
+                    </Modal>
+
+                    {/* 정산 */}
+                    <button class="calculate" onClick={()=> setCalculateModalIsOpen(true)}>정산</button>
+                    <Modal isOpen={calculateModalIsOpen} ariaHideApp={false}>
+                        This is Modal content3
+                        <button onClick={()=> setCalculateModalIsOpen(false)}>Modal Open</button>
+                    </Modal>
                 </div>
             </div>
 
+            {/* 탭 */}
             <div className="tabs">
                 {content.map((section, index) => (
                     <button class="tablinks" onClick={() => contentChange(index)}>{section.tab}</button>
