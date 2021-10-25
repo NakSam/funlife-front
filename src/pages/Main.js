@@ -1,6 +1,5 @@
-import { MainTitleWrapper, MainTitle, MainLogo, MainAddClub, MyClubList, SectionTitle, LatestClub } from "./styled/Main.styled";
+import { MainTitleWrapper, MainTitle, MainLogo, Button, MainAddClub, MyClubList, SectionTitle, LatestClub } from "./styled/Main.styled";
 import logo from "../static/img/logo.png"
-import Button from '@mui/material/Button';
 import ClubCard from "../components/common/ClubCard";
 import ListBasic from "../components/common/ListBasic";
 import React, { useState } from 'react';
@@ -10,9 +9,12 @@ import UserClubList from "../components/userInfo/UserClubList";
 import { UserClubWrapper} from "./styled/UserInfo.styled";
 import Modal from 'react-modal';
 import cookie from "react-cookies";
+import { useEffect } from "react";
+import { loginStatus } from "../states/state";
+import { useRecoilState } from "recoil";
 
 export default function Main(){
-    
+    const [ userStatus, setUserStatus ] = useRecoilState(loginStatus);
     const login = () => {
         axios.post("http://naksam.169.56.174.130.nip.io/user/session/login", {
             email: "qwe@google.com",
@@ -24,14 +26,7 @@ export default function Main(){
 
         
     // 내가 가입한 모임
-    const [myClubList, setMyClubList] = React.useState("");
-    React.useEffect(() => {
-        axiosUtils.get("/club/myClub").then((response) => {
-            setMyClubList(response.data);
-        });
-    }, []);
-    // 내가 .가입한 모임
-
+    const [myClubList, setMyClubList] = useState("");
     // 내 모임 만들기
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -48,11 +43,6 @@ export default function Main(){
     const submitHandler = (e) => {
         e.preventDefault();
         // state에 저장한 값을 가져옵니다.
-        console.log(Name);
-        console.log(Category);
-        console.log(Location);
-        console.log(Description);
-        
         axios({
             method:"post",
             url:'http://naksam.169.56.174.130.nip.io:80/club/register',
@@ -74,14 +64,17 @@ export default function Main(){
             
           })
     };
-    // 내 모임 만들기
 
-    const [newClubList, setNewClubList] = React.useState("");
-    React.useEffect(() => {
-        axiosUtils.get("/club/home").then((response) => {
-            setNewClubList(response.data);
+    //최근 개설된 모임
+    const [newClubList, setNewClubList] = useState("");
+    useEffect(() => {
+        axiosUtils.get("/club/myClub").then((res) => {
+            setMyClubList(res.data);
         });
-    }, []);//최근 개설된 모임
+        axiosUtils.get("/club/home").then((res) => {
+            setNewClubList(res.data);
+        });
+    }, []);
 
     return(
         <div>
@@ -90,9 +83,10 @@ export default function Main(){
                     <img width="100%" height="100%" alt="" src={logo} />
                 </MainLogo>
             </MainTitleWrapper>
-            <button onClick={login}>로그인</button>
             <MainAddClub>
-                <Button variant='outlined'style={{width: '100%', height:'50px'}} onClick={()=> setModalIsOpen(true)}>내 모임 만들기</Button>
+                {!userStatus 
+                ? <Button onClick={login}>로그인</Button> 
+                : <Button onClick={()=> setModalIsOpen(true)}>내 모임 만들기</Button>}
             </MainAddClub>
             <Modal isOpen={modalIsOpen} ariaHideApp={false}>
                 {/*onSubmit={submitHandler}*/} 
