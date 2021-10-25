@@ -13,7 +13,7 @@ export default function SearchResultList({ searchData }){
         return(
             data && Object.entries(data).map((item) => {
                 return (
-                    <div style={{display:"flex", margin:"5px 0px 5px 0px"}} key={item[1].id} name="clubId" value={item[1].id} onClick={() => setShowModal({show: !showModal.show, clubId:1})}>
+                    <div style={{display:"flex", margin:"5px 0px 5px 0px"}} key={item[1].id} name="clubId" value={item[1].id} onClick={() => setShowModal({show: !showModal.show, clubId:item[1].id})}>
                         <div >
                             <img alt="book" style={{width: "170px", borderRadius:"10px"}} src={item[1].image} />
                         </div>
