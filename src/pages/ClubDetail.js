@@ -6,8 +6,9 @@ import 'react-calendar/dist/Calendar.css';
 import axiosUtils from "../utils/axiosUtils";
 import Modal from 'react-modal';
 import { useLocation } from "react-router-dom";
-import Invitation from '../components/clubdetail/InviteModal';
 import InviteModal from '../components/clubdetail/InviteModal';
+import ClubDepositModal from '../components/clubdetail/ClubDepositModal';
+import DevideModal from '../components/clubdetail/DevideModal';
 
 const useTabs = (initialTabs, allTabs) => {
     const [contentIndex, setContentIndex] = useState(initialTabs);
@@ -80,7 +81,6 @@ export default function ClubDetail(e){
     const { contentItem, contentChange } = useTabs(0, content);
 
     // 모달
-    const [transferModalIsOpen, setTransferModalIsOpen] = useState(false);
     const [payModalIsOpen, setPayModalIsOpen] = useState(false);
     const [calculateModalIsOpen, setCalculateModalIsOpen] = useState(false);
  
@@ -103,11 +103,7 @@ export default function ClubDetail(e){
                     <h3 class="balance">45,600,000,000 <FontAwesomeIcon icon="fa-solid fa-p" /></h3>
                     
                     {/* 송금 */}
-                    <button class="transfer" onClick={()=> setTransferModalIsOpen(true)}>송금</button>
-                    <Modal isOpen={transferModalIsOpen} ariaHideApp={false}>
-                        This is Modal content1
-                        <button onClick={()=> setTransferModalIsOpen(false)}>Modal Open</button>
-                    </Modal>
+                    <ClubDepositModal clubId={query.get("clubId")} dues={club.dues} />
 
                     {/* 결제 */}
                     <button class="pay" onClick={()=> setPayModalIsOpen(true)}>결제</button>
@@ -117,11 +113,14 @@ export default function ClubDetail(e){
                     </Modal>
 
                     {/* 정산 */}
-                    <button class="calculate" onClick={()=> setCalculateModalIsOpen(true)}>정산</button>
+                    <DevideModal clubId={query.get("clubId")} />
+
+                    {/* 내역 */}
+                    {/* <button class="history" onClick={()=> setHistoryModalIsOpen(true)}>내역</button>
                     <Modal isOpen={calculateModalIsOpen} ariaHideApp={false}>
                         This is Modal content3
                         <button onClick={()=> setCalculateModalIsOpen(false)}>Modal Open</button>
-                    </Modal>
+                    </Modal> */}
                 </div>
             </div>
 
