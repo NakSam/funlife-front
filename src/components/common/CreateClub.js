@@ -47,6 +47,16 @@ const CreateClub = ({open, handleClose}) => {
     //     setOpen(false);
     // }
 
+    const [inputData, setInputData] = useState({
+        amount: "",
+        category: "",
+        description: "",
+        image: "",
+        location: "",
+        maxMemberNum: "",
+        name: ""
+    })
+
     const onChange = (e) => {
         const img = e.target.files[0];        
         // const formData = new FormData();
@@ -115,6 +125,10 @@ const CreateClub = ({open, handleClose}) => {
             // })
         }
     }
+    const handleChange = (e) => {
+        setInputData({...inputData, [e.target.name]:e.target.value})
+        console.log(e.target.value);
+    }
 
     return(
         <Dialog
@@ -147,19 +161,22 @@ const CreateClub = ({open, handleClose}) => {
                 </label>
             </div>
             <div>
-                <TextField style={{display:"flex", margin:"25px"}} id="outlined-basic" label="모임명" variant="outlined" />
+                <TextField name="name" style={{display:"flex", margin:"25px"}} id="outlined-basic" label="모임명" variant="outlined" value={inputData.name} onChange={handleChange}/>
             </div>
             <div>
                 <FormControl fullWidth>
                     <InputLabel style={{margin:"25px"}}  id="demo-simple-select-label">분류</InputLabel>
                     <Select
-                    style={{margin:"25px"}} 
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                        name="category"
+                        style={{margin:"25px"}} 
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={inputData.category}
+                        onChange={handleChange}
                     >
-                    <MenuItem value={"스포츠"}>스포츠</MenuItem>
-                    <MenuItem value={"스터디"}>스터디</MenuItem>
-                    <MenuItem value={"맛집탐방"}>맛집탐방</MenuItem>
+                        <MenuItem value={"스포츠"}>스포츠</MenuItem>
+                        <MenuItem value={"스터디"}>스터디</MenuItem>
+                        <MenuItem value={"맛집탐방"}>맛집탐방</MenuItem>
                     </Select>
                 </FormControl>
             </div>
@@ -167,15 +184,18 @@ const CreateClub = ({open, handleClose}) => {
                 <FormControl fullWidth>
                     <InputLabel style={{margin:"25px"}}  id="demo-simple-select-label">지역</InputLabel>
                     <Select
-                    style={{margin:"25px"}} 
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                        name="location"
+                        style={{margin:"25px"}} 
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={inputData.location}
+                        onChange={handleChange}
                     >
-                    <MenuItem value={"강남구"}>강남구</MenuItem>
-                    <MenuItem value={"강동구"}>강동구</MenuItem>
-                    <MenuItem value={"강서구"}>강서구</MenuItem>
-                    <MenuItem value={"강북구"}>강북구</MenuItem>
-                    <MenuItem value={"중구"}>중구</MenuItem>
+                        <MenuItem value={"강남구"}>강남구</MenuItem>
+                        <MenuItem value={"강동구"}>강동구</MenuItem>
+                        <MenuItem value={"강서구"}>강서구</MenuItem>
+                        <MenuItem value={"강북구"}>강북구</MenuItem>
+                        <MenuItem value={"중구"}>중구</MenuItem>
                     </Select>
                 </FormControl>
             </div>            
@@ -183,24 +203,39 @@ const CreateClub = ({open, handleClose}) => {
                 <FormControl fullWidth>
                     <InputLabel style={{margin:"25px"}}  id="demo-simple-select-label">정원</InputLabel>
                     <Select
-                    style={{margin:"25px"}} 
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                        name="maxMemberNum"
+                        style={{margin:"25px"}} 
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={inputData.maxMemberNum}
+                        onChange={handleChange}
                     >
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                    <MenuItem value={5}>5</MenuItem>
-                    <MenuItem value={6}>6</MenuItem>
-                    <MenuItem value={7}>7</MenuItem>
-                    <MenuItem value={8}>8</MenuItem>
-                    <MenuItem value={9}>9</MenuItem>
-                    <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={6}>6</MenuItem>
+                        <MenuItem value={7}>7</MenuItem>
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={9}>9</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
                     </Select>
                 </FormControl>
             </div>
             <div>
-                <TextField style={{display:"flex", margin:"25px"}} id="outlined-basic" label="회비(원)" variant="outlined" />
+                <TextField name="amount" style={{display:"flex", margin:"25px"}} id="outlined-basic" label="회비(원)" variant="outlined" value={inputData.amount} onChange={handleChange}/>
+            </div>
+            <div>
+            <TextField
+                name="description"
+                style={{display:"flex", margin:"25px"}}
+                id="outlined-multiline-static"
+                label="모임 설명"
+                multiline
+                rows={4}
+                value={inputData.description}
+                onChange={handleChange}
+            />
             </div>
             <div style={{textAlign:"center"}}>
                 <Button variant="outlined" style={{width:"50%", height:"50px"}} onClick={handleCreate}>
