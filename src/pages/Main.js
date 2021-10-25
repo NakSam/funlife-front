@@ -10,6 +10,7 @@ import UserClubList from "../components/userInfo/UserClubList";
 import { UserClubWrapper} from "./styled/UserInfo.styled";
 import Modal from 'react-modal';
 import { Route } from "react-router-dom";
+import CreateClub from "../components/common/CreateClub";
 
 export default function Main(){
         
@@ -24,6 +25,10 @@ export default function Main(){
 
     // 내 모임 만들기
     const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const handleCreate = () => {
+        setModalIsOpen(false);
+    }
 
     const [Name, SetName] = useState("");
     const [Category, SetCategory] = useState("");
@@ -88,21 +93,7 @@ export default function Main(){
             <MainAddClub>
                 <Button variant='outlined'style={{width: '100%', height:'50px'}} onClick={()=> setModalIsOpen(true)}>내 모임 만들기</Button>
             </MainAddClub>
-            <Modal isOpen={modalIsOpen} ariaHideApp={false}>
-                {/*onSubmit={submitHandler}*/} 
-                <form onSubmit={submitHandler}>
-                    <label>모임 이름</label><br />
-                    <input type="text" value={Name} onChange={nameHandler}/><br />
-                    <label>카테고리</label><br />
-                    <input type="text" value={Category} onChange={categoryHandler}/><br />
-                    <label>장소</label><br />
-                    <input type="text" value={Location} onChange={locationHandler}/><br />
-                    <label>설명</label><br />
-                    <input type="text" value={Description} onChange={descriptionHandler}/><br />
-                    <button type="submit">제출</button>
-                </form>
-                <button onClick={()=> setModalIsOpen(false)}>닫기</button>
-            </Modal>
+            <CreateClub open={modalIsOpen} handleClose={handleCreate}/>
             <MyClubList>
                 <SectionTitle>
                     내가 가입한 모임
