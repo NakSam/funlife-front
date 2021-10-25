@@ -35,7 +35,11 @@ const CreateClub = ({open, handleClose}) => {
         console.log(img);
         let reader = new FileReader();
         reader.readAsDataURL(img);
-        console.log(reader);
+        reader.onload = () =>{
+            var result = reader.result;
+            setSelect(result);            
+        }
+        
         // setSelect(img);
         // formData.append('file', img);
         // console.log(formData);
@@ -60,8 +64,8 @@ const CreateClub = ({open, handleClose}) => {
                 </IconButton>
                 <Typography>모임 만들기</Typography>
             </Toolbar>
-            <div style={{margin:"20px", borderRadius:"20px", border:"0.5px solid"}}>
-                <img alt="club-img" src={select}/>
+            <div style={{margin:"20px 50px 20px 50px", borderRadius:"20px", border:"0.5px solid"}}>
+                <img style={{borderRadius:"20px"}} alt="club-img" src={select}/>
             </div>
             <div>
                 <label htmlFor="icon-button-file">
