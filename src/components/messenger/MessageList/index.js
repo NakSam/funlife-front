@@ -152,7 +152,7 @@ export default function MessageList(props) {
               <IconButton
                 edge="start"
                 color="inherit"
-                onClick={handleClose}
+                onClick={sendMessages}
                 aria-label="close"
               >
                 <SendRoundedIcon/>   
