@@ -1,11 +1,16 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import ConversationList from "../components/messenger/ConversationList";
+import { MessengerArea, MessengerTitle, MessengerTitleWrapper } from "./styled/messenger.styled";
 
 export default function Messenger(){
     return(
         <div>
-            <Link to='/clubdetail'>
-                club detail
-            </Link>      
+            <MessengerTitleWrapper>
+                <MessengerTitle>메신저</MessengerTitle>
+            </MessengerTitleWrapper>
+            <MessengerArea>
+                <ConversationList/>
+            </MessengerArea>
         </div>
     );
 }
