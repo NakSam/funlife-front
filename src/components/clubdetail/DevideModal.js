@@ -1,24 +1,19 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from 'react-modal';
-import axios from "axios";
+import { ModalHeader, ModalTitle} from "../common/styled/ClubModal.styled";
+import { Modal, Button } from "react-bootstrap";
+import axiosUtils from "../../utils/axiosUtils";
 
 export default function DevideModal({clubId}) {
-    const [devideModalIsOpen, setDevideModalIsOpen] = useState(false);
+    const [devideModal, setDevideModal] = useState(false);
 
     const submitHandler = (e) => {
         e.preventDefault();
         
-        axios({
-            method:"post",
-            url:'http://naksam.169.56.174.130.nip.io:80/wallet/club/' + clubId + '/distribute',
-            data:{
-            }
-          })
+        axiosUtils.post('/wallet/club/' + clubId + '/distribute')
           .then((response) => {
             console.log(response);
-            alert("성공");
-            setDevideModalIsOpen(false);
+            alert("정산이 완료되었습니다.");
+            setDevideModal(false);
           })
           .catch((error) => {
             
@@ -27,11 +22,23 @@ export default function DevideModal({clubId}) {
 
     return(
         <div>
-            <button class="devide" onClick={()=> setDevideModalIsOpen(true)}>정산</button>
-            <Modal isOpen={devideModalIsOpen} ariaHideApp={false}>
-                <h5>정산하시겠습니까?</h5>
-                <button onClick={submitHandler}>예</button>
-                <button onClick={()=> setDevideModalIsOpen(false)}>닫기</button>
+            <button class="devide" onClick={()=> setDevideModal({show: !devideModal.show})}>정산</button>
+
+            <Modal show={devideModal.show}>
+            <ModalHeader>
+                    <ModalTitle>정산</ModalTitle>
+                </ModalHeader>
+                <Modal.Body>
+                    정산하시겠습니까?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="success" onClick={submitHandler}>
+                        정산하기
+                    </Button>
+                    <Button variant="success" onClick={()=> setDevideModal(false)}>
+                        취소
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </div>
     );

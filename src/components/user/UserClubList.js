@@ -4,12 +4,10 @@ import '../../static/icons/FontAwesome';
 import { Button } from "@mui/material";
 
 function goClubDetail(clubId){
-    console.log(clubId);
     return window.location.href = "/clubDetail/?clubId="+clubId;
 }
 
 const UserClubList = ({data}) => {
-    
     return(
         data && Object.entries(data).map((item) => {
             return (

@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
-export const SearchTitleWrapper = styled.div`
-    display : flex;
-    margin: 2rem auto;
+export const SearchResult = styled.h5`
+    color: #58555A;
+    font-size: 1.2rem;
+    font-family: 'S-CoreDream-6Bold';
 `;
 
-export const SearchTitle = styled.h2`
+export const SearchTitle = styled.h1`
     color:#ffb300;
-    font-weight: bolder;
-`;
-
-export const ReturnIcon = styled.div`
-    margin: 0.3rem 0 0 auto;
-    color: gray;
+    margin: 2rem auto;
+    font-weight: bold;
+    font-family: 'S-CoreDream-6Bold';
 `;

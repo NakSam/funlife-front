@@ -8,6 +8,7 @@ import UserInfo from "./pages/UserInfo";
 import ClubDetail from "./pages/ClubDetail";
 import Messenger from "./pages/Messenger";
 import Navbar from "./components/common/Navbar";
+import ClubModal from "./components/common/ClubModal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppWrapper } from "./App.styled";
 import ClubModal from "./components/common/ClubModal";
@@ -70,7 +71,6 @@ export default function App() {
       <RecoilRoot>
         <AppWrapper>
           <Switch>
-            <Route path="/home" component={Main}/>
             <Route path="/search" component={Search} />
             <Route path="/messenger" render={()=><Messenger sendToMessage={sendToMessage} recevieMessage={recevieMessage}/>}/>
             <Route path="/userinfo" component={UserInfo}/>
@@ -79,7 +79,6 @@ export default function App() {
           </Switch>   
           <Navbar />
           <ClubModal />
-          <UserWalletModal />
         </AppWrapper>
       </RecoilRoot>
       <SockJsClient

@@ -1,30 +1,51 @@
 import styled from "styled-components";
-import { FormControl, TextField } from "@mui/material";
+import { Form } from "react-bootstrap";
 
-export const SelectBox1 = styled(FormControl)`
-    width: 43%;
-    margin-right: 0.6rem !important;
-    margin-bottom: 0.8rem !important;;
+export const LabelSelectBox = styled.label`
+    font-family: 'S-CoreDream-6Bold';
+    text-align:left;
+    color: #58555A;
+    display: block;
+    margin: 0rem 0.5rem 0.5rem 0.5rem;
 `;
 
-export const SelectBox2 = styled(FormControl)`
-    width: 40%;
-    margin-right: 0.3rem !important;
-    margin-bottom: 0.8rem !important;;
+export const SelectBox1 = styled(Form.Select)`
+    height: 3rem;
+    width: 100%;
+    color: #58555A;
+    border: 2px solid #dedede;
+    border-radius: 0.4rem;
+    font-weight:bold;
+`;
+
+export const SelectBox2 = styled(Form.Select)`
+    height: 3rem;
+    width: 100%;
+    color: #58555A;
+    border: 2px solid #dedede;
+    border-radius: 0.4rem;
+    font-weight:bold;
 `;
 
 export const SearchInputBox = styled.div`
     display: flex;
+    position: relative;
+    margin-top: 0.5rem;
 `;
 
-export const SearchInput = styled(TextField)`
-    width: 90%;
+export const SearchInput = styled.input`
+    width: 100%;
+    border: 2px solid #dedede;
+    border-radius: 0.4rem;
+    padding: 0.7rem;
+    height: 3rem;
 `;
 
 export const SearchButton = styled.button`
-    margin-left: 0.5rem;
-    margin-bottom: 0.4rem;
-    color: gray;
+    position: absolute;
+    right: 1.8rem;
+    top:0.4rem;
+    color: #cdcdcd;
     border: none;
     font-size: 1.4rem;
     background-color: white;

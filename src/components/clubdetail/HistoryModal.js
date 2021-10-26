@@ -1,17 +1,38 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modal from 'react-modal';
-import axios from "axios";
+import { ModalHeader, ModalTitle} from "../common/styled/ClubModal.styled";
+import { Modal, Button } from "react-bootstrap";
+import axiosUtils from "../../utils/axiosUtils";
+import React from "react";
+import WalletHistory from "../common/WalletHistory";
 
-export default function HistoryModal() {
-    const [HistoryModalIsOpen, setHistoryModalIsOpen] = useState(false);
+export default function HistoryModal({clubId}) {
+    const [HistoryModal, setHistoryModal] = useState(false);
+
+    const [clubWalletHistory, setClubWalletHistory] = React.useState("");
+    React.useEffect(() => {
+        axiosUtils.get("/wallet/club/"+clubId+"/history").then((response) => {
+            setClubWalletHistory(response.data.depositHistories);
+            console.log(response.data.depositHistories);
+        });
+    }, []);
+
 
     return (
         <div>
-            <button class="history" onClick={()=> setHistoryModalIsOpen(true)}>내역</button>
-            <Modal isOpen={HistoryModalIsOpen} ariaHideApp={false}>
-                This is Modal content3
-                <button onClick={()=> setHistoryModalIsOpen(false)}>Modal Open</button>
+            <button onClick={()=> setHistoryModal({show: !HistoryModal.show})}>내역</button>
+
+            <Modal show={HistoryModal.show}>
+                <ModalHeader>
+                    <ModalTitle>지갑내역</ModalTitle>
+                </ModalHeader>
+                <Modal.Body>
+                    <WalletHistory data={clubWalletHistory}/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="success" onClick={()=> setHistoryModal(false)}>
+                        닫기
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </div>
     );
