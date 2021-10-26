@@ -5,6 +5,7 @@ import Main from "./pages/Main";
 import Search from "./pages/Search";
 import UserInfo from "./pages/UserInfo";
 import ClubDetail from "./pages/ClubDetail";
+import Messenger from "./pages/Messenger";
 import Navbar from "./components/common/Navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppWrapper } from "./App.styled";
@@ -27,6 +28,7 @@ export default function App() {
           <Switch>
             <Route path="/home" component={Main}/>
             <Route path="/search" component={Search} />
+            <Route path="/messenger" component={Messenger}/>
             <Route path="/userinfo" component={UserInfo}/>
             <Route path="/clubdetail" component={ClubDetail} />
             <Route path="/" component={Main}/>
