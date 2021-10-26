@@ -3,7 +3,6 @@ import { modalStatus } from "../../states/state";
 import { ListWrapper, Thumbnail, Location, ClubName, PeopleCnt, Category, Left, Right } from "./styled/ListBasic.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../static/icons/FontAwesome';
-import { Row, Col } from "react-bootstrap";
 
 export default function ListBasic({ data }){
     const [ showModal, setShowModal] = useRecoilState(modalStatus);

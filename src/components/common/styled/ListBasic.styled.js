@@ -54,9 +54,9 @@ export const Category = styled.small`
     border-radius:0.6rem;
     font-weight: bold;
     background-color : ${props => {
-        if (props.cate == '스포츠') {
+        if (props.cate === '스포츠') {
            return '#D7E9F7'
-        } else if (props.cate == '맛집탐방') {
+        } else if (props.cate === '맛집탐방') {
             return '#F4D19B'
         } else {
             return '#D4E2D4'
