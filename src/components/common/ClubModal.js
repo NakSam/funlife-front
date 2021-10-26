@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import { modalStatus } from "../../states/state";
-import { Modal, Col, Button } from "react-bootstrap";
-import { ModalHeader, ModalImg, ModalLocWrapper, ModalTitle, ModalLocIcon, ModalLoc, ModalCatBadge, ModalImgWrapper, ModalRow, ModalCol, ModalColLabel } from "./styled/ClubModal.styled";
+import { Modal, Col } from "react-bootstrap";
+import { ModalWrapper, ModalHeader, ModalImg, ModalLocWrapper, ModalTitle, ModalLocIcon, ModalLoc, ModalCatBadge, ModalImgWrapper, ModalRow, ModalCol, ModalColLabel, ClubButton } from "./styled/ClubModal.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useClubModal from "../../hooks/useClubModal";
 
@@ -14,7 +14,7 @@ export default function ClubModal(){
     return(
         <>
         {data && 
-        <Modal show={showModal.show} onHide={handleClose}>
+        <ModalWrapper show={showModal.show} onHide={handleClose}>
             <ModalHeader closeButton>
                 <ModalLocWrapper>
                     <ModalLocIcon>
@@ -27,26 +27,24 @@ export default function ClubModal(){
             <Modal.Body>
                 <ModalImgWrapper>
                     <ModalImg src={data.image} />
-                    <ModalCatBadge>{data.category}</ModalCatBadge>
+                    <ModalCatBadge cate={data.category}>{data.category}</ModalCatBadge>
                 </ModalImgWrapper>
                 <ModalRow>
                     <ModalCol xs={6} md={4}>
                         <h3>👩‍👦‍👦</h3>
-                        {/* <FontAwesomeIcon icon="fa-solid fa-user" /> */}
                         <ModalColLabel>{data.memberNum} / {data.maxMemberNum}인</ModalColLabel>
                     </ModalCol>
                     <Col xs={6} md={4}>
                         <h3>💰</h3>
-                        {/* <FontAwesomeIcon icon="fa-solid fa-wallet" /> */}
                         <ModalColLabel>{data.dues.toLocaleString()} P</ModalColLabel>
                     </Col>
                 </ModalRow>
                 <small>{data.description}</small>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="success" onClick={handleClubApply}>신청</Button>
+                <ClubButton variant="outline-warning" onClick={handleClubApply}>신청하기</ClubButton>
             </Modal.Footer>
-        </Modal>}
+        </ModalWrapper>}
         </>
     );
 }

@@ -8,7 +8,7 @@ import Signup from "../components/user/Signup";
 import Login from "../components/user/LoginModal";
 import ListBasic from "../components/common/ListBasic";
 import CreateClub from "../components/common/CreateClub";
-import CardSlider from "../components/common/CardSlider";
+import CardSlider from "../components/common/cardSlider/CardSlider";
 import { MainTitleWrapper, MainLogo, Button, MainAddClub, MyClubList, SectionTitle, SectionTitle1, LatestClub } from "./styled/Main.styled";
 
 export default function Main(){

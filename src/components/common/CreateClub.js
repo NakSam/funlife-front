@@ -158,13 +158,13 @@ const CreateClub = ({open, handleClose}) => {
             </Toolbar>
             <DialogWrapper>
                 <ImgWrapper>
-                    <img style={{objectFit:"cover"}} alt="club-img" src={select}/>
+                    <img style={{objectFit:"cover", height:"100%"}} alt="club-img" src={select}/>
                 <ImgUploadButton>
                     <label htmlFor="icon-button-file">
                         <Input accept="image/*" id="icon-button-file" type="file" onChange={onChange}/>
-                        <div style={{color: "#a1a1a199", fontSize:"6rem"}}>
+                        {!uploadImg && <div style={{color: "#a1a1a199", fontSize:"6rem"}}>
                             <FontAwesomeIcon aria-label="upload picture" icon="fa-solid fa-circle-plus" />
-                        </div>
+                        </div>}
                     </label>
                 </ImgUploadButton>
                 </ImgWrapper>
