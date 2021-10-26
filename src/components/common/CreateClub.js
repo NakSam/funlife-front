@@ -106,28 +106,47 @@ const CreateClub = ({open, handleClose}) => {
             }
             myBucket.upload(params, (err) => {
                 if(err){
-
+                    console.log(err);
                 } else {
-                    // axios.post('http://naksam.169.56.174.130.nip.io/club/register',{
-                    //     amount: 0,
-                    //     category: "string",
-                    //     description: "string",
-                    //     image: "string",
-                    //     location: "string",
-                    //     maxMemberNum: 0,
-                    //     name: "string"
+                    inputData.image="https://naksam.s3.ap-northeast-2.amazonaws.com/img/"+name;
+                    inputData.amount=Number(inputData.amount);
+                    //console.log(inputData.image);
+                    // axios.post('https://naksam.169.56.174.130.nip.io/club/register',{
+                    //     amount: inputData.amount,
+                    //     category: inputData.category,
+                    //     description: inputData.description,
+                    //     image: inputData.image,
+                    //     location: inputData.location,
+                    //     maxMemberNum: inputData.maxMemberNum,
+                    //     name: inputData.name
                     // })
-                    console.log("create");
+                    axios({
+                        method:"post",
+                        url:"https://naksam.169.56.174.130.nip.io/club/register",
+                        data:{
+                            amount: inputData.amount,
+                            category: inputData.category,
+                            description: inputData.description,
+                            image: inputData.image,
+                            location: inputData.location,
+                            maxMemberNum: inputData.maxMemberNum,
+                            name: inputData.name
+                        }
+                    })
+                    .then((res)=>{
+                        //console.log(res);
+                    })
+                    .catch((err)=>{
+                        //console.log(err);
+                    })
+                    
                 }
-            });
-            // myBucket.putObject(params).on('httpUploadProgress', (evt) => {
-                
-            // })
+            });            
         }
     }
     const handleChange = (e) => {
         setInputData({...inputData, [e.target.name]:e.target.value})
-        console.log(e.target.value);
+        //console.log(e.target.value);
     }
 
     return(
@@ -223,7 +242,7 @@ const CreateClub = ({open, handleClose}) => {
                 </FormControl>
             </div>
             <div>
-                <TextField name="amount" style={{display:"flex", margin:"25px"}} id="outlined-basic" label="회비(원)" variant="outlined" value={inputData.amount} onChange={handleChange}/>
+                <TextField name="amount" type="number" style={{display:"flex", margin:"25px"}} id="outlined-basic" label="회비(원)" variant="outlined" value={inputData.amount} onChange={handleChange}/>
             </div>
             <div>
             <TextField
