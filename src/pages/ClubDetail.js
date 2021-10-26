@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import InviteModal from '../components/clubdetail/InviteModal';
 import ClubDepositModal from '../components/clubdetail/ClubDepositModal';
 import DevideModal from '../components/clubdetail/DevideModal';
+import HistoryModal from '../components/clubdetail/HistoryModal';
 
 const useTabs = (initialTabs, allTabs) => {
     const [contentIndex, setContentIndex] = useState(initialTabs);
@@ -82,7 +83,6 @@ export default function ClubDetail(e){
 
     // 모달
     const [payModalIsOpen, setPayModalIsOpen] = useState(false);
-    const [calculateModalIsOpen, setCalculateModalIsOpen] = useState(false);
  
     return(
         <div>
@@ -116,11 +116,7 @@ export default function ClubDetail(e){
                     <DevideModal clubId={query.get("clubId")} />
 
                     {/* 내역 */}
-                    {/* <button class="history" onClick={()=> setHistoryModalIsOpen(true)}>내역</button>
-                    <Modal isOpen={calculateModalIsOpen} ariaHideApp={false}>
-                        This is Modal content3
-                        <button onClick={()=> setCalculateModalIsOpen(false)}>Modal Open</button>
-                    </Modal> */}
+                    <HistoryModal />
                 </div>
             </div>
 
