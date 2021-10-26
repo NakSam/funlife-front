@@ -19,6 +19,7 @@
     "axios": "^0.23.0",
     "bootstrap": "^5.1.1",
     "evergreen-ui": "^6.5.1",
+    "moment": "^2.29.1",
     "or": "^0.2.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-rc.1",
@@ -27,12 +28,18 @@
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
     "react-query": "^3.27.0",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "react-stomp": "^5.1.0",
     "recoil": "^0.4.1",
     "styled-components": "^5.3.1",
     "web-vitals": "^1.1.2",
-    "yarn": "^1.22.17"
+    "yarn": "^1.22.17",
+    "dotenv": "^10.0.0",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "sockjs-client": "^1.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -57,5 +64,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "shave": "^2.5.4"
   }
 }
