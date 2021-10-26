@@ -24,6 +24,13 @@ const BottomNav = () => {
                 </Link>
             </div>
             <div>
+                <Link to='/messenger'>
+                    <IconButton size="small">
+                        <FontAwesomeIcon icon="comment"/>
+                    </IconButton>                    
+                </Link>
+            </div>
+            <div>
                 <Link to='/userinfo'>
                     <IconButton size="small">
                         <FontAwesomeIcon icon="user"/>
