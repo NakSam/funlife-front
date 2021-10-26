@@ -7,3 +7,11 @@ export const modalStatus = atom({
         clubId: null
     }
 })
+
+export const UserWalletModalStatus = atom({
+    key : 'userWalletModal',
+    default : {
+        show: false,
+        type: ''
+    }
+})
