@@ -13,6 +13,7 @@ import cookie from "react-cookies";
 import { useEffect } from "react";
 import { loginStatus } from "../states/state";
 import { useRecoilState } from "recoil";
+import Signup from "../components/user/Signup"
 
 export default function Main(){
     const [ userStatus, setUserStatus ] = useRecoilState(loginStatus);
@@ -25,6 +26,11 @@ export default function Main(){
         })
     }
 
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
         
     // 내가 가입한 모임
     const [myClubList, setMyClubList] = useState("");
@@ -92,6 +98,10 @@ export default function Main(){
                 {!userStatus 
                 ? <Button onClick={login}>로그인</Button> 
                 : <Button onClick={()=> setModalIsOpen(true)}>내 모임 만들기</Button>}
+                
+                <Button onClick={handleClickOpen}>회원가입</Button>   
+                <Signup open={open} setOpen={setOpen} />   
+            
             </MainAddClub>
             <CreateClub open={modalIsOpen} handleClose={handleCreate}/>
             <MyClubList>

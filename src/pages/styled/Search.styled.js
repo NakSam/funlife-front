@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
-export const SearchTitleWrapper = styled.div`
-    display : flex;
-    margin: 2rem auto;
-`;
-
-export const SearchTitle = styled.h2`
+export const SearchTitle = styled.h1`
     color:#ffb300;
-    font-weight: bolder;
+    margin: 2rem auto;
+    font-weight: bold;
 `;
 
 export const ReturnIcon = styled.div`
     margin: 0.3rem 0 0 auto;
-    color: gray;
+    color: grey;
 `;
+
+// width: 100%;
+// height: 8rem;
+// border: 2px solid #dedede;
+// border-radius: 0.4rem;
+// padding: 0.7rem;
