@@ -8,6 +8,7 @@ import axios from "axios";
 import UserClubList from "../components/userInfo/UserClubList";
 import { UserClubWrapper} from "./styled/UserInfo.styled";
 import Modal from 'react-modal';
+import CreateClub from "../components/common/CreateClub";
 import cookie from "react-cookies";
 import { useEffect } from "react";
 import { loginStatus } from "../states/state";
@@ -29,6 +30,10 @@ export default function Main(){
     const [myClubList, setMyClubList] = useState("");
     // 내 모임 만들기
     const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const handleCreate = () => {
+        setModalIsOpen(false);
+    }
 
     const [Name, SetName] = useState("");
     const [Category, SetCategory] = useState("");
@@ -88,21 +93,7 @@ export default function Main(){
                 ? <Button onClick={login}>로그인</Button> 
                 : <Button onClick={()=> setModalIsOpen(true)}>내 모임 만들기</Button>}
             </MainAddClub>
-            <Modal isOpen={modalIsOpen} ariaHideApp={false}>
-                {/*onSubmit={submitHandler}*/} 
-                <form onSubmit={submitHandler}>
-                    <label>모임 이름</label><br />
-                    <input type="text" value={Name} onChange={nameHandler}/><br />
-                    <label>카테고리</label><br />
-                    <input type="text" value={Category} onChange={categoryHandler}/><br />
-                    <label>장소</label><br />
-                    <input type="text" value={Location} onChange={locationHandler}/><br />
-                    <label>설명</label><br />
-                    <input type="text" value={Description} onChange={descriptionHandler}/><br />
-                    <button type="submit">제출</button>
-                </form>
-                <button onClick={()=> setModalIsOpen(false)}>닫기</button>
-            </Modal>
+            <CreateClub open={modalIsOpen} handleClose={handleCreate}/>
             <MyClubList>
                 <SectionTitle>
                     내가 가입한 모임
