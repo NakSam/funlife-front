@@ -11,8 +11,6 @@ import Navbar from "./components/common/Navbar";
 import ClubModal from "./components/common/ClubModal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppWrapper } from "./App.styled";
-import ClubModal from "./components/common/ClubModal";
-import UserWalletModal from "./components/common/UserWalletModal";
 import SockJsClient from 'react-stomp';
 import {useDispatch} from 'react-redux';
 import { insertPartner, insertMessage, receive } from './modules/ConversationList'
