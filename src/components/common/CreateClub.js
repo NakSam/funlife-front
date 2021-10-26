@@ -3,7 +3,6 @@ import AWS from "aws-sdk";
 import axios from 'axios';
 import { Col, Row } from "react-bootstrap";
 import { styled } from '@mui/material/styles';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Dialog, InputAdornment, Toolbar, IconButton, Slide } from "@mui/material";
 import { DialogTitle, DialogWrapper, ImgWrapper, ImgUploadButton, LabelInputBox, InputBox, LabelSelectBox, SelectBox, DescriptionBox, CreateButton } from "./styled/CreateClub.styled";
@@ -159,13 +158,13 @@ const CreateClub = ({open, handleClose}) => {
             </Toolbar>
             <DialogWrapper>
                 <ImgWrapper>
-                    <img style={{objectFit:"cover"}} alt="club-img" src={select}/>
+                    <img style={{objectFit:"cover", height:"100%"}} alt="club-img" src={select}/>
                 <ImgUploadButton>
                     <label htmlFor="icon-button-file">
                         <Input accept="image/*" id="icon-button-file" type="file" onChange={onChange}/>
-                        <div style={{color: "#a1a1a199", fontSize:"6rem"}}>
+                        {!uploadImg && <div style={{color: "#a1a1a199", fontSize:"6rem"}}>
                             <FontAwesomeIcon aria-label="upload picture" icon="fa-solid fa-circle-plus" />
-                        </div>
+                        </div>}
                     </label>
                 </ImgUploadButton>
                 </ImgWrapper>
@@ -183,9 +182,8 @@ const CreateClub = ({open, handleClose}) => {
                         >
                             <option>선택</option>
                             {Object.entries(CategoryList).map(([key, value]) => {
-                                if (key !== "전체") {
-                                    return <option value={value} key={key}>{value}</option>
-                                }
+                                if (key !== "전체") return <option value={value} key={key}>{value}</option>
+                                else return null
                             })}
                         </SelectBox>
                     </Col>
@@ -198,9 +196,8 @@ const CreateClub = ({open, handleClose}) => {
                         >
                             <option>선택</option>
                             {Object.entries(LocationList).map(([key, value]) => {
-                                if (key !== "전체") {
-                                    return <option value={value} key={key}>{value}</option>
-                                }
+                                if (key !== "전체") return <option value={value} key={key}>{value}</option>
+                                else return null
                             })}
                         </SelectBox>
                     </Col>

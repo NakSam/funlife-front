@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ModalHeader, ModalTitle} from "../common/styled/LIstModal.styled";
+import { ModalHeader, ModalTitle} from "../common/styled/ClubModal.styled";
 import { Modal, Button } from "react-bootstrap";
 import axiosUtils from "../../utils/axiosUtils";
 import React from "react";

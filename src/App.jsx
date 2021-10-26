@@ -6,9 +6,9 @@ import Search from "./pages/Search";
 import UserInfo from "./pages/UserInfo";
 import ClubDetail from "./pages/ClubDetail";
 import Navbar from "./components/common/Navbar";
+import ClubModal from "./components/common/ClubModal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppWrapper } from "./App.styled";
-import ClubModal from "./components/common/ClubModal";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,7 +24,6 @@ export default function App() {
       <RecoilRoot>
         <AppWrapper>
           <Switch>
-            <Route path="/home" component={Main}/>
             <Route path="/search" component={Search} />
             <Route path="/userinfo" component={UserInfo}/>
             <Route path="/clubdetail" component={ClubDetail} />
