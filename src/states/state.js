@@ -9,6 +9,7 @@ export const modalStatus = atom({
     }
 })
 
+
 export const UserWalletModalStatus = atom({
     key : 'userWalletModal',
     default : {
