@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import cookie from "react-cookies";
 
 export const modalStatus = atom({
     key : 'modal',
@@ -14,4 +15,9 @@ export const UserWalletModalStatus = atom({
         show: false,
         type: ''
     }
+})
+
+export const loginStatus = atom({
+    key: 'login',
+    default: cookie.load("naksam")
 })

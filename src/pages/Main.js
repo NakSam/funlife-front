@@ -1,6 +1,5 @@
-import { MainTitleWrapper, MainTitle, MainLogo, MainAddClub, MyClubList, SectionTitle, LatestClub } from "./styled/Main.styled";
+import { MainTitleWrapper, MainTitle, MainLogo, Button, MainAddClub, MyClubList, SectionTitle, LatestClub } from "./styled/Main.styled";
 import logo from "../static/img/logo.png"
-import Button from '@mui/material/Button';
 import ClubCard from "../components/common/ClubCard";
 import ListBasic from "../components/common/ListBasic";
 import React, { useState } from 'react';
@@ -9,21 +8,32 @@ import axios from "axios";
 import UserClubList from "../components/userInfo/UserClubList";
 import { UserClubWrapper} from "./styled/UserInfo.styled";
 import Modal from 'react-modal';
-import { Route } from "react-router-dom";
+import CreateClub from "../components/common/CreateClub";
+import cookie from "react-cookies";
+import { useEffect } from "react";
+import { loginStatus } from "../states/state";
+import { useRecoilState } from "recoil";
 
 export default function Main(){
+    const [ userStatus, setUserStatus ] = useRecoilState(loginStatus);
+    const login = () => {
+        axios.post("http://naksam.169.56.174.130.nip.io/user/session/login", {
+            email: "qwe@google.com",
+            password: "1q2w3e4r"
+        }).then(() => {
+            console.log(cookie.load("naksam"));
+        })
+    }
+
         
     // 내가 가입한 모임
-    const [myClubList, setMyClubList] = React.useState("");
-    React.useEffect(() => {
-        axiosUtils.get("/club/myClub").then((response) => {
-            setMyClubList(response.data);
-        });
-    }, []);
-    // 내가 .가입한 모임
-
+    const [myClubList, setMyClubList] = useState("");
     // 내 모임 만들기
     const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const handleCreate = () => {
+        setModalIsOpen(false);
+    }
 
     const [Name, SetName] = useState("");
     const [Category, SetCategory] = useState("");
@@ -38,11 +48,6 @@ export default function Main(){
     const submitHandler = (e) => {
         e.preventDefault();
         // state에 저장한 값을 가져옵니다.
-        console.log(Name);
-        console.log(Category);
-        console.log(Location);
-        console.log(Description);
-        
         axios({
             method:"post",
             url:'http://naksam.169.56.174.130.nip.io:80/club/register',
@@ -64,45 +69,31 @@ export default function Main(){
             
           })
     };
-    // 내 모임 만들기
 
-    const [newClubList, setNewClubList] = React.useState("");
-    React.useEffect(() => {
-        axiosUtils.get("/club/home").then((response) => {
-            setNewClubList(response.data);
+    //최근 개설된 모임
+    const [newClubList, setNewClubList] = useState("");
+    useEffect(() => {
+        axiosUtils.get("/club/myClub").then((res) => {
+            setMyClubList(res.data);
         });
-    }, []);//최근 개설된 모임
+        axiosUtils.get("/club/home").then((res) => {
+            setNewClubList(res.data);
+        });
+    }, []);
 
     return(
         <div>
-            {/* 로그인 버튼 라우트 어떻게 쓰는거여*/}
-            {/* <Router>
-                <Route path="/login" component={Login}/>
-            </Router> */}
-            {/* 로그인 버튼 */}
             <MainTitleWrapper>
                 <MainLogo>
                     <img width="100%" height="100%" alt="" src={logo} />
                 </MainLogo>
             </MainTitleWrapper>
             <MainAddClub>
-                <Button variant='outlined'style={{width: '100%', height:'50px'}} onClick={()=> setModalIsOpen(true)}>내 모임 만들기</Button>
+                {!userStatus 
+                ? <Button onClick={login}>로그인</Button> 
+                : <Button onClick={()=> setModalIsOpen(true)}>내 모임 만들기</Button>}
             </MainAddClub>
-            <Modal isOpen={modalIsOpen} ariaHideApp={false}>
-                {/*onSubmit={submitHandler}*/} 
-                <form onSubmit={submitHandler}>
-                    <label>모임 이름</label><br />
-                    <input type="text" value={Name} onChange={nameHandler}/><br />
-                    <label>카테고리</label><br />
-                    <input type="text" value={Category} onChange={categoryHandler}/><br />
-                    <label>장소</label><br />
-                    <input type="text" value={Location} onChange={locationHandler}/><br />
-                    <label>설명</label><br />
-                    <input type="text" value={Description} onChange={descriptionHandler}/><br />
-                    <button type="submit">제출</button>
-                </form>
-                <button onClick={()=> setModalIsOpen(false)}>닫기</button>
-            </Modal>
+            <CreateClub open={modalIsOpen} handleClose={handleCreate}/>
             <MyClubList>
                 <SectionTitle>
                     내가 가입한 모임
