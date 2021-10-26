@@ -21,20 +21,23 @@ export default function Signup({ open, setOpen }){
     const signUp = () => {
         console.log("signup");
         setOpen(false);
+        setSignupData({ email: '', name: '', password:'' })
     }
 
     const goSignIn = () => {
         console.log("go sign in");
         setOpen(false);
+        setSignupData({ email: '', name: '', password:'' })
     }
 
     const handleClose = () => {
         setOpen(false);
+        setSignupData({ email: '', name: '', password:'' })
     };
 
     return (
         <div>
-        <Dialog open={open} TransitionComponent={Transition} onClose={handleClose}>
+        <Dialog sx={{ margin:0 }} open={open} TransitionComponent={Transition} onClose={handleClose}>
             <DialogTitle>Sign Up</DialogTitle>
             <DialogContent>
             <TextField
@@ -48,6 +51,7 @@ export default function Signup({ open, setOpen }){
                 color="warning"
                 onChange={handleChange}
                 value={signupData.name}
+                sx={{ marginBottom:2 }}
             />
             <TextField
                 margin="dense"
@@ -59,6 +63,7 @@ export default function Signup({ open, setOpen }){
                 color="warning"
                 value={signupData.email}
                 onChange={handleChange}
+                sx={{ marginBottom:2 }}
             />
             <TextField
                 margin="dense"
