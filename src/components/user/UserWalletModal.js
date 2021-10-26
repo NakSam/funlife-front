@@ -1,6 +1,6 @@
 import { ChargeBtn, BarTag, ExchangeBtn } from "./styled/UserInfo.styled";
 import { Modal, Button } from "react-bootstrap";
-import { ModalHeader, ModalTitle} from "../common/styled/LIstModal.styled";
+import { ModalHeader, ModalTitle} from "../common/styled/ClubModal.styled";
 import { useState } from "react";
 import axiosUtils from "../../utils/axiosUtils";
 import React from "react";

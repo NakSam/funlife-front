@@ -2,11 +2,11 @@ import {UserInfoTitle, UserInfoWrapper,
     UserInfoDiv1, UserIcon, UserNameTag, UserModifyBtn,
      UserInfoDiv2, TextTag, UserPointTag,
       UserInfoDiv3, UserClubTitle, UserClubWrapper} from "./styled/UserInfo.styled";
-import UserClubList from "../components/userInfo/UserClubList";
+import UserClubList from "../components/user/UserClubList";
 import axiosUtils from "../utils/axiosUtils";
 import React from "react";
 import { useState } from "react";
-import UserWalletModal from "../components/userInfo/UserWalletModal";
+import UserWalletModal from "../components/user/UserWalletModal";
 
 export default function UserInfo() {
     

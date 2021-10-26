@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const UserInfoTitle = styled.h2`
+export const UserInfoTitle = styled.h1`
     color:#ffb300;
     font-weight: bolder;
+    font-family: 'S-CoreDream-6Bold';
 `;
 
 export const UserInfoWrapper = styled.div`
