@@ -5,4 +5,6 @@ export const AppWrapper = styled.div`
     padding: 1.5rem 2rem;
     max-width: 480px;
     min-height: 100%;
+    font-family: 'S-CoreDream-4Regular';
+    color: #58555A;
 `;
