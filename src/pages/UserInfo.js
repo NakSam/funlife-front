@@ -1,13 +1,12 @@
 import {UserInfoTitle, UserInfoWrapper,
     UserInfoDiv1, UserIcon, UserNameTag, UserModifyBtn,
      UserInfoDiv2, TextTag, UserPointTag,
-      UserInfoDiv3, ChargeBtn, BarTag, ExchangeBtn,
-      UserClubTitle, UserClubWrapper} from "./styled/UserInfo.styled";
+      UserInfoDiv3, UserClubTitle, UserClubWrapper} from "./styled/UserInfo.styled";
 import UserClubList from "../components/userInfo/UserClubList";
 import axiosUtils from "../utils/axiosUtils";
 import React from "react";
-import { UserWalletModalStatus } from "../states/state";
-import { useRecoilState } from "recoil";
+import { useState } from "react";
+import UserWalletModal from "../components/userInfo/UserWalletModal";
 
 export default function UserInfo() {
     
@@ -30,7 +29,7 @@ export default function UserInfo() {
         });
     }, []);
 
-    const [ showModal, setShowModal] = useRecoilState(UserWalletModalStatus);
+    const [ showModal, setShowModal] = useState(false);
 
     const [myClubList, setMyClubList] = React.useState("");
     React.useEffect(() => {
@@ -53,11 +52,7 @@ export default function UserInfo() {
                     <UserPointTag>{userWalletInfo.amount} P</UserPointTag>
                 </UserInfoDiv2>
                 <UserInfoDiv3>
-                    <ChargeBtn onClick={() => setShowModal({show: !showModal.show, type:"deposit"})}>충전</ChargeBtn>
-                    <BarTag></BarTag>
-                    <ExchangeBtn onClick={() => setShowModal({show: !showModal.show, type:"exchange"})}>환전</ExchangeBtn>
-                    <BarTag></BarTag>
-                    <ExchangeBtn>내역</ExchangeBtn>
+                    <UserWalletModal />
                 </UserInfoDiv3>
             </UserInfoWrapper>
             <UserClubTitle>내가 가입한 모임</UserClubTitle>

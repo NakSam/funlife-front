@@ -8,7 +8,6 @@ import useClubModal from "../../hooks/useClubModal";
 export default function ClubModal(){
     const [ showModal, setShowModal ] = useRecoilState(modalStatus);
     const { data } = useClubModal(showModal);
-    console.log(data);
 
     const handleClose = () => setShowModal({...showModal, show: !showModal.show});
     const handleClubApply = () => setShowModal({...showModal, show: !showModal.show});

@@ -9,7 +9,6 @@ import Navbar from "./components/common/Navbar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppWrapper } from "./App.styled";
 import ClubModal from "./components/common/ClubModal";
-import UserWalletModal from "./components/common/UserWalletModal";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,7 +32,6 @@ export default function App() {
           </Switch>   
           <Navbar />
           <ClubModal />
-          <UserWalletModal />
         </AppWrapper>
       </RecoilRoot>
     </QueryClientProvider>
