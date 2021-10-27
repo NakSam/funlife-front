@@ -6,8 +6,6 @@ import { loginStatus } from "../../states/state";
 import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { SignUpWrapper, LabelInputBox, InputBox, SignInButton, SignUpButton } from "./styled/SignIn.styled";
-
-import axiosUtils from "../../utils/axiosUtils";
 import { isEmail, isPassword } from '../../utils/ValidationCheck'
 
 
@@ -34,14 +32,14 @@ export default function SignIn({ open, setOpen }){
     const signIn = () => {
         //이메일 검사
         var emailCheck = isEmail(signInData.email);
-        if(!emailCheck == ''){
+        if(!emailCheck === ''){
             alert(emailCheck);
             return;
         }
 
         //PW검사
         var pwCheck = isPassword(signInData.password);
-        if(!pwCheck == ''){
+        if(!pwCheck === ''){
             alert(pwCheck);
             return;
         }

@@ -4,7 +4,7 @@ export default function WalletHistory({data}) {
     return (
         <>
         {data &&
-        <div style={{height:"100vh", overflow:"scroll", height:"23rem"}}>
+        <div style={{overflow:"scroll", height:"23rem"}}>
         <Table sx={{maxWidth:"100%"}} aria-label="simple table">
             <TableHead>
                 <TableRow>

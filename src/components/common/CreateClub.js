@@ -67,14 +67,14 @@ const CreateClub = ({open, handleClose}) => {
 
         //공백 검사
         var emptyCheck = isEmpty(inputData);
-        if(!emptyCheck == ''){
+        if(!emptyCheck === ''){
             alert(emptyCheck);
             return;
         }
 
         //회비 금액제한
         var moneyCheck = moneyLimit(inputData.amount);
-        if(!moneyCheck == ''){
+        if(!moneyCheck === ''){
             alert(moneyCheck);
             return;
         }

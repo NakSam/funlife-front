@@ -27,21 +27,21 @@ export default function Signup({ open, setOpen }){
     const signUp = () => {
         //공백 검사
         var emptyCheck = isEmpty(signupData);
-        if(!emptyCheck == ''){
+        if(!emptyCheck === ''){
             alert(emptyCheck);
             return;
         }
 
         //이메일 검사
         var emailCheck = isEmail(signupData.email);
-        if(!emailCheck == ''){
+        if(!emailCheck === ''){
             alert(emailCheck);
             return;
         }
 
         //PW검사
         var pwCheck = isPassword(signupData.password);
-        if(!pwCheck == ''){
+        if(!pwCheck === ''){
             alert(pwCheck);
             return;
         }
