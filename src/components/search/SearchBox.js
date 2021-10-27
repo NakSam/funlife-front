@@ -49,6 +49,7 @@ export default function SearchBox({ searchData, setSearchData }){
                 <SearchInput 
                     name="clubname"
                     placeholder="모임을 검색하세요."
+                    maxLength="20"
                     value={searchData.clubname}    
                     onChange={handleChange}
                 />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { SignUpWrapper, LabelInputBox, InputBox, SignUpButton } from "./styled/SignUp.styled";
-import { isEmpty, isEmail, isPassword } from '../../utils/ValidationCheck'
+import { isEmptyList, isEmail, isPassword } from '../../utils/ValidationCheck'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -26,7 +26,7 @@ export default function Signup({ open, setOpen }){
 
     const signUp = () => {
         //공백 검사
-        var emptyCheck = isEmpty(signupData);
+        var emptyCheck = isEmptyList(signupData);
         if(!emptyCheck === ''){
             alert(emptyCheck);
             return;
