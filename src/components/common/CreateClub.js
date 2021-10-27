@@ -66,15 +66,15 @@ const CreateClub = ({open, handleClose}) => {
     const handleCreate = () => {
 
         //공백 검사
-        var emptyCheck = isEmptyList(inputData);
-        if(!emptyCheck == ''){
+        var emptyCheck = isEmpty(inputData);
+        if(!emptyCheck === ''){
             alert(emptyCheck);
             return;
         }
 
         //금액제한
         var moneyCheck = moneyLimit(inputData.amount);
-        if(!moneyCheck == ''){
+        if(!moneyCheck === ''){
             alert(moneyCheck);
             return;
         }

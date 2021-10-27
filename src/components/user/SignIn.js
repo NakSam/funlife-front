@@ -31,14 +31,14 @@ export default function SignIn({ open, setOpen }){
     const signIn = () => {
         //이메일 검사
         var emailCheck = isEmail(signInData.email);
-        if(!emailCheck == ''){
+        if(!emailCheck === ''){
             alert(emailCheck);
             return;
         }
 
         //PW검사
         var pwCheck = isPassword(signInData.password);
-        if(!pwCheck == ''){
+        if(!pwCheck === ''){
             alert(pwCheck);
             return;
         }
