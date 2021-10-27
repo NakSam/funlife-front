@@ -13,7 +13,23 @@ export const MyClubList = styled.div`
     margin-top:1rem;
 `;
 
-export const SectionTitle1 = styled.h5`
+export const Button = styled.button`
+    border: 0;
+    margin: auto 0;
+    background-color: #F2F2F2;
+    width: 100%;
+    border-radius: 0.3rem;
+    padding: 0.7rem;
+    color: #58555A;
+    height:7rem;
+    font-family: 'S-CoreDream-6Bold';
+    &:active,
+    &:visited { 
+        background-color: #EDEDED;
+    }
+`;
+
+export const SectionTitle = styled.h5`
     color: #58555A;
     font-size: 1.2rem;
     display:inline-block;

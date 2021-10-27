@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import cookie from "react-cookies";
 import { useSetRecoilState } from "recoil";
 import Signup from "./Signup";
 import axiosUtils from "../../utils/axiosUtils";
@@ -15,7 +14,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function SignIn({ open, setOpen }){
     const setUserStatus = useSetRecoilState(loginStatus);
     const [ signInData, setSignInData ] = useState({ email: '', password:'' });
-
     const handleChange = (e) => {
         setSignInData({ ...signInData, [e.target.id] : e.target.value }) 
     }
@@ -32,9 +30,8 @@ export default function SignIn({ open, setOpen }){
     const signIn = () => {
         // axios 하기
         axiosUtils.post("/user/session/login", signInData)
-        .then(() => { setUserStatus(cookie.load("naksam"));handleClose();console.log(cookie.load("naksam")); })
+        .then(() => { setUserStatus(true);handleClose(); })
         .catch(() => alert("로그인에 실패하였습니다."))
-        
     }
 
     return (
