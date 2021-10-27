@@ -11,7 +11,6 @@ export default function DevideModal({clubId}) {
         
         axiosUtils.post('/wallet/club/' + clubId + '/distribute')
           .then((response) => {
-            console.log(response);
             alert("정산이 완료되었습니다.");
             setDevideModal(false);
           })
@@ -22,7 +21,7 @@ export default function DevideModal({clubId}) {
 
     return(
         <div>
-            <button class="devide" onClick={()=> setDevideModal({show: !devideModal.show})}>정산</button>
+            <button className="devide" onClick={()=> setDevideModal({show: !devideModal.show})}>정산</button>
 
             <Modal show={devideModal.show}>
             <ModalHeader>

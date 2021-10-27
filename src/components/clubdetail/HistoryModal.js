@@ -12,7 +12,6 @@ export default function HistoryModal({clubId}) {
     React.useEffect(() => {
         axiosUtils.get("/wallet/club/"+clubId+"/history").then((response) => {
             setClubWalletHistory(response.data.depositHistories);
-            console.log(response.data.depositHistories);
         });
     }, []);
 

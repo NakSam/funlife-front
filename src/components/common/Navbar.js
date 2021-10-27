@@ -10,7 +10,7 @@ const BottomNav = () => {
     return (
         <nav className="wrapper">
             <div>
-                <Link to='/home'>
+                <Link to='/'>
                     <IconButton size="small">
                         <FontAwesomeIcon icon="house"/>
                     </IconButton>

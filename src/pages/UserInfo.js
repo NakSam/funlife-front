@@ -5,7 +5,7 @@ import { loginStatus } from "../states/state";
 import Login from "../components/user/SignIn";
 import UserInfoBox from "../components/user/UserInfoBox";
 import CardSlider from "../components/common/cardSlider/CardSlider";
-import { UserInfoTitle, MyClubList, SectionTitle1 } from "./styled/UserInfo.styled";
+import { UserInfoTitle, MyClubList, SectionTitle, Button } from "./styled/UserInfo.styled";
 
 export default function UserInfo() {
     const userStatus = useRecoilValue(loginStatus);
@@ -25,11 +25,14 @@ export default function UserInfo() {
         <div>
             <UserInfoTitle>마이페이지</UserInfoTitle>
             {!userStatus 
-            ? <Login open={open} setOpen={setOpen} /> 
+            ? <>
+                <Button onClick={() => setOpen({...open, signIn:true})}>로그인</Button> 
+                <Login open={open} setOpen={setOpen} />
+            </> 
             : <>
                 <UserInfoBox userInfo={userInfo} userWalletInfo={userWalletInfo} />
                 <MyClubList>
-                    <SectionTitle1>내가 가입한 모임</SectionTitle1>
+                    <SectionTitle>내가 가입한 모임</SectionTitle>
                     {myClubList ? <CardSlider data={myClubList} /> : <small style={{fontSize:"0.8rem", display:"block",padding:"0.5rem 2rem 3rem 2rem"}}>아직 가입한 모임이 없습니다.<br />원하는 모임에 가입해보세요 :)</small> }
                 </MyClubList>
             </> }

@@ -9,6 +9,7 @@ import { DialogTitle, DialogWrapper, ImgWrapper, ImgUploadButton, LabelInputBox,
 import { CategoryList, LocationList } from "../../consts/search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../static/icons/FontAwesome';
+import { isEmpty, moneyLimit } from '../../utils/ValidationCheck'
 
 //AWS S3 설정
 const S3_BUCKET = 'naksam/img';
@@ -38,19 +39,18 @@ const CreateClub = ({open, handleClose}) => {
     const [select, setSelect] = useState("https://naksam.s3.ap-northeast-2.amazonaws.com/img/default.png");
     const [uploadImg, setUploadImg] = useState(null);
     const [inputData, setInputData] = useState({
-        amount: "",
-        category: "",
-        description: "",
         image: "",
+        name: "",
+        category: "",
         location: "",
-        maxMemberNum: "",
-        name: ""
+        maxMemberNum: "2",
+        amount: "",
+        description: ""
     })
 
     const onChange = (e) => {
         const img = e.target.files[0];        
         // const formData = new FormData();
-        console.log(img);
         let reader = new FileReader();
         reader.readAsDataURL(img);
         reader.onload = () =>{
@@ -64,6 +64,21 @@ const CreateClub = ({open, handleClose}) => {
     }
 
     const handleCreate = () => {
+
+        //공백 검사
+        var emptyCheck = isEmpty(inputData);
+        if(!emptyCheck === ''){
+            alert(emptyCheck);
+            return;
+        }
+
+        //회비 금액제한
+        var moneyCheck = moneyLimit(inputData.amount);
+        if(!moneyCheck === ''){
+            alert(moneyCheck);
+            return;
+        }
+
         if(uploadImg!==null){
             var today = new Date();
 
@@ -170,7 +185,7 @@ const CreateClub = ({open, handleClose}) => {
                 </ImgWrapper>
                 <div>
                     <LabelInputBox htmlFor="clubname">모임명</LabelInputBox>
-                    <InputBox name="name" id="clubname" value={inputData.name} onChange={handleChange} />
+                    <InputBox name="name" id="clubname" type="text" maxLength="12" value={inputData.name} onChange={handleChange} />
                 </div>
                 <Row>
                     <Col>
