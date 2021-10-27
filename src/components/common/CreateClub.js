@@ -66,7 +66,7 @@ const CreateClub = ({open, handleClose}) => {
     const handleCreate = () => {
 
         //공백 검사
-        var emptyCheck = isEmpty(inputData);
+        var emptyCheck = isEmptyList(inputData);
         if(!emptyCheck === ''){
             alert(emptyCheck);
             return;

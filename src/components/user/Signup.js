@@ -26,7 +26,7 @@ export default function Signup({ open, setOpen }){
 
     const signUp = () => {
         //공백 검사
-        var emptyCheck = isEmpty(signupData);
+        var emptyCheck = isEmptyList(signupData);
         if(!emptyCheck === ''){
             alert(emptyCheck);
             return;
