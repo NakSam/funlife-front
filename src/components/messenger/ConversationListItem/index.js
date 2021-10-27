@@ -12,13 +12,27 @@ export default function ConversationListItem ({ partner, host, sendToMessage}){
   const conversationList = useSelector(state => state.conversationlist);
   const dispatch = useDispatch();
   const baseImg = 'https://naksam.s3.ap-northeast-2.amazonaws.com/user-img/base.png';
-  // const [textList, setTextList] = useState(text);  
+  const [last, setLast] = useState("");  
   useEffect(() => {
-    shave('.conversation-snippet', 20);    
+    shave('.conversation-snippet', 20);
+    setLastMsg();  
   })  
 
   const openMessage = () =>{
     setShowMessage(true);
+  }
+
+  const setLastMsg = () => {
+  
+    if(conversationList[partner].length > 0 && conversationList[partner][conversationList[partner].length-1].status === 1){
+      setLast(conversationList[partner][conversationList[partner].length-1].clubName + "초대");
+    }
+    if(conversationList[partner].length > 0 && conversationList[partner][conversationList[partner].length-1].status === 2){
+      setLast(conversationList[partner][conversationList[partner].length-1].email + "가입신청");
+    }
+    if(conversationList[partner].length > 0 && conversationList[partner][conversationList[partner].length-1].status === 0){
+      setLast(conversationList[partner][conversationList[partner].length-1].message);
+    }
   }
 
   const handleLeaveChat = () => {
@@ -45,7 +59,7 @@ export default function ConversationListItem ({ partner, host, sendToMessage}){
         <img className="conversation-photo" src={baseImg} alt="conversation" />
         <div className="conversation-info">
           <h1 className="conversation-title">{ partner }</h1>
-          <p className="conversation-snippet">{ conversationList[partner].length === 0 ? "" : conversationList[partner][conversationList[partner].length-1].message }</p>
+          <p className="conversation-snippet">{ last }</p>
         </div>        
       </div>
       <MessageList 

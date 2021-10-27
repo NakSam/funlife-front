@@ -105,7 +105,7 @@ export default function MessageList(props) {
         
       }
 
-      if(messageState===2){
+      if(current.status===2){
         tempMessages.push(
           <AcceptMessage
             key={i}
@@ -118,7 +118,7 @@ export default function MessageList(props) {
           />
         );
       }
-      if(messageState===1){
+      if(current.status===1){
         tempMessages.push(
           <InviteMessage
             key={i}
@@ -131,7 +131,7 @@ export default function MessageList(props) {
           />
         );
       }
-      if(messageState===0){
+      if(current.status===0){
         tempMessages.push(
           <Message
             key={i}

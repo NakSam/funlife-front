@@ -33,12 +33,21 @@ export default function App() {
     getConversations();
   }, [])
 
-  const sendToMessage = (from, to, msg) =>{
+  const sendToMessage = (from, to, msg, status) =>{
     const m = {message:msg, author:from, to:to, timestamp: new Date().getTime()};
-    const invite = {message:msg, author:"naksam", to:"test", messageState:1, timestamp: new Date().getTime()};
-    const accept = {message:msg, author:from, to:to, timestamp: new Date().getTime()};
-    $websocket.current.sendMessage("/app/send", JSON.stringify(m));
-    dispatch(insertMessage(m));
+    const invite = {message:msg, author:"naksam", to:"test", clubName:"KB테스트모임", status:1, timestamp: new Date().getTime()};
+    const accept = {message:msg, author:"naksam", to:"test", email:"test@google.com", clubId:99, status:2, timestamp: new Date().getTime()};
+    if(status===0){
+      $websocket.current.sendMessage("/app/send", JSON.stringify(m));
+      dispatch(insertMessage(m));
+    }
+    if(status===1){
+      $websocket.current.sendMessage("/app/send", JSON.stringify(invite));
+      dispatch(insertMessage(invite));
+    }
+    if(status===2){}
+    $websocket.current.sendMessage("/app/send", JSON.stringify(accept));
+    dispatch(insertMessage(accept));
   }
 
   const recevieMessage = (msg) => {
