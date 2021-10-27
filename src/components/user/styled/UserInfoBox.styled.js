@@ -26,7 +26,7 @@ export const UserImg = styled.img`
 `;
 
 export const UserInfos = styled.div`
-    width: 70%;
+    width: 80%;
 `;
 
 export const UserName = styled.p`
@@ -37,31 +37,38 @@ export const UserName = styled.p`
 
 export const UserButtonWrapper = styled.div`
     margin-left: 1rem;
+    width:100%;
 
 `;
 
 export const UserButton = styled.button`
-    margin: 0.3rem 0.1rem 0 0;
-    padding: 0.2rem 0.4rem;
+    margin: 0.4rem 0.3rem 0 0;
+    padding: 0.1rem 0.3rem;
     font-weight: bold;
     font-size:0.9rem;
     border-radius: 0.4rem;
-    border: 3px solid #ffb300;
+    border: 2px solid #ffb300;
     font-family: 'S-CoreDream-6Bold';
-    background-color: white;
-    color: #ffb300;
+    background-color: #ffb300;
+    color: white;
+`;
 
-    &:active,
-    &:focus {
-        background-color: #ffb300;
-        color:white;
-    }
+export const UserButton1 = styled.button`
+    margin-left: 0.7rem;
+    padding: 0.1rem 0.3rem;
+    font-weight: bold;
+    font-size:0.9rem;
+    border-radius: 0.4rem;
+    border: 2px solid #a1a1a1;
+    font-family: 'S-CoreDream-6Bold';
+    background-color: #a1a1a1;
+    color: white;
 `;
 
 export const UserWalletInfoWrapper = styled.div`
     background-color: white;
     border-radius: 0.8rem;
-    margin:0.7rem 1rem;
+    margin:0.8rem 1rem;
     height:3.6rem;
     display: flex;
     padding: 1rem;
