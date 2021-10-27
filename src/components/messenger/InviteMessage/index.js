@@ -45,7 +45,7 @@ export default function Message(props) {
               <img className="conversation-photo" src={process.env.REACT_APP_USER_BASE_IMAGE} alt="conversation" />
             </div>
             <div style={{textAlign:"center", fontSize:"15px", marginTop:"7px", marginBottom:"7px"}}>
-              <strong>{team}</strong>
+              <strong>{data.clubName}</strong>
             </div>
             <div style={{marginTop:"7px", marginBottom:"7px"}}>
               { dummy1 }

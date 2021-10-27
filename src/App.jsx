@@ -45,9 +45,11 @@ export default function App() {
       $websocket.current.sendMessage("/app/send", JSON.stringify(invite));
       dispatch(insertMessage(invite));
     }
-    if(status===2){}
-    $websocket.current.sendMessage("/app/send", JSON.stringify(accept));
-    dispatch(insertMessage(accept));
+    if(status===2){
+      $websocket.current.sendMessage("/app/send", JSON.stringify(accept));
+      dispatch(insertMessage(accept));
+    }
+      
   }
 
   const recevieMessage = (msg) => {
