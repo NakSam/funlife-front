@@ -19,7 +19,7 @@ export default function ClubPayModal({clubId, dues}) {
             money: money
             })
           .then((response) => {
-            console.log(response);
+
             alert("결제가 완료되었습니다.");
             window.location.href = '/clubDetail/?clubId=' + query.get("clubId");
             setClubPayModal(false);
@@ -38,7 +38,7 @@ export default function ClubPayModal({clubId, dues}) {
 
     return(
         <div>
-            <button class="transfer" onClick={()=> setClubPayModal({show: !clubPayModal.show})}>결제</button>
+            <button className="transfer" onClick={()=> setClubPayModal({show: !clubPayModal.show})}>결제</button>
 
             <Modal show={clubPayModal.show}>
                 <ModalHeader>

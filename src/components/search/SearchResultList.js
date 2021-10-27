@@ -8,7 +8,6 @@ import { Button } from "@mui/material";
 export default function SearchResultList({ searchData }){
     const { data } = useSearchList(searchData);  
     const [ showModal, setShowModal] = useRecoilState(modalStatus);
-    console.log(data);
     if(data != null && data != ""){
         return(
             data && Object.entries(data).map((item) => {

@@ -12,8 +12,6 @@ export default function InviteModal({name}) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        
-        console.log(Email);
 
         axios({
             method:"post",
@@ -26,7 +24,7 @@ export default function InviteModal({name}) {
               }
           })
           .then((response) => {
-            console.log(response);
+
           })
           .catch((error) => {
             
@@ -35,14 +33,14 @@ export default function InviteModal({name}) {
 
     return(
         <div>
-            <button class="invitation" onClick={()=> setInviteModalIsOpen(true)}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</button>
+            <button className="invitation" onClick={()=> setInviteModalIsOpen(true)}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</button>
             
-            <Modal class="inviteModal" isOpen={inviteModalIsOpen} ariaHideApp={false}>
+            <Modal className="inviteModal" isOpen={inviteModalIsOpen} ariaHideApp={false}>
                 <FontAwesomeIcon icon="fa-solid fa-envelope" />
                 <br />
                 {name}에 멤버 초대
                 <br />
-                <div class="search-container">
+                <div className="search-container">
                     <form onSubmit={submitHandler}>
                         <FontAwesomeIcon icon="fa-solid fa-user" />
                         <input type="text" placeholder="Search.." name="search" value={Email} onChange={emailHandler} />

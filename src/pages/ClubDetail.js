@@ -27,7 +27,6 @@ export default function ClubDetail(e){
     let query = useQuery();
     // club detail
     const [club, setClub] = React.useState("");
-    console.log(query.get("clubId"));
 
     React.useEffect(() => {
         axiosUtils.get('/club/search/' + query.get("clubId")).then((response) => {
@@ -126,7 +125,7 @@ export default function ClubDetail(e){
             {/* 탭 */}
             <div className="tabs">
                 {content.map((section, index) => (
-                    <button className="tablinks" onClick={() => contentChange(index)}>{section.tab}</button>
+                    <button className="tablinks" key={index} onClick={() => contentChange(index)}>{section.tab}</button>
                 ))}
                 <br />
                 {contentItem.content}

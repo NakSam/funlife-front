@@ -14,18 +14,15 @@ export default function Signup({ open, setOpen }){
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        console.log(signupData)
         setSignupData({ ...signupData, [id] : value }) 
     }
 
     const signUp = () => {
-        console.log("signup");
         setOpen(false);
         setSignupData({ email: '', name: '', password:'' })
     }
 
     const goSignIn = () => {
-        console.log("go sign in");
         setOpen(false);
         setSignupData({ email: '', name: '', password:'' })
     }

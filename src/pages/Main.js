@@ -22,7 +22,6 @@ export default function Main(){
             email: "qwe@google.com",
             password: "1q2w3e4r"
         }).then(() => {
-            console.log(cookie.load("naksam"));
         })
     }
 
@@ -69,7 +68,7 @@ export default function Main(){
               }
           })
           .then((response) => {
-            console.log(response);
+              
           })
           .catch((error) => {
             

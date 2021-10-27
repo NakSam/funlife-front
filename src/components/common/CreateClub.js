@@ -51,7 +51,6 @@ const CreateClub = ({open, handleClose}) => {
     const onChange = (e) => {
         const img = e.target.files[0];        
         // const formData = new FormData();
-        console.log(img);
         let reader = new FileReader();
         reader.readAsDataURL(img);
         reader.onload = () =>{
