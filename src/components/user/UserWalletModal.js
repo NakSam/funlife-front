@@ -28,14 +28,14 @@ export default function UserWalletModal({ showModal, setShowModal }){
         //공백 검사
         var emptyCheck = isEmpty(money);
         console.log(emptyCheck);
-        if(!emptyCheck == ''){
+        if(!(emptyCheck === '')){
             alert(emptyCheck);
             return;
         }
 
         //금액제한
         var moneyCheck = moneyLimit(money);
-        if(!moneyCheck == ''){
+        if(!(moneyCheck === '')){
             alert(moneyCheck);
             return;
         }

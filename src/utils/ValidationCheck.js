@@ -1,6 +1,6 @@
 export const isEmail = (email) => {
     var emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    var result = emailRegex.test(email) ? '' : '이메일이 올바르지 않습니다'
+    var result = emailRegex.test(email) ? '' : '이메일이 올바르지않습니다'
 
     return result;
 }
@@ -22,16 +22,17 @@ export const isEmptyList = (value) => {
     
     Object.entries(value).map(([key, value]) => {
         if(result == ''){
-            result = value ? '' : key + ' 값을 입력해주세요.'
+            result = value ? '' : key + ' 값을 입력해주세요'
         }
        return;
     });
+    console.log(result);
 
     return result; 
 }
 
 export const isEmpty = (value) => {
-    var result = value ? '' : '값을 입력해주세요.';
-    console.log(result);
+    var result = value ? '' : '값을 입력해주세요';
+
     return result; 
 }
