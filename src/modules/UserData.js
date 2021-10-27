@@ -3,6 +3,7 @@ const INSERT = 'userdata/INSERT';
 const REMOVE = 'userdata/REMOVE';
 const MESSAGE = 'userdata/MESSAGE';
 const SETUSERID = 'userdata/SETUSERID';
+const SETUSEREMAIL = 'userdata/SETUSEREMAIL';
 const SETLIST = 'userdata/SETLIST'
 
 export const login = () => ({type: LOGIN, payload:true});
@@ -10,16 +11,19 @@ export const insert = (input) => ({type:INSERT, payload:input});
 export const remove = (partner) => ({type:REMOVE, payload:partner});
 export const message = (msg) => ({type:MESSAGE, payload:msg});
 export const userid = (id) => ({type:SETUSERID, payload:id});
+export const email = (email) => ({type:SETUSEREMAIL, payload:email});
 export const setlist = (conversation) => ({type:SETLIST, payload:conversation});
 
-const initialState = {isLogin:false, userId:"", conversation:[]};
+const initialState = {isLogin:false, userId:"", email:"", conversation:[]};
 
 const UserData = (state=initialState, action) => {
     switch (action.type) {
         case LOGIN:
             return {...state, isLogin:action.payload};
         case SETUSERID:
-            return {...state, userId:action.payload}
+            return {...state, userId:action.payload};
+        case SETUSEREMAIL:
+            return {...state, email:action.payload};
         case INSERT:
             let temp = {};
             temp[action.paylod.partner] = {photo:action.payload.photo,list:[]}
@@ -37,7 +41,7 @@ const UserData = (state=initialState, action) => {
             return;            
         case SETLIST:            
             state.conversation.push(action.payload);
-            return {...state, conversation:[...state.conversation]}
+            return {...state, conversation:[...state.conversation]};
         default:
             return state;
     }

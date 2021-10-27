@@ -26,7 +26,7 @@ const useTabs = (initialTabs, allTabs) => {
 //     return new URLSearchParams(useLocation().search);
 // }
 
-export default function ClubDetail(){
+export default function ClubDetail({sendToMessage}){
     let query = new URLSearchParams(useLocation().search);
 
     const [inviteModal, setInviteModal] = useState(false);
@@ -91,7 +91,7 @@ export default function ClubDetail(){
             <TitleWrapper>
                 <DetailTitle>{club.name}</DetailTitle>
                 <InviteButton onClick={() => setInviteModal({show:!inviteModal.show})}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</InviteButton>
-                <InviteModal name={club.name} inviteModal={inviteModal} setInviteModal={setInviteModal} />
+                <InviteModal clubId={query.get("clubId")} name={club.name} inviteModal={inviteModal} setInviteModal={setInviteModal} sendToMessage={sendToMessage} />
             </TitleWrapper>
 
             <ClubInfoBox club={club} clubWallet={clubWallet} />

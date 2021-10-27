@@ -4,8 +4,7 @@ import './InviteMessage.css';
 import {Button} from '../../../pages/styled/Main.styled';
 
 const dummy1 = "모임에서 회원님을 초대하였습니다."
-const dummy2 = "수락하기를 눌러 모임을 시작해보세요.";
-const team = "KB 연수생모임"
+const dummy2 = "가입하기를 눌러 모임을 시작해보세요.";
 
 export default function Message(props) {
     const {
@@ -42,7 +41,7 @@ export default function Message(props) {
           }
           <div className="bubble" title={friendlyTimestamp}>
             <div style={{textAlign:"center"}}>
-              <img className="conversation-photo" src={process.env.REACT_APP_USER_BASE_IMAGE} alt="conversation" />
+              <img className="message-photo" src={"https://naksam.s3.ap-northeast-2.amazonaws.com/user-img/base.png"} alt="conversation" />
             </div>
             <div style={{textAlign:"center", fontSize:"15px", marginTop:"7px", marginBottom:"7px"}}>
               <strong>{data.clubName}</strong>

@@ -12,7 +12,7 @@ import ClubModal from "./components/common/ClubModal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppWrapper } from "./App.styled";
 import SockJsClient from 'react-stomp';
-import {useDispatch} from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { insertPartner, insertMessage, receive } from './modules/ConversationList'
 import axios from "axios";
 
@@ -25,68 +25,75 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
-  const $websocket = useRef(null); 
-  let topics = ['/topic/test'];
+  const $websocket = useRef(null);   
   const dispatch = useDispatch();
+  const userData = useSelector(state => state.userdata);
+  console.log(userData);
+  let topics = ['/topic/'+userData.userId];
 
-  useEffect(() => {
-    getConversations();
-  }, [])
+  // useEffect(() => {
+  //   if(userData.isLogin){
+  //     getConversations();
+  //   }    
+  // }, [])
 
   const sendToMessage = (from, to, msg, status) =>{
-    const m = {message:msg, author:from, to:to, timestamp: new Date().getTime()};
-    const invite = {message:msg, author:"naksam", to:"test", clubName:"KB테스트모임", status:1, timestamp: new Date().getTime()};
-    const accept = {message:msg, author:"naksam", to:"test", email:"test@google.com", clubId:99, status:2, timestamp: new Date().getTime()};
     if(status===0){
+      const m = {message:msg, author:from, to:to, timestamp: new Date().getTime()};
       $websocket.current.sendMessage("/app/send", JSON.stringify(m));
       dispatch(insertMessage(m));
     }
     if(status===1){
+      const invite = {message:"초대", author:"naksam", to:to, clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:1, timestamp: new Date().getTime()};
       $websocket.current.sendMessage("/app/send", JSON.stringify(invite));
-      dispatch(insertMessage(invite));
+      //dispatch(insertMessage(invite));
     }
     if(status===2){
+      const accept = {message:"초대", author:"naksam", to:to, clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:2, timestamp: new Date().getTime()};
       $websocket.current.sendMessage("/app/send", JSON.stringify(accept));
-      dispatch(insertMessage(accept));
+      //dispatch(insertMessage(accept));
     }
-      
+    console.log(msg);
+    console.log(to);
   }
 
   const recevieMessage = (msg) => {
+    console.log(msg);
     dispatch(receive(msg));    
   }
 
-  const getConversations = () => {
-    axios({
-      method:"get",
-      url:process.env.REACT_APP_USER_BASE_URL+'/fetchAllUsers/test'
-    })
-    .then((response) => {
-      for (const key in response.data) {
-        dispatch(insertPartner(
-          {
-            photo:process.env.REACT_APP_USER_BASE_IMAGE,
-            partner: response.data[key].partner,
-            list:[...response.data[key].messageList]
-          }
-        ))
-      }           
-    })
-    .catch((error) => {
+  // const getConversations = () => {
+  //   axios({
+  //     method:"get",
+  //     url:process.env.REACT_APP_USER_BASE_URL+'/fetchAllUsers/'+userData.userId
+  //   })
+  //   .then((response) => {
+  //     console.log(response);
+  //     for (const key in response.data) {
+  //       dispatch(insertPartner(
+  //         {
+  //           photo:process.env.REACT_APP_USER_BASE_IMAGE,
+  //           partner: response.data[key].partner,
+  //           list:[...response.data[key].messageList]
+  //         }
+  //       ))
+  //     }           
+  //   })
+  //   .catch((error) => {
       
-    })
-  }    
+  //   })
+  // }    
 
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <AppWrapper>
           <Switch>
-            <Route path="/search" component={Search} />
+            <Route path="/search" render={()=><Search sendToMessage={sendToMessage}/>} />
             <Route path="/messenger" render={()=><Messenger sendToMessage={sendToMessage} recevieMessage={recevieMessage}/>}/>
             <Route path="/userinfo" component={UserInfo}/>
-            <Route path="/clubdetail" component={ClubDetail} />
-            <Route path="/" component={Main}/>
+            <Route path="/clubdetail" render={()=><ClubDetail sendToMessage={sendToMessage}/>} />
+            <Route path="/" render={()=><Main sendToMessage={sendToMessage}/>}/>
           </Switch>   
           <Navbar />
           <ClubModal />

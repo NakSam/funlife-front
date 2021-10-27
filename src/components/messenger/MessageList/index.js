@@ -17,7 +17,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 
 import './MessageList.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //const MY_USER_ID = 'apple';
 
@@ -28,7 +28,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function MessageList(props) {
   const {showMessage, setShowMessage, partner, list, host, sendToMessage, handleLeaveChat} = props;
   const [inputMessage, setInputMessage] = useState("");
-  const messageState = 2;
   useEffect(() => {
   },[])
 
@@ -36,15 +35,15 @@ export default function MessageList(props) {
     setShowMessage(false);
   };    
 
-  const handleExit = () => {
-    handleLeaveChat(partner);    
-  }
+  // const handleExit = () => {
+  //   handleLeaveChat(partner);    
+  // }
 
-  const sendMessages = () => {
-    if(inputMessage.length===0 || inputMessage===undefined)return;
-    sendToMessage(host, partner, inputMessage)
-    setInputMessage("")
-  }
+  // const sendMessages = () => {
+  //   if(inputMessage.length===0 || inputMessage===undefined)return;
+  //   sendToMessage(host, partner, inputMessage)
+  //   setInputMessage("")
+  // }
 
   const renderMessages = () => {
     moment.locale('ko');

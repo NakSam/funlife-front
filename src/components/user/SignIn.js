@@ -7,6 +7,10 @@ import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { SignUpWrapper, LabelInputBox, InputBox, SignInButton, SignUpButton } from "./styled/SignIn.styled";
 import { isEmail, isPassword } from '../../utils/ValidationCheck'
+import { useDispatch } from "react-redux";
+import {login, userid, email} from '../../modules/UserData';
+import axios from "axios";
+import { insertPartner } from "../../modules/ConversationList";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -15,6 +19,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function SignIn({ open, setOpen }){
     const setUserStatus = useSetRecoilState(loginStatus);
     const [ signInData, setSignInData ] = useState({ email: '', password:'' });
+    const dispatch = useDispatch();
+
     const handleChange = (e) => {
         setSignInData({ ...signInData, [e.target.id] : e.target.value }) 
     }
@@ -45,7 +51,32 @@ export default function SignIn({ open, setOpen }){
 
         // axios 하기
         axiosUtils.post("/user/session/login", signInData)
-        .then(() => { setUserStatus(true);handleClose(); })
+        .then((res) => { 
+            setUserStatus(true);
+            dispatch(login(true));
+            dispatch(userid(String(res.data)));
+            dispatch(email(signInData.email));
+            axios({
+                method:"get",
+                url:process.env.REACT_APP_USER_BASE_URL+'/fetchAllUsers/'+String(res.data)
+              })
+              .then((response) => {
+                console.log(response);
+                for (const key in response.data) {
+                  dispatch(insertPartner(
+                    {
+                      photo:process.env.REACT_APP_USER_BASE_IMAGE,
+                      partner: response.data[key].partner,
+                      list:[...response.data[key].messageList]
+                    }
+                  ))
+                }           
+              })
+              .catch((error) => {
+                
+              })
+            handleClose(); 
+        })
         .catch(() => alert("로그인에 실패하였습니다."))
     }
 

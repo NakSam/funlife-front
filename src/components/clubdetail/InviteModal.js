@@ -1,29 +1,37 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ModalHeader, ModalTitle} from "../common/styled/ClubModal.styled";
 import { Modal, Button } from "react-bootstrap";
 import axiosUtils from "../../utils/axiosUtils";
 
-export default function InviteModal({ name, inviteModal, setInviteModal }) {
-    const [Email, SetEmail] = useState("");
+export default function InviteModal({ clubId, name, inviteModal, setInviteModal, sendToMessage }) {
+    const [email, setEmail] = useState("");
 
-    const emailHandler = (e) => { e.preventDefault(); SetEmail(e.target.value); };
+    const emailHandler = (e) => { e.preventDefault(); setEmail(e.target.value); };
 
     const submitHandler = (e) => {
         e.preventDefault();
-
-        axiosUtils.post('/club/invite', {
-            clubId : 1,
-            emails : [
-                Email
-            ]
+        axiosUtils.get('/user/search?email='+email)
+        .then((res)=>{            
+            const msg = {
+                clubName:name,
+                clubId:clubId,
+                email:email
+            }
+            sendToMessage("naksam", res.data.id, msg, 1);
         })
-          .then((response) => {
+        .catch((err)=>{console.log(err);alert('존재하지 않는 사용자입니다.')});        
+        // axiosUtils.post('/club/invite', {
+        //     clubId : 1,
+        //     emails : [
+        //         Email
+        //     ]
+        // })
+        //   .then((response) => {
 
-          })
-          .catch((error) => {
+        //   })
+        //   .catch((error) => {
             
-          })
+        //   })
     };
 
     return(
@@ -32,7 +40,7 @@ export default function InviteModal({ name, inviteModal, setInviteModal }) {
                 <ModalTitle>{name}에 멤버 초대</ModalTitle>
             </ModalHeader>
             <Modal.Body>
-                <input type="text" placeholder="Search.." name="search" value={Email} onChange={emailHandler} />
+                <input type="text" placeholder="Search.." name="search" value={email} onChange={emailHandler} />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="success" onClick={submitHandler}>

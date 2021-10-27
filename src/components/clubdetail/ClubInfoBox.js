@@ -13,7 +13,7 @@ export default function ClubInfoBox({ club, clubWallet }) {
             <UserWalletInfoWrapper>
                 <LeftWalletInfo>포인트</LeftWalletInfo>
                 <RightWalletInfo>
-                    {clubWallet.toLocaleString()} P
+                    {/* {clubWallet.toLocaleString()} P */}
                     <UserButton1 onClick={() => setShowModal({show: !showModal.show, type:4})}>내역</UserButton1>
                     {showModal.show && <UserWalletModal showModal={showModal} setShowModal={setShowModal} />}
                 </RightWalletInfo>
