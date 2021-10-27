@@ -22,7 +22,7 @@ export default function SignIn({ open, setOpen }){
 
     const handleClose = () => {
         setOpen({...open, signIn:false});
-        setSignInData({ email: '', name: '', password:'' })
+        setSignInData({ email: '', password:'' })
     };
 
     const signUp = () => {
