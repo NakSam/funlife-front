@@ -7,6 +7,10 @@ import {useSelector} from 'react-redux';
 export default function ConversationList({userId, sendToMessage}) {
   const conversationList = useSelector(state => state.conversationlist);  
  
+  const sendMessage = () => {
+    sendToMessage("test", "naksam", "hello");
+  }
+
     return (
       <div className="conversation-list">        
         <ConversationSearch />
@@ -21,7 +25,8 @@ export default function ConversationList({userId, sendToMessage}) {
               sendToMessage={sendToMessage}
             />
           )
-        }  
+        } 
+        <button onClick={sendMessage}>send</button>
       </div>
     );
 }

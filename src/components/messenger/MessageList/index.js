@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import Compose from '../Compose';
+//import Compose from '../Compose';
 import Toolbar from '../Toolbar';
-import ToolbarButton from '../ToolbarButton';
+//import ToolbarButton from '../ToolbarButton';
 import Message from '../Message';
+import InviteMessage from '../InviteMessage';
+import AcceptMessage from '../AcceptMessage'
 import moment from 'moment';
 import 'moment/locale/ko'
 import { Slide, Dialog } from '@mui/material';
@@ -11,7 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 //import {useSelector, useDispatch} from 'react-redux';
 //import { insertPartner, insertMessage } from '../../modules/ConversationList'
-import SendRoundedIcon from '@mui/icons-material/SendRounded';
+//import SendRoundedIcon from '@mui/icons-material/SendRounded';
 
 
 import './MessageList.css';
@@ -24,11 +26,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function MessageList(props) {
-  //const [messages, setMessages] = useState([])
-  //const list = useSelector(state => state.conversationlist);
-  //const dispatch = useDispatch();
   const {showMessage, setShowMessage, partner, list, host, sendToMessage, handleLeaveChat} = props;
   const [inputMessage, setInputMessage] = useState("");
+  const messageState = 2;
   useEffect(() => {
   },[])
 
@@ -45,6 +45,7 @@ export default function MessageList(props) {
     sendToMessage(host, partner, inputMessage)
     setInputMessage("")
   }
+
   const renderMessages = () => {
     moment.locale('ko');
     let i = 0;
@@ -104,17 +105,46 @@ export default function MessageList(props) {
         
       }
 
-      tempMessages.push(
-        <Message
-          key={i}
-          isMine={isMine}
-          startsSequence={startsSequence}
-          endsSequence={endsSequence}
-          showTimestamp={showTimestamp}
-          data={current}
-          prevCompare={prevCompare}
-        />
-      );
+      if(messageState===2){
+        tempMessages.push(
+          <AcceptMessage
+            key={i}
+            isMine={isMine}
+            startsSequence={startsSequence}
+            endsSequence={endsSequence}
+            showTimestamp={showTimestamp}
+            data={current}
+            prevCompare={prevCompare}
+          />
+        );
+      }
+      if(messageState===1){
+        tempMessages.push(
+          <InviteMessage
+            key={i}
+            isMine={isMine}
+            startsSequence={startsSequence}
+            endsSequence={endsSequence}
+            showTimestamp={showTimestamp}
+            data={current}
+            prevCompare={prevCompare}
+          />
+        );
+      }
+      if(messageState===0){
+        tempMessages.push(
+          <Message
+            key={i}
+            isMine={isMine}
+            startsSequence={startsSequence}
+            endsSequence={endsSequence}
+            showTimestamp={showTimestamp}
+            data={current}
+            prevCompare={prevCompare}
+          />
+        );
+      }
+      
 
       // Proceed to the next message.
       i += 1;
@@ -146,7 +176,7 @@ export default function MessageList(props) {
 
           <div className="message-list-container">{renderMessages()}</div>
 
-          <Compose 
+          {/* <Compose 
             rightItems={[
               // <ToolbarButton action={sendMessages} key="send" icon="ion-ios-send"/>
               <IconButton
@@ -164,7 +194,7 @@ export default function MessageList(props) {
             setInputMessage={setInputMessage}
             //sendMessages={sendMessages}
             inputMessage={inputMessage}
-          />              
+          />               */}
         </div>
       </Dialog>
     );

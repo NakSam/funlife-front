@@ -1,9 +1,9 @@
-.message {
+.accept {
   display: flex;
   flex-direction: column;
 }
 
-.message .timestamp {
+.accept .timestamp {
   display: flex;
   justify-content: center;
   color: #999;
@@ -13,36 +13,36 @@
   text-transform: uppercase;
 }
 
-.message .bubble-container {
+.accept .bubble-container {
   font-size: 14px;
   display: flex;
 }
 
-.message.mine .bubble-container {
+.accept.mine .bubble-container {
   justify-content: flex-end;
 }
 
-.message.start .bubble-container .bubble {
+.accept.start .bubble-container .bubble {
   /* margin-top: 10px; */
   border-top-left-radius: 20px;
 }
 
-.message.end .bubble-container .bubble {
+.accept.end .bubble-container .bubble {
   border-bottom-left-radius: 20px;
   /* margin-bottom: 10px; */
 }
 
-.message.mine.start .bubble-container .bubble {
+.accept.mine.start .bubble-container .bubble {
   margin-top: 10px;
   border-top-right-radius: 20px;
 }
 
-.message.mine.end .bubble-container .bubble {
+.accept.mine.end .bubble-container .bubble {
   border-bottom-right-radius: 20px;
   margin-bottom: 10px;
 }
 
-.message .bubble-container .bubble {
+.accept .bubble-container .bubble {
   margin: 1px 0px;
   background: #f4f4f8;
   padding: 10px 15px;
@@ -54,7 +54,7 @@
   border-bottom-right-radius: 20px;
 }
 
-.message.mine .bubble-container .bubble {
+.accept.mine .bubble-container .bubble {
   background: #007aff;
   color: white;
   border-top-left-radius: 20px;
@@ -69,24 +69,35 @@
   flex-flow: row-reverse;
 }
 
-.message .sendtime {
+.accept .sendtime {
+  font-size: 0.8em;
+  color: #999;
+  margin: 2px 5px;
+  padding-top: 160px;
+  text-transform: uppercase;
+  vertical-align: bottom;
+}
+
+.accept.mine .sendtime {
   font-size: 0.8em;
   color: #999;
   margin: 8px 5px;
-  padding-top: 12px;
+  padding-top: 160px;
   text-transform: uppercase;
 }
 
-.meesage.mine .sendtime {
-  font-size: 0.8em;
-  color: #999;
-  margin: 8px 5px;
-  text-transform: uppercase;
-}
-
-.message.mine.start .sendtime {
+.accept.mine.start .sendtime {
   font-size: 0.8em;
   color: #999;
   margin: 12px 5px;
   text-transform: uppercase;
+}
+
+.conversation-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  border: 0.2px solid thistle;
 }

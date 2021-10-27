@@ -35,6 +35,8 @@ export default function App() {
 
   const sendToMessage = (from, to, msg) =>{
     const m = {message:msg, author:from, to:to, timestamp: new Date().getTime()};
+    const invite = {message:msg, author:"naksam", to:"test", messageState:1, timestamp: new Date().getTime()};
+    const accept = {message:msg, author:from, to:to, timestamp: new Date().getTime()};
     $websocket.current.sendMessage("/app/send", JSON.stringify(m));
     dispatch(insertMessage(m));
   }
