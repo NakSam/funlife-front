@@ -1,98 +1,110 @@
-import { ChargeBtn, BarTag, ExchangeBtn } from "./styled/UserInfo.styled";
-import { Modal, Button } from "react-bootstrap";
-import { ModalHeader, ModalTitle} from "../common/styled/ClubModal.styled";
-import { useState } from "react";
-import axiosUtils from "../../utils/axiosUtils";
 import React from "react";
+import { useState, useEffect } from "react";
+import axiosUtils from "../../utils/axiosUtils";
 import WalletHistory from "../common/WalletHistory"
+import { Slide, Dialog, Toolbar, IconButton } from "@mui/material";
+import { DialogTitle, DialogWrapper, InputBox, CreateButton } from "./styled/UserWalletModal.styled";
+import card from '../../static/img/kbcard.png'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-export default function UserWalletModal(){
-    const [ showModal, setShowModal ] = useState(false);
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
-    const [money, setMoney] = useState('');
-    let text = "";
-    if(showModal.type == 'deposit'){
-        text = "충전";
-    }else{
-        text = "환전";
-    }
-
-    const onChange = (e) => {
-        setMoney(e.target.value);
-    }
-
-    const HandleApply = (e) => {
-        axiosUtils.post("/wallet/my/"+showModal.type, {
-            money: money
-        });
-        setShowModal({...showModal, show: !showModal.show});
-        setMoney('');
-        window.location.href = "/userinfo";
-    }
-
-    const [myWalletHistory, setMyWalletHistory] = React.useState("");
-    React.useEffect(() => {
-        axiosUtils.get("/wallet/my/history").then((response) => {
-            setMyWalletHistory(response.data.depositHistories);
+export default function UserWalletModal({ showModal, setShowModal }){
+    const [myWalletHistory, setMyWalletHistory] = useState("");
+    const [money, setMoney] = useState();
+    
+    useEffect(() => {
+        axiosUtils.get("/wallet/my/history").then((res) => {
+            setMyWalletHistory(res.data.depositHistories);
         });
     }, []);
-    
-    if(showModal.type == 'history'){
-        return(
-            <div>
-                <ChargeBtn onClick={() => setShowModal({show: !showModal.show, type:"deposit"})}>충전</ChargeBtn>
-                <BarTag></BarTag>
-                <ExchangeBtn onClick={() => setShowModal({show: !showModal.show, type:"exchange"})}>환전</ExchangeBtn>
-                <BarTag></BarTag>
-                <ExchangeBtn onClick={() => setShowModal({show: !showModal.show, type:"history"})}>내역</ExchangeBtn>
 
-                <Modal show={showModal.show}>
-                    <ModalHeader>
-                        <ModalTitle>지갑내역</ModalTitle>
-                    </ModalHeader>
-                    <Modal.Body>
-                        <WalletHistory data={myWalletHistory}/>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="success" onClick={()=> setShowModal(false)}>
-                            닫기
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        );
-    }else{
-        return(
-            <div>
-                <ChargeBtn onClick={() => setShowModal({show: !showModal.show, type:"deposit"})}>충전</ChargeBtn>
-                <BarTag></BarTag>
-                <ExchangeBtn onClick={() => setShowModal({show: !showModal.show, type:"exchange"})}>환전</ExchangeBtn>
-                <BarTag></BarTag>
-                <ExchangeBtn onClick={() => setShowModal({show: !showModal.show, type:"history"})}>내역</ExchangeBtn>
-                
-                <Modal show={showModal.show}>
-                    <ModalHeader>
-                        <ModalTitle>{text}</ModalTitle>
-                    </ModalHeader>
-                    <Modal.Body>
-                    <input         
-                        name="name"
-                        placeholder="금액"
-                        value={money}
-                        onChange={onChange}
-                    />
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="success" onClick={HandleApply}>
-                            {text}하기
-                        </Button>
-                        <Button variant="success" onClick={()=> setShowModal(false)}>
-                            취소
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        );
+    const onChange = (e) => { setMoney(e.target.value);}
+
+    const HandleApply = () => {
+        let tmp;
+        if (showModal.type===1) { tmp = 'deposit'; } else if (showModal.type===2) { tmp = 'exchange'; }
+        axiosUtils.post("/wallet/my/" + tmp, { money: money })
+        .then(() => {
+            setShowModal({...showModal, show: !showModal.show});
+            setMoney('');
+            window.location.href="/userinfo";
+        })
+        .catch((err) => alert(err.data))
     }
-    
+
+    const handleClose = () => {setShowModal({...showModal, show: !showModal.show})}
+
+    if (showModal.type === 1) {
+        return (
+            <Dialog
+                open={showModal.show}
+                onClose={handleClose}
+                TransitionComponent={Transition}
+                PaperProps={{
+                    style: {
+                        backgroundColor: 'transparent',
+                        boxShadow: 'none',
+                    },
+                }}
+                style={{textAlign:"center"}}
+            >
+                <DialogWrapper>
+                    <div>
+                        <img src={card} alt="card" />
+                    </div>
+                        <InputBox placeholder="충전할 금액을 입력해주세요(숫자)" type="number" min="100" name="money" value={money} onChange={onChange} />
+                    <CreateButton variant="outlined" onClick={HandleApply} >충전하기</CreateButton>
+                </DialogWrapper>
+            </Dialog>
+        )
+    } else if (showModal.type === 2) {
+        return (
+            <Dialog
+                open={showModal.show}
+                onClose={handleClose}
+                TransitionComponent={Transition}
+                PaperProps={{
+                    style: {
+                        backgroundColor: 'transparent',
+                        boxShadow: 'none',
+                    },
+                }}
+                style={{textAlign:"center"}}
+            >
+                <DialogWrapper>
+                    <div>
+                        <img src={card} alt="card" />
+                    </div>
+                        <InputBox placeholder="환전할 금액을 입력해주세요(숫자)" type="number" min="100" name="money" value={money} onChange={onChange} />
+                    <CreateButton variant="outlined" onClick={HandleApply} >환전하기</CreateButton>
+                </DialogWrapper>
+            </Dialog>
+        )
+    } else if (showModal.type === 3) {
+        return (
+            <Dialog
+                open={showModal.show}
+                onClose={handleClose}
+                TransitionComponent={Transition}
+                style={{textAlign:"center"}}
+            >
+                <Toolbar style={{marginTop:"0.7rem"}}>
+                    <IconButton
+                        edge="start"
+                        onClick={handleClose}
+                        aria-label="close"
+                    >
+                        <ArrowBackIosNewIcon/>
+                    </IconButton>
+                    <DialogTitle variant="h6">내역 조회</DialogTitle>
+                </Toolbar>
+                <DialogWrapper>
+                    <WalletHistory data={myWalletHistory} />
+                </DialogWrapper>
+            </Dialog>
+        )
+    }
 }

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-// import axios from "axios";
-import cookie from "react-cookies";
+import { useSetRecoilState } from "recoil";
 import Signup from "./Signup";
+import axiosUtils from "../../utils/axiosUtils";
+import { loginStatus } from "../../states/state";
 import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { SignUpWrapper, LabelInputBox, InputBox, SignInButton, SignUpButton } from "./styled/SignIn.styled";
+
 import axiosUtils from "../../utils/axiosUtils";
 import { isEmail, isPassword } from '../../utils/ValidationCheck'
 
@@ -13,15 +15,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function SignIn({ open, setOpen }){
-    const [ signInData, setSignInData ] = useState({ email: '', password:'' })
-
+    const setUserStatus = useSetRecoilState(loginStatus);
+    const [ signInData, setSignInData ] = useState({ email: '', password:'' });
     const handleChange = (e) => {
         setSignInData({ ...signInData, [e.target.id] : e.target.value }) 
     }
 
     const handleClose = () => {
         setOpen({...open, signIn:false});
-        setSignInData({ email: '', name: '', password:'' })
+        setSignInData({ email: '', password:'' })
     };
 
     const signUp = () => {
@@ -45,10 +47,8 @@ export default function SignIn({ open, setOpen }){
 
         // axios 하기
         axiosUtils.post("/user/session/login", signInData)
-        .then((res) => { handleClose();console.log(cookie.load("naksam")) })
-        // .then(() => { console.log("로그인") setLoginModal({modal:false, login:true});setLogin(cookie.load("naksam"));console.log(cookie.load("naksam")); })
+        .then(() => { setUserStatus(true);handleClose(); })
         .catch(() => alert("로그인에 실패하였습니다."))
-        
     }
 
     return (
