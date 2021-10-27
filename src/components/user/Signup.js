@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { SignUpWrapper, LabelInputBox, InputBox, SignUpButton } from "./styled/SignUp.styled";
+import { isEmpty, isEmail, isPassword } from '../../utils/ValidationCheck'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -9,8 +10,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function Signup({ open, setOpen }){
     const [ signupData, setSignupData ] = useState({
-        email: '',
         name: '',
+        email: '',
         password:'',
     })
 
@@ -24,6 +25,27 @@ export default function Signup({ open, setOpen }){
     };
 
     const signUp = () => {
+        //공백 검사
+        var emptyCheck = isEmpty(signupData);
+        if(!emptyCheck == ''){
+            alert(emptyCheck);
+            return;
+        }
+
+        //이메일 검사
+        var emailCheck = isEmail(signupData.email);
+        if(!emailCheck == ''){
+            alert(emailCheck);
+            return;
+        }
+
+        //PW검사
+        var pwCheck = isPassword(signupData.password);
+        if(!pwCheck == ''){
+            alert(pwCheck);
+            return;
+        }
+
         // axios 하기
         handleClose();
     }
@@ -49,7 +71,7 @@ export default function Signup({ open, setOpen }){
             <SignUpWrapper>
                 <div>
                     <LabelInputBox htmlFor="name">닉네임</LabelInputBox>
-                    <InputBox name="name" id="name" value={signupData.name} onChange={handleChange} />
+                    <InputBox name="name" id="name" maxLength="10" value={signupData.name} onChange={handleChange} />
                 </div>
                 <div>
                     <LabelInputBox htmlFor="email">이메일</LabelInputBox>

@@ -4,13 +4,21 @@ import { Modal, Col } from "react-bootstrap";
 import { ModalWrapper, ModalHeader, ModalImg, ModalLocWrapper, ModalTitle, ModalLocIcon, ModalLoc, ModalCatBadge, ModalImgWrapper, ModalRow, ModalCol, ModalColLabel, ClubButton } from "./styled/ClubModal.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useClubModal from "../../hooks/useClubModal";
+import axiosUtils from "../../utils/axiosUtils";
 
 export default function ClubModal(){
     const [ showModal, setShowModal ] = useRecoilState(modalStatus);
     const { data } = useClubModal(showModal);
 
     const handleClose = () => setShowModal({...showModal, show: !showModal.show});
-    const handleClubApply = () => setShowModal({...showModal, show: !showModal.show});
+    const handleClubApply = () => {
+        axiosUtils.post('/club/join/'+data.id ).then((response) => {
+
+          })
+          .catch((error) => {
+            
+          })
+    };
     return(
         <>
         {data && 

@@ -10,7 +10,6 @@ export default function ClubDepositModal({clubId, dues}) {
 
         axiosUtils.post('/wallet/club/' + clubId + '/deposit')
           .then((response) => {
-            console.log(response);
             alert("송금이 완료되었습니다.");
             setClubDepositModal(false);
           })
@@ -21,7 +20,7 @@ export default function ClubDepositModal({clubId, dues}) {
 
     return(
         <div>
-            <button class="transfer" onClick={()=> setClubDepositModal({show: !clubDepositModal.show})}>송금</button>
+            <button className="transfer" onClick={()=> setClubDepositModal({show: !clubDepositModal.show})}>송금</button>
 
             <Modal show={clubDepositModal.show}>
             <ModalHeader>
