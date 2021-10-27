@@ -10,66 +10,6 @@ import { loginStatus } from "../states/state";
 import { MainTitleWrapper, MainLogo, Button, MainAddClub, MyClubList, SectionTitle, SectionTitle1, LatestClub } from "./styled/Main.styled";
 
 export default function Main(){
-<<<<<<< HEAD
-    const [ userStatus, setUserStatus ] = useRecoilState(loginStatus);
-    const login = () => {
-        axios.post("http://naksam.169.56.174.130.nip.io/user/session/login", {
-            email: "qwe@google.com",
-            password: "1q2w3e4r"
-        }).then(() => {
-        })
-    }
-
-    const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-        
-    // 내가 가입한 모임
-    const [myClubList, setMyClubList] = useState("");
-    // 내 모임 만들기
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-
-    const handleCreate = () => {
-        setModalIsOpen(false);
-    }
-
-    const [Name, SetName] = useState("");
-    const [Category, SetCategory] = useState("");
-    const [Location, SetLocation] = useState("");
-    const [Description, SetDescription] = useState("");
-
-    const nameHandler = (e) => { e.preventDefault(); SetName(e.target.value); };
-    const categoryHandler = (e) => { e.preventDefault(); SetCategory(e.target.value); };
-    const locationHandler = (e) => { e.preventDefault(); SetLocation(e.target.value); };
-    const descriptionHandler = (e) => { e.preventDefault(); SetDescription(e.target.value); };
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        // state에 저장한 값을 가져옵니다.
-        axios({
-            method:"post",
-            url:'http://naksam.169.56.174.130.nip.io:80/club/register',
-            data:{
-                category: Category,
-                description: Description,
-                image: "https://naksam.s3.ap-northeast-2.amazonaws.com/img/gym_1920.jpg",
-                location: Location,
-                maxMemberNum: 100,
-                memberNum: 1,
-                name: Name,
-                ownerId: 1
-              }
-          })
-          .then((response) => {
-              
-          })
-          .catch((error) => {
-            
-          })
-    };
-=======
     const userStatus = useRecoilValue(loginStatus);
     // const [ loginModal, setLoginModal ] = useState({modal:false, login:cookie.load("naksam")});
     const [ myClubList, setMyClubList ] = useState();
@@ -78,7 +18,6 @@ export default function Main(){
     const [ open, setOpen ] = useState({signIn:false, signUp:false});
     
     const handleCreate = () => setCreateClubOpen(false);
->>>>>>> bc45d9b1ac1276e2b23b652b28abe6442a4e8f6c
 
     useEffect(() => {
         axiosUtils.get("/club/myClub").then((res) => setMyClubList(res.data));

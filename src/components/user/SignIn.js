@@ -6,6 +6,7 @@ import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { SignUpWrapper, LabelInputBox, InputBox, SignInButton, SignUpButton } from "./styled/SignIn.styled";
 import axiosUtils from "../../utils/axiosUtils";
+import { isEmail, isPassword } from '../../utils/ValidationCheck'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -28,6 +29,20 @@ export default function SignIn({ open, setOpen }){
     }
 
     const signIn = () => {
+        //이메일 검사
+        var emailCheck = isEmail(signInData.email);
+        if(!emailCheck == ''){
+            alert(emailCheck);
+            return;
+        }
+
+        //PW검사
+        var pwCheck = isPassword(signInData.password);
+        if(!pwCheck == ''){
+            alert(pwCheck);
+            return;
+        }
+
         // axios 하기
         axiosUtils.post("/user/session/login", signInData)
         .then((res) => { handleClose();console.log(cookie.load("naksam")) })
