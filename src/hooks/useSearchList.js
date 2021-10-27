@@ -7,10 +7,10 @@ export default function useSearchList(searchDic) {
 
 const fetchGetSearchResult = async (searchDic) => {
     const { data } = await axiosUtils.get("/club/search", {
-        params : {
-            location : searchDic.location,
-            category : searchDic.category,
-            clubname : searchDic.clubname,
+        params: {
+            location: searchDic.location,
+            category: searchDic.category,
+            clubname: searchDic.clubname,
         },
     });
     return data;

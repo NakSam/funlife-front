@@ -6,7 +6,7 @@ export const TitleWrapper = styled.div`
 
 export const DetailTitle = styled.h1`
     margin: 2rem auto;
-    font-weight: bold;
+    font-weight: bolder;
     color: #58555A;
     font-family: 'S-CoreDream-6Bold';
 `;

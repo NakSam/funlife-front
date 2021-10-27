@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import GlobalFonts from "./static/fonts/fonts"
 import App from './App';
-import { ThemeProvider } from '@mui/material';
 import { theme } from "./utils/muiTheme";
+import { ThemeProvider } from '@mui/material';
+import GlobalFonts from "./static/fonts/fonts"
 
 ReactDOM.render(
   <React.StrictMode>

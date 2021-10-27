@@ -15,7 +15,7 @@ export default function CardSlider({ data }) {
     return (
         <div>
             <SliderCustom {...settings}>
-            {data && Object.entries(data).map((item) => { return <Card data={item[1]} key={item[1].id} /> })}
+                {data && Object.entries(data).map((item) => { return <Card data={item[1]} key={item[1].id} /> })}
             </SliderCustom>
         </div>
     );

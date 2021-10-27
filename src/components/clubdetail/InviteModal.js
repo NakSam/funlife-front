@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ModalHeader, ModalTitle} from "../common/styled/ClubModal.styled";
 import { Modal, Button } from "react-bootstrap";
 import axiosUtils from "../../utils/axiosUtils";
