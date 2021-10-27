@@ -11,5 +11,5 @@ export const modalStatus = atom({
 
 export const loginStatus = atom({
     key: 'login',
-    default: cookie.load("naksam")
+    default: cookie.load("naksam") ? true : false
 })
