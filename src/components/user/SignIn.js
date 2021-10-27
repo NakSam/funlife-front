@@ -6,8 +6,6 @@ import { loginStatus } from "../../states/state";
 import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { SignUpWrapper, LabelInputBox, InputBox, SignInButton, SignUpButton } from "./styled/SignIn.styled";
-
-import axiosUtils from "../../utils/axiosUtils";
 import { isEmail, isPassword } from '../../utils/ValidationCheck'
 
 const Transition = React.forwardRef(function Transition(props, ref) {

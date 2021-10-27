@@ -9,7 +9,7 @@ import { DialogTitle, DialogWrapper, ImgWrapper, ImgUploadButton, LabelInputBox,
 import { CategoryList, LocationList } from "../../consts/search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../static/icons/FontAwesome';
-import { isEmpty, moneyLimit } from '../../utils/ValidationCheck'
+import { isEmptyList, moneyLimit } from '../../utils/ValidationCheck'
 
 //AWS S3 설정
 const S3_BUCKET = 'naksam/img';
@@ -66,13 +66,13 @@ const CreateClub = ({open, handleClose}) => {
     const handleCreate = () => {
 
         //공백 검사
-        var emptyCheck = isEmpty(inputData);
+        var emptyCheck = isEmptyList(inputData);
         if(!emptyCheck == ''){
             alert(emptyCheck);
             return;
         }
 
-        //회비 금액제한
+        //금액제한
         var moneyCheck = moneyLimit(inputData.amount);
         if(!moneyCheck == ''){
             alert(moneyCheck);
@@ -185,7 +185,7 @@ const CreateClub = ({open, handleClose}) => {
                 </ImgWrapper>
                 <div>
                     <LabelInputBox htmlFor="clubname">모임명</LabelInputBox>
-                    <InputBox name="name" id="clubname" type="text" maxLength="12" value={inputData.name} onChange={handleChange} />
+                    <InputBox name="name" id="clubname" type="text" maxLength="20" value={inputData.name} onChange={handleChange} />
                 </div>
                 <Row>
                     <Col>
@@ -236,6 +236,7 @@ const CreateClub = ({open, handleClose}) => {
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">P</InputAdornment>,
                             }}
+                            maxLength="10"
                             name="amount" 
                             type="number"
                             id="amount" 
