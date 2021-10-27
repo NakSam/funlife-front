@@ -1,25 +1,27 @@
 import styled from "styled-components";
 import { Form } from "react-bootstrap";
-import { FormControl, TextField } from "@mui/material";
-
 
 export const LabelSelectBox = styled.label`
     font-family: 'S-CoreDream-6Bold';
     text-align:left;
+    color: #58555A;
     display: block;
     margin: 0rem 0.5rem 0.5rem 0.5rem;
 `;
 
 export const SelectBox1 = styled(Form.Select)`
     height: 3rem;
+    width: 100%;
+    color: #58555A;
     border: 2px solid #dedede;
     border-radius: 0.4rem;
     font-weight:bold;
 `;
 
 export const SelectBox2 = styled(Form.Select)`
-    margin-left:0.6rem;
     height: 3rem;
+    width: 100%;
+    color: #58555A;
     border: 2px solid #dedede;
     border-radius: 0.4rem;
     font-weight:bold;
@@ -32,7 +34,7 @@ export const SearchInputBox = styled.div`
 `;
 
 export const SearchInput = styled.input`
-    width: 93%;
+    width: 100%;
     border: 2px solid #dedede;
     border-radius: 0.4rem;
     padding: 0.7rem;

@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { Modal, Row, Col } from "react-bootstrap";
 
+export const ModalWrapper= styled(Modal)`
+    color: #58555A;
+    font-family: 'S-CoreDream-4Regular';
+`;
+
 export const ModalTitle = styled(Modal.Title)`
     margin-top: 1.3rem;
     font-weight: bolder;
@@ -47,11 +52,20 @@ export const ModalCatBadge = styled.button`
     position : absolute;
     top: 0.7rem;
     left: 0.7rem;
-    font-size: 0.8rem;
-    border-radius: 1rem;
-    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+    border-radius: 0.6rem;
+    padding: 0.2rem 0.6rem;
     border: 0;
-    background-color: #ffb300bb;
+    font-weight: bold;
+    background-color : ${props => {
+        if (props.cate === '스포츠') {
+           return '#D7E9F7'
+        } else if (props.cate === '맛집탐방') {
+            return '#F4D19B'
+        } else {
+            return '#D4E2D4'
+        }
+    }};
 `;
 
 export const ModalRow = styled(Row)`
@@ -69,4 +83,19 @@ export const ModalCol = styled(Col)`
 export const ModalColLabel = styled.p`
     font-weight: bold;
     margin: 0.7rem auto 0 auto;
+`;
+
+
+export const ClubButton = styled.button`
+    padding: 0.5rem;
+    font-weight: bold;
+    border-radius: 0.4rem;
+    background-color: white;
+    color: #ffb300;
+    border: 3px solid #ffb300;
+    &:active,
+    &:focus {
+        background-color: #ffb300;
+        color:white;
+    }
 `;

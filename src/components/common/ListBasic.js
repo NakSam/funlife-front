@@ -1,38 +1,29 @@
-import React from "react";
+import { useRecoilState } from "recoil";
+import { modalStatus } from "../../states/state";
+import { ListWrapper, Thumbnail, Location, ClubName, PeopleCnt, Category, Left, Right } from "./styled/ListBasic.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import '../../static/icons/FontAwesome';
-import { Button } from "@mui/material";
 
-const ListBasic = ({data}) => {
-    return(
-        data && Object.entries(data).map((item) => {
+export default function ListBasic({ data }){
+    const [ showModal, setShowModal] = useRecoilState(modalStatus);
+    return (
+        <>
+        {data && Object.entries(data).map((item) => {
             return(
-                <div style={{display:"flex", margin:"5px 0px 5px 0px"}} key={item[1].id} >
-                    <div>
-                        <img alt="book" style={{width: "170px", borderRadius:"10px"}} src={item[1].image} />
-                    </div>
-                    <div style={{margin:"0px 0px 0px 5px"}}>
-                        <div style={{margin:"0px 5px 5px 5px", fontSize:"10px"}}>
-                            <span style={{padding:"2px"}}>{item[1].location}</span>
-                        </div>
-                        <div className="clubTitle" style={{margin:"5px"}}>
-                            <span>{item[1].name}</span>
-                        </div>
-                        <div className="personCount" style={{margin:"5px"}}>
-                            <FontAwesomeIcon icon="users"/>
-                            <span>{item[1].memberNum} / {item[1].maxMemberNum}인</span>
-                        </div>
-                        
-                        <div className="tagCategory">
-                            <Button variant="outlined" startIcon={<FontAwesomeIcon style={{width:"15px"}} icon="hashtag"/>} style={{borderRadius:"20px", fontSize:"12px", height:"25px"}}>
-                                {item[1].category}
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+                <ListWrapper style={{maxWidth:"100%"}} onClick={() => setShowModal({show: !showModal.show, clubId:item[1].id})} key={item[1].id} >
+                    <Left>
+                        <Thumbnail alt="book" src={item[1].image} />
+                    </Left>
+                    <Right>
+                        <Location><FontAwesomeIcon icon="location-dot"/> {item[1].location}</Location>
+                        <ClubName>{item[1].name.length > 16 ? item[1].name.substr(0, 15) + "..." : item[1].name}</ClubName>
+                        <PeopleCnt>
+                            <FontAwesomeIcon icon="user"/> {item[1].memberNum} / {item[1].maxMemberNum}인
+                        </PeopleCnt>
+                        <Category cate={item[1].category}>{item[1].category}</Category>
+                    </Right>
+                </ListWrapper>
             )
-        })
+        })}
+        </>
     );
 }
-
-export default ListBasic;

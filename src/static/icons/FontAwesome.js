@@ -16,7 +16,8 @@ import {
     faLocationDot,
     faWallet,
     faP,
-    faEnvelope
+    faEnvelope,
+    faLock
  } from "@fortawesome/free-solid-svg-icons";
 
 // 사용할 아이콘을 라이브러리에 추가
@@ -35,5 +36,6 @@ library.add(
     faLocationDot,
     faWallet,
     faP,
-    faEnvelope
+    faEnvelope,
+    faLock
 );

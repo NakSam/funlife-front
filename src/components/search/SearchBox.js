@@ -1,13 +1,11 @@
+import { Row, Col } from "react-bootstrap";
 import { CategoryList, LocationList } from "../../consts/search";
-import { SelectBox1, SelectBox2, SearchInputBox, SearchInput, SearchButton } from "./styled/SearchBox.styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { SelectBox1, SelectBox2, SearchInputBox, SearchInput } from "./styled/SearchBox.styled";
 
 export default function SearchBox({ searchData, setSearchData }){
-    
+
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setSearchData({ ...searchData, [name] : value }) 
+        setSearchData({ ...searchData, [e.target.name] : e.target.value }) 
     }
 
     const handleSubmit = (e) => {
@@ -17,8 +15,8 @@ export default function SearchBox({ searchData, setSearchData }){
 
     return(
         <form onSubmit={handleSubmit} style={{marginBottom:"2rem"}}>
-            <div style={{display:"flex"}}>
-                <div>
+            <Row style={{ margin:"0" }}>
+                <Col style={{ padding:"0 0.2rem 0 0" }}>
                     <SelectBox1 aria-label="category" 
                         name="category"
                         onChange={handleChange}
@@ -31,8 +29,8 @@ export default function SearchBox({ searchData, setSearchData }){
                             return <option value={value} key={key}>{value}</option>
                         })}
                     </SelectBox1>
-                </div>
-                <div>
+                </Col>
+                <Col style={{ padding:"0 0 0 0.2rem" }}>
                     <SelectBox2 aria-label="location"
                         name="location"
                         onChange={handleChange}
@@ -45,8 +43,8 @@ export default function SearchBox({ searchData, setSearchData }){
                             return <option value={value} key={key}>{value}</option>
                         })}
                     </SelectBox2>
-                </div>
-            </div>
+                </Col>
+            </Row>
             <SearchInputBox>
                 <SearchInput 
                     name="clubname"
@@ -54,9 +52,6 @@ export default function SearchBox({ searchData, setSearchData }){
                     value={searchData.clubname}    
                     onChange={handleChange}
                 />
-                <SearchButton type="submit">
-                    <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" /> 
-                </SearchButton>
             </SearchInputBox>
         </form>
     );

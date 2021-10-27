@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Slide, Dialog, DialogTitle, DialogActions, DialogContent, DialogContentText, TextField, Button, InputAdornment, IconButton } from "@mui/material"
+import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { SignUpWrapper, LabelInputBox, InputBox, SignUpButton } from "./styled/SignUp.styled";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -13,6 +15,7 @@ export default function Signup({ open, setOpen }){
     })
 
     const handleChange = (e) => {
+<<<<<<< HEAD
         const { id, value } = e.target;
         setSignupData({ ...signupData, [id] : value }) 
     }
@@ -25,73 +28,54 @@ export default function Signup({ open, setOpen }){
     const goSignIn = () => {
         setOpen(false);
         setSignupData({ email: '', name: '', password:'' })
+=======
+        setSignupData({ ...signupData, [e.target.id] : e.target.value }) 
+>>>>>>> bc45d9b1ac1276e2b23b652b28abe6442a4e8f6c
     }
 
     const handleClose = () => {
-        setOpen(false);
+        setOpen({...open, signUp:false});
         setSignupData({ email: '', name: '', password:'' })
     };
 
+    const signUp = () => {
+        // axios 하기
+        handleClose();
+    }
+
     return (
-        <div>
-        <Dialog sx={{ margin:0 }} open={open} TransitionComponent={Transition} onClose={handleClose}>
-            <DialogTitle>Sign Up</DialogTitle>
-            <DialogContent>
-            <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Nickname"
-                type="text"
-                fullWidth
-                variant="standard"
-                color="warning"
-                onChange={handleChange}
-                value={signupData.name}
-                sx={{ marginBottom:2 }}
-            />
-            <TextField
-                margin="dense"
-                id="email"
-                label="Email"
-                type="email"
-                fullWidth
-                variant="standard"
-                color="warning"
-                value={signupData.email}
-                onChange={handleChange}
-                sx={{ marginBottom:2 }}
-            />
-            <TextField
-                margin="dense"
-                id="password"
-                label="Password"
-                type='password'
-                value={signupData.password}
-                onChange={handleChange}
-                fullWidth
-                variant="standard"
-                color="warning"
-            />
-            {/* <TextInputField
-                autoFocus
-                margin="dense"
-                id="passwordconfirm"
-                label="Password Confirm"
-                type="password"
-                fullWidth
-                type='password'
-                value={signupData.passwordConfirm}
-                onChange={handleChange}
-                variant="standard"
-                color="warning"
-            /> */}
-            </DialogContent>
-            <DialogActions>
-            <Button color="secondary" onClick={goSignIn}>Cancel</Button>
-            <Button color="warning" onClick={signUp}>Sign Up</Button>
-            </DialogActions>
+        <Dialog 
+            fullScreen 
+            open={open.signUp} 
+            TransitionComponent={Transition} 
+            onClose={handleClose}
+            style={{ textAlign: "center" }}
+        >
+            <Toolbar style={{marginTop:"0.7rem"}}>
+                <IconButton
+                    edge="start"
+                    onClick={handleClose}
+                    aria-label="close"
+                >
+                    <ArrowBackIosNewIcon />
+                </IconButton>
+                <DialogTitle variant="h6" style={{padding: "0"}}>회원가입</DialogTitle>
+            </Toolbar>
+            <SignUpWrapper>
+                <div>
+                    <LabelInputBox htmlFor="name">닉네임</LabelInputBox>
+                    <InputBox name="name" id="name" value={signupData.name} onChange={handleChange} />
+                </div>
+                <div>
+                    <LabelInputBox htmlFor="email">이메일</LabelInputBox>
+                    <InputBox name="email" id="email" value={signupData.email} onChange={handleChange} />
+                </div>
+                <div>
+                    <LabelInputBox htmlFor="password">비밀번호</LabelInputBox>
+                    <InputBox type="password" name="password" id="password" value={signupData.password} onChange={handleChange} />
+                </div>
+                <SignUpButton onClick={signUp}>회원가입</SignUpButton>
+            </SignUpWrapper>
         </Dialog>
-        </div>
     );
 }
