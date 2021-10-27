@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Signup from "./SignUp";
+// import axios from "axios";
+import Signup from "./Signup";
 import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { SignUpWrapper, LabelInputBox, InputBox, SignInButton, SignUpButton } from "./styled/SignIn.styled";
@@ -26,8 +27,9 @@ export default function SignIn({ open, setOpen }){
 
     const signIn = () => {
         // axios 하기
-        // axios.post("https://naksam.169.56.174.130.nip.io/user/session/login", loginData)
-        // .then(() => { setLoginModal({modal:false, login:true});setLogin(cookie.load("naksam"));console.log(cookie.load("naksam")); })
+        // axiosUtils.post("https://naksam.169.56.174.130.nip.io/user/session/login", signInData)
+        // .then((res) => { console.log(res)  })
+        // // .then(() => { console.log("로그인") setLoginModal({modal:false, login:true});setLogin(cookie.load("naksam"));console.log(cookie.load("naksam")); })
         // .catch(() => alert("로그인에 실패하였습니다."))
         handleClose();
     }

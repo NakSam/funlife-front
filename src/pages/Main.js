@@ -28,7 +28,7 @@ export default function Main(){
         <div>
             <MainTitleWrapper>
                 <MainLogo>
-                    <img width="100%" height="100%" alt="logo" src={logo} />
+                    <img width="80rem" height="80rem" alt="logo" src={logo} />
                 </MainLogo>
             </MainTitleWrapper>
             <MainAddClub>

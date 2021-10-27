@@ -8,7 +8,7 @@ export const MainTitleWrapper = styled.div`
 export const MainLogo = styled.div`
     height:3.5rem;
     display:block;
-    margin: 3rem auto;
+    margin: 0.5rem auto 2.5rem auto;
 `;
 
 export const Button = styled.button`
