@@ -60,7 +60,6 @@ const CreateClub = ({open, handleClose}) => {
         setUploadImg(img);
         // setSelect(img);
         // formData.append('file', img);
-        // console.log(formData);
     }
 
     const handleCreate = () => {
@@ -97,12 +96,7 @@ const CreateClub = ({open, handleClose}) => {
             const lastDot = uploadImg.name.lastIndexOf('.');
             const filename = uploadImg.name.substring(0,lastDot);
             const fileExt = uploadImg.name.substring(lastDot,len);
-
-            // console.log(filename);
-            // console.log(fileExt);
-
             const name = filename+dateString+timeString+fileExt;
-            //console.log(name); 
             const params = {
                 ACL: 'public-read',
                 Body: uploadImg,
@@ -115,7 +109,6 @@ const CreateClub = ({open, handleClose}) => {
                 } else {
                     inputData.image="https://naksam.s3.ap-northeast-2.amazonaws.com/img/"+name;
                     inputData.amount=Number(inputData.amount);
-                    //console.log(inputData.image);
                     // axios.post('https://naksam.169.56.174.130.nip.io/club/register',{
                     //     amount: inputData.amount,
                     //     category: inputData.category,
@@ -139,10 +132,8 @@ const CreateClub = ({open, handleClose}) => {
                         }
                     })
                     .then((res)=>{
-                        //console.log(res);
                     })
                     .catch((err)=>{
-                        //console.log(err);
                     })
                     
                 }
