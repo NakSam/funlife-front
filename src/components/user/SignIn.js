@@ -52,13 +52,14 @@ export default function SignIn({ open, setOpen }){
         // axios 하기
         axiosUtils.post("/user/session/login", signInData)
         .then((res) => { 
+            console.log(res);
             setUserStatus(true);
             dispatch(login(true));
-            dispatch(userid(String(res.data)));
+            dispatch(userid(String(res.data.userId)));
             dispatch(email(signInData.email));
             axios({
                 method:"get",
-                url:process.env.REACT_APP_USER_BASE_URL+'/fetchAllUsers/'+String(res.data)
+                url:process.env.REACT_APP_USER_BASE_URL+'/fetchAllUsers/'+String(res.data.userId)
               })
               .then((response) => {
                 console.log(response);

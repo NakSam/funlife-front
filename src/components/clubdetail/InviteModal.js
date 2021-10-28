@@ -22,8 +22,10 @@ export default function InviteModal({ clubId, name, inviteModal, setInviteModal,
                 email:inviteData.email
             }
             sendToMessage("naksam", res.data.id, msg, 1);
+            alert("초대하였습니다.");
+            setInviteModal(false);
         })
-        .catch((err)=>{console.log(err);alert('존재하지 않는 사용자입니다.')});
+        .catch(()=>{alert('존재하지 않는 사용자입니다.')});
     }
 
     return(

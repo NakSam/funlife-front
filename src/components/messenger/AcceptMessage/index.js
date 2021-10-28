@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import './AcceptMessage.css';
 import {Button} from '../../../pages/styled/Main.styled';
+import axiosUtils from '../../../utils/axiosUtils';
 
 const dummy1 = "에 참여하기를 원합니다."
 const dummy2 = "수락하여 참여시켜주세요.";
@@ -16,9 +17,17 @@ export default function Message(props) {
       showTimestamp,
       prevCompare
     } = props;
-
+    
     const friendlyTimestamp = moment(data.timestamp).format('LL') + ' ' +moment(data.timestamp).format('dddd');
-    const sendTimestamp = moment(data.timestamp).format('LT')
+    const sendTimestamp = moment(data.timestamp).format('LT');
+
+    const handleAccept = () => {
+      axiosUtils.post('/club/invite', {
+        clubId:data.clubId,
+        emails:[data.email]
+      })
+    }
+
     return (
       <div className={[
         'accept',
@@ -54,7 +63,7 @@ export default function Message(props) {
               { dummy2 }
             </div>
             <div>
-              <Button style={{backgroundColor:"#79bcd7"}}>가입수락</Button>
+              <Button onClick={handleAccept} style={{backgroundColor:"#79bcd7"}}>가입수락</Button>
             </div>            
           </div>
           {
