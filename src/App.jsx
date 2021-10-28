@@ -29,7 +29,6 @@ export default function App() {
   const $websocket = useRef(null);   
   const dispatch = useDispatch();
   const userData = useSelector(state => state.userdata);
-  console.log(userData);
   let topics = ['/topic/'+userData.userId];
 
   // useEffect(() => {
