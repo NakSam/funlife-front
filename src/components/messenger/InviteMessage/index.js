@@ -26,6 +26,9 @@ export default function Message(props) {
       .then(()=>{
         alert("가입완료!")
       })
+      .catch(()=>{
+        alert("이미 가입되었거나 최대인원입니다.")
+      })
     }
 
     return (
@@ -69,7 +72,7 @@ export default function Message(props) {
           {
             prevCompare && !isMine && 
             <span className="sendtime">
-              <text>{sendTimestamp}</text>        
+              <p>{sendTimestamp}</p>        
             </span>
           }          
         </div>

@@ -4,9 +4,8 @@ import { Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BoxWrapper, UserWalletInfoWrapper, LeftWalletInfo, RightWalletInfo, UserButton1, Button } from "./styled/ClubInfoBox.styled";
 
-export default function ClubInfoBox({ club, clubWallet }) {
+export default function ClubInfoBox({ club, clubWallet, setClubWallet }) {
     const [showModal, setShowModal] = useState({show: false, type:4});
-
     return(
         <BoxWrapper club={club}>
             <UserWalletInfoWrapper>
@@ -14,7 +13,7 @@ export default function ClubInfoBox({ club, clubWallet }) {
                 <RightWalletInfo>
                     {parseInt(clubWallet).toLocaleString()}
                     <UserButton1 onClick={() => setShowModal({show: !showModal.show, type:4})}>내역</UserButton1>
-                    {showModal.show && <UserWalletModal showModal={showModal} setShowModal={setShowModal} club={club} />}
+                    {showModal.show && <UserWalletModal showModal={showModal} setShowModal={setShowModal} clubWallet={clubWallet} setClubWallet={setClubWallet} club={club} />}
                 </RightWalletInfo>
             </UserWalletInfoWrapper>
             <Row style={{margin:"1.3rem 0"}}>

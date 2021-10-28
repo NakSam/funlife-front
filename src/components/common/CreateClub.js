@@ -113,7 +113,7 @@ const CreateClub = ({open, handleClose}) => {
                     inputData.amount=Number(inputData.amount);
                     axios({
                         method:"post",
-                        url:"https://naksam.169.56.174.130.nip.io/club/register",
+                        url:"http://naksam.169.56.174.130.nip.io/club/register",
                         data:{
                             amount: inputData.amount,
                             category: inputData.category,
@@ -128,8 +128,12 @@ const CreateClub = ({open, handleClose}) => {
                         }
                     })
                     .then((res)=>{
+                        alert("모임 개설 완료!");
+                        handleClose();
                     })
                     .catch((err)=>{
+                        alert("Error! 잠시후 다시 시도해주세요.");
+                        handleClose();
                     })
                     
                 }

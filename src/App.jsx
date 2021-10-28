@@ -28,7 +28,7 @@ export default function App() {
   const $websocket = useRef(null);   
   const dispatch = useDispatch();
   const userData = useSelector(state => state.userdata);
-  let topics = ['/topic/'+userData.userId];  
+  let topics = ['/topic/'+String(userData.userId)]; 
 
   const sendToMessage = (from, to, msg, status) =>{
     if(status===0){
@@ -37,11 +37,11 @@ export default function App() {
       dispatch(insertMessage(m));
     }
     if(status===1){
-      const invite = {message:"초대", author:"naksam", to:to, clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:1, timestamp: new Date().getTime()};
+      const invite = {message:"초대가 도착했습니다.", author:"naksam", to:String(to), clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:1, timestamp: new Date().getTime()};
       $websocket.current.sendMessage("/app/send", JSON.stringify(invite));      
     }
     if(status===2){
-      const accept = {message:"가입신청", author:"naksam", to:to, clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:2, timestamp: new Date().getTime()};
+      const accept = {message:"가입신청이 도착했습니다.", author:"naksam", to:String(to), clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:2, timestamp: new Date().getTime()};
       $websocket.current.sendMessage("/app/send", JSON.stringify(accept));      
     }
   }

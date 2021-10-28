@@ -33,7 +33,7 @@ export default function ClubDetail({sendToMessage}){
                 <DetailTitle>{club.name}</DetailTitle>
                 <InviteButton onClick={() => setInviteModal({show:!inviteModal.show})}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</InviteButton>                
             </TitleWrapper>
-            <ClubInfoBox club={club} clubWallet={clubWallet} />
+            <ClubInfoBox club={club} clubWallet={clubWallet} setClubWallet={setClubWallet} />
 
             <div style={{ marginBottom:"3rem", borderRadius:"0.7rem", fontFamily:"S-CoreDream-4Regular", border:"2px solid #ededed"}}>
                 <div style={{ display:"flex", backgroundColor:"#ededed", cursor:"pointer"}}>

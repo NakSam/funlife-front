@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserWalletModal from "./UserWalletModal";
 import { useState } from "react";
 
-export default function UserInfoBox({ userInfo, userWalletInfo }){
+export default function UserInfoBox({ userInfo, userWalletInfo, setUserWalletInfo }){
     const [ showModal, setShowModal ] = useState({show: false, type:0});
 
     return (
@@ -24,7 +24,7 @@ export default function UserInfoBox({ userInfo, userWalletInfo }){
                         <UserButton onClick={() => setShowModal({show: !showModal.show, type:1})}>충전</UserButton>
                         <UserButton onClick={() => setShowModal({show: !showModal.show, type:2})}>환전</UserButton>
                     </UserButtonWrapper>
-                    {showModal.show && <UserWalletModal showModal={showModal} setShowModal={setShowModal} />}
+                    {showModal.show && <UserWalletModal showModal={showModal} setShowModal={setShowModal} userWalletInfo={userWalletInfo} setUserWalletInfo={setUserWalletInfo}/>}
                 </UserInfos>
             </UserInfoWrapper>
             <UserWalletInfoWrapper>

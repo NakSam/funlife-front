@@ -13,7 +13,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function UserWalletModal({ showModal, setShowModal, club }){
+export default function UserWalletModal({ showModal, setShowModal, club, userWalletInfo, setUserWalletInfo, clubWallet, setClubWallet}){
     let query = new URLSearchParams(useLocation().search);
     const [myWalletHistory, setMyWalletHistory] = useState("");
     const [clubWalletHistory, setClubWalletHistory] = useState("");
@@ -39,7 +39,6 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
     const onChange = (e) => { setMoney(e.target.value);}
     
     const onChangeStore = (e) => { setStoreName(e.target.value);}
-
     const HandleApply = () => {
         var emptyCheck = isEmpty(money);
         if (!emptyCheck === '' && showModal.type !== 5) {
@@ -58,6 +57,8 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                 .then(() => {
                     alert("충전이 완료되었습니다.");
                     setShowModal({ ...showModal, show: !showModal.show });
+                    const afterDe = Number(userWalletInfo.amount)+Number(money);
+                    setUserWalletInfo({...userWalletInfo, amount:afterDe});
                     setMoney('');
                 })
             .catch((err) => alert(err.data));
@@ -65,14 +66,18 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
             axiosUtils.post("/wallet/my/exchange", { money: money },{headers:{Authorization:cookies['naksam']}})
                 .then(() => {
                     alert("환전이 완료되었습니다.");
+                    const afterEx = Number(userWalletInfo.amount)-Number(money);
+                    setUserWalletInfo({...userWalletInfo, amount:afterEx});
                     setShowModal({ ...showModal, show: !showModal.show });
                     setMoney('');
                 })
             .catch((err) => alert(err.data));
-        } else if (showModal.type === 5) {
+        } else if (showModal.type === 5) {            
             axiosUtils.post('/wallet/club/' + club.id + '/deposit',{},{headers:{Authorization:cookies['naksam']}})
                 .then(() => {
                     alert("송금이 완료되었습니다.");
+                    const afterClubDe = Number(clubWallet) + Number(club.dues);
+                    setClubWallet(afterClubDe);
                     setShowModal({ ...showModal, show: !showModal.show });
                 })
             .catch((err) => alert(err.data));
@@ -81,6 +86,8 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                 .then(() => {
                     alert("결제가 완료되었습니다.");
                     setShowModal({ ...showModal, show: !showModal.show });
+                    const afterClubPay = Number(clubWallet) - Number(money);
+                    setClubWallet(afterClubPay);
                     setStoreName('');
                     setMoney('');
                 })
