@@ -4,14 +4,13 @@ import { SampleNextArrow, SamplePrevArrow, SliderCustom } from "./styled/CardSli
 export default function CardSlider({ data }) {
     const settings = {
         dots: false,
-        infinite: true,
+        infinite: false,
         slidesToShow: 2,
         slidesToScroll: 1,
         speed: 500,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
     }
-
     return (
         <div>
             <SliderCustom {...settings}>

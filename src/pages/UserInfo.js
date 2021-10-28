@@ -32,7 +32,7 @@ export default function UserInfo() {
                 <Login open={open} setOpen={setOpen} />
             </> 
             : <>
-                <UserInfoBox userInfo={userInfo} userWalletInfo={userWalletInfo} />
+                <UserInfoBox userInfo={userInfo} userWalletInfo={userWalletInfo} setUserWalletInfo={setUserWalletInfo}/>
                 <MyClubList>
                     <SectionTitle>내가 가입한 모임</SectionTitle>
                     {myClubList ? <CardSlider data={myClubList} /> : <small style={{fontSize:"0.8rem", display:"block",padding:"0.5rem 2rem 3rem 2rem"}}>아직 가입한 모임이 없습니다.<br />원하는 모임에 가입해보세요 :)</small> }

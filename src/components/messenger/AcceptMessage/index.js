@@ -21,7 +21,6 @@ export default function Message(props) {
     
     const friendlyTimestamp = moment(data.timestamp).format('LL') + ' ' +moment(data.timestamp).format('dddd');
     const sendTimestamp = moment(data.timestamp).format('LT');
-
     const handleAccept = () => {
       axiosUtils.post('/club/invite', {
         clubId:data.clubId,
@@ -29,6 +28,8 @@ export default function Message(props) {
       },
       {headers:cookies['naksam']}      
       )
+      .then(()=>{alert("가입수락완료")})
+      .catch(()=>{alert("이미 가입되었거나 최대인원입니다.")})
     }
 
     return (
@@ -72,7 +73,7 @@ export default function Message(props) {
           {
             prevCompare && !isMine && 
             <span className="sendtime">
-              <text>{sendTimestamp}</text>        
+              <p>{sendTimestamp}</p>        
             </span>
           }          
         </div>
