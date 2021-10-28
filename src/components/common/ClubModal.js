@@ -6,26 +6,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useClubModal from "../../hooks/useClubModal";
 import { loginStatus } from "../../states/state";
 import { useSelector } from "react-redux";
+import axiosUtils from "../../utils/axiosUtils";
+import {useCookies} from 'react-cookie';
 
 export default function ClubModal({sendToMessage}){
     const [ showModal, setShowModal ] = useRecoilState(modalStatus);
     const { data } = useClubModal(showModal);
     const userStatus = useRecoilValue(loginStatus);
-    const userData = useSelector(state => state.userdata);
-
+    const [cookies] = useCookies();
     const handleClose = () => setShowModal({...showModal, show: !showModal.show});
     const handleClubApply = () => {        
         if(!userStatus){
             return alert("로그인 후 신청하세요.")
         }
         if(userStatus){
-            const msg = {
-                clubId: data.id,
-                clubName: data.name,
-                email: userData.email,
-            }
-            sendToMessage("naksam", data.clubMasterId, msg, 2);
-            alert("신청완료! 모임장의 수락 후 참여가능합니다.");
+            axiosUtils.get("/user/detail",{headers:{Authorization:cookies['naksam']}})
+            .then((res) => {
+                const msg = {
+                    clubId: data.id,
+                    clubName: data.name,
+                    email: res.data.email,
+                }
+                sendToMessage("naksam", data.clubMasterId, msg, 2);
+                alert("신청완료! 모임장의 수락 후 참여가능합니다.");
+            });            
         }
         
     };
