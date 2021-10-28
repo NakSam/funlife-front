@@ -24,31 +24,31 @@ export default function Signup({ open, setOpen }){
         setSignupData({ email: '', name: '', password:'' })
     };
 
-    const signUp = () => {
-        //공백 검사
-        var emptyCheck = isEmptyList(signupData);
-        if(!emptyCheck === ''){
-            alert(emptyCheck);
-            return;
-        }
+    // const signUp = () => {
+    //     //공백 검사
+    //     var emptyCheck = isEmptyList(signupData);
+    //     if(!emptyCheck === ''){
+    //         alert(emptyCheck);
+    //         return;
+    //     }
 
-        //이메일 검사
-        var emailCheck = isEmail(signupData.email);
-        if(!emailCheck === ''){
-            alert(emailCheck);
-            return;
-        }
+    //     //이메일 검사
+    //     var emailCheck = isEmail(signupData.email);
+    //     if(!emailCheck === ''){
+    //         alert(emailCheck);
+    //         return;
+    //     }
 
-        //PW검사
-        var pwCheck = isPassword(signupData.password);
-        if(!pwCheck === ''){
-            alert(pwCheck);
-            return;
-        }
+    //     //PW검사
+    //     var pwCheck = isPassword(signupData.password);
+    //     if(!pwCheck === ''){
+    //         alert(pwCheck);
+    //         return;
+    //     }
 
-        // axios 하기
-        handleClose();
-    }
+    //     // axios 하기
+    //     handleClose();
+    // }
 
     return (
         <Dialog 
@@ -81,7 +81,7 @@ export default function Signup({ open, setOpen }){
                     <LabelInputBox htmlFor="password">비밀번호</LabelInputBox>
                     <InputBox type="password" name="password" id="password" value={signupData.password} onChange={handleChange} />
                 </div>
-                <SignUpButton onClick={signUp}>회원가입</SignUpButton>
+                <SignUpButton >회원가입</SignUpButton>
             </SignUpWrapper>
         </Dialog>
     );

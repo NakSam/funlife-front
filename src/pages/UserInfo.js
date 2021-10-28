@@ -19,7 +19,7 @@ export default function UserInfo() {
         axiosUtils.get("/wallet/my").then((res) => setUserWalletInfo(res.data));
         axiosUtils.get("/club/myClub").then((res) => setMyClubList(res.data));
         if (!userStatus) setOpen({...open, signIn:true})
-    }, []);
+    }, [userInfo]);
 
     return (
         <div>
