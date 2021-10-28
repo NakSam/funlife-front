@@ -1,47 +1,43 @@
 import React, { useState } from "react";
-import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { SignUpWrapper, LabelInputBox, InputBox, SignUpButton } from "./styled/SignUp.styled";
 import { isEmptyList, isEmail, isPassword } from '../../utils/ValidationCheck'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { Slide, Dialog, DialogTitle, IconButton, Toolbar } from "@mui/material"
+import { SignUpWrapper, LabelInputBox, InputBox, SignUpButton } from "./styled/SignUp.styled";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Signup({ open, setOpen }){
-    const [ signupData, setSignupData ] = useState({
-        name: '',
-        email: '',
-        password:'',
-    })
+export default function Signup({ open, setOpen }) {
+    const [signupData, setSignupData] = useState({ email: '', name: '', password: '' })
 
     const handleChange = (e) => {
-        setSignupData({ ...signupData, [e.target.id] : e.target.value }) 
+        setSignupData({ ...signupData, [e.target.id]: e.target.value })
     }
 
     const handleClose = () => {
-        setOpen({...open, signUp:false});
-        setSignupData({ email: '', name: '', password:'' })
+        setOpen({ ...open, signUp: false });
+        setSignupData({ email: '', name: '', password: '' })
     };
 
     const signUp = () => {
         //공백 검사
         var emptyCheck = isEmptyList(signupData);
-        if(!emptyCheck === ''){
+        if (!emptyCheck === '') {
             alert(emptyCheck);
             return;
         }
 
         //이메일 검사
         var emailCheck = isEmail(signupData.email);
-        if(!emailCheck === ''){
+        if (!emailCheck === '') {
             alert(emailCheck);
             return;
         }
 
         //PW검사
         var pwCheck = isPassword(signupData.password);
-        if(!pwCheck === ''){
+        if (!pwCheck === '') {
             alert(pwCheck);
             return;
         }
@@ -51,14 +47,14 @@ export default function Signup({ open, setOpen }){
     }
 
     return (
-        <Dialog 
-            fullScreen 
-            open={open.signUp} 
-            TransitionComponent={Transition} 
+        <Dialog
+            fullScreen
+            open={open.signUp}
+            TransitionComponent={Transition}
             onClose={handleClose}
             style={{ textAlign: "center" }}
         >
-            <Toolbar style={{marginTop:"0.7rem"}}>
+            <Toolbar style={{ marginTop: "0.7rem" }}>
                 <IconButton
                     edge="start"
                     onClick={handleClose}
@@ -66,7 +62,7 @@ export default function Signup({ open, setOpen }){
                 >
                     <ArrowBackIosNewIcon />
                 </IconButton>
-                <DialogTitle variant="h6" style={{padding: "0"}}>회원가입</DialogTitle>
+                <DialogTitle variant="h6" style={{ padding: "0" }}>회원가입</DialogTitle>
             </Toolbar>
             <SignUpWrapper>
                 <div>

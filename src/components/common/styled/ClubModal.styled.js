@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Modal, Row, Col } from "react-bootstrap";
 
-export const ModalWrapper= styled(Modal)`
+export const ModalWrapper = styled(Modal)`
     color: #58555A;
     font-family: 'S-CoreDream-4Regular';
 `;
@@ -59,7 +59,7 @@ export const ModalCatBadge = styled.button`
     font-weight: bold;
     background-color : ${props => {
         if (props.cate === '스포츠') {
-           return '#D7E9F7'
+            return '#D7E9F7'
         } else if (props.cate === '맛집탐방') {
             return '#F4D19B'
         } else {

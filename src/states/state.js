@@ -2,8 +2,8 @@ import { atom } from "recoil";
 import cookie from "react-cookies";
 
 export const modalStatus = atom({
-    key : 'modal',
-    default : {
+    key: 'modal',
+    default: {
         show: false,
         clubId: null
     }

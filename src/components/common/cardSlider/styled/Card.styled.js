@@ -38,7 +38,7 @@ export const Category = styled.small`
     border-radius:0.6rem;
     background-color : ${props => {
         if (props.cate === '스포츠') {
-           return '#D7E9F7'
+            return '#D7E9F7'
         } else if (props.cate === '맛집탐방') {
             return '#F4D19B'
         } else {
