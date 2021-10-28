@@ -3,7 +3,8 @@ import moment from 'moment';
 import './AcceptMessage.css';
 import {Button} from '../../../pages/styled/Main.styled';
 import axiosUtils from '../../../utils/axiosUtils';
-import {useCookies} from 'react-cookie';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 const dummy1 = "에 참여하기를 원합니다."
 const dummy2 = "수락하여 참여시켜주세요.";
@@ -18,16 +19,23 @@ export default function Message(props) {
       prevCompare
     } = props;
     const [cookies] = useCookies();
-    
     const friendlyTimestamp = moment(data.timestamp).format('LL') + ' ' +moment(data.timestamp).format('dddd');
     const sendTimestamp = moment(data.timestamp).format('LT');
     const handleAccept = () => {
-      axiosUtils.post('/club/invite', {
+      const info = {
         clubId:data.clubId,
-        emails:[data.email]
-      },
-      {headers:cookies['naksam']}      
-      )
+        emails:[String(data.email)]
+      }
+      axios({
+        method:"post",
+        url:"http://naksam.169.56.174.130.nip.io/club/invite",
+        data:{
+          ...info
+        },
+        headers:{
+          Authorization:cookies['naksam']
+        }
+      })
       .then(()=>{alert("가입수락완료")})
       .catch(()=>{alert("이미 가입되었거나 최대인원입니다.")})
     }
