@@ -6,6 +6,7 @@ import Login from "../components/user/SignIn";
 import UserInfoBox from "../components/user/UserInfoBox";
 import CardSlider from "../components/common/cardSlider/CardSlider";
 import { UserInfoTitle, MyClubList, SectionTitle, Button } from "./styled/UserInfo.styled";
+import {useCookies} from 'react-cookie';
 
 export default function UserInfo() {
     const userStatus = useRecoilValue(loginStatus);
@@ -13,13 +14,14 @@ export default function UserInfo() {
     const [ userInfo, setUserInfo ] = useState();
     const [ userWalletInfo, setUserWalletInfo ] = useState();
     const [ myClubList, setMyClubList ] = useState();
+    const [cookies] = useCookies();
 
     useEffect(() => {
-        axiosUtils.get("/user/detail").then((res) => setUserInfo(res.data));
-        axiosUtils.get("/wallet/my").then((res) => setUserWalletInfo(res.data));
-        axiosUtils.get("/club/myClub").then((res) => setMyClubList(res.data));
+        axiosUtils.get("/user/detail",{headers:{Authorization:cookies['naksam']}}).then((res) => setUserInfo(res.data));
+        axiosUtils.get("/wallet/my", {headers:{Authorization:cookies['naksam']}}).then((res) => {setUserWalletInfo(res.data);});
+        axiosUtils.get("/club/myClub", {headers:{Authorization:cookies['naksam']}}).then((res) => setMyClubList(res.data));
         if (!userStatus) setOpen({...open, signIn:true})
-    }, [userInfo]);
+    }, []);
 
     return (
         <div>

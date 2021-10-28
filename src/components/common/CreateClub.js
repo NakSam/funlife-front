@@ -10,6 +10,7 @@ import { CategoryList, LocationList } from "../../consts/search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../static/icons/FontAwesome';
 import { isEmptyList, moneyLimit } from '../../utils/ValidationCheck'
+import {useCookies} from 'react-cookie';
 
 //AWS S3 설정
 const S3_BUCKET = 'naksam/img';
@@ -46,7 +47,8 @@ const CreateClub = ({open, handleClose}) => {
         maxMemberNum: "2",
         amount: "",
         description: ""
-    })
+    });
+    const [cookies] = useCookies();
 
     const onChange = (e) => {
         const img = e.target.files[0];        
@@ -105,19 +107,10 @@ const CreateClub = ({open, handleClose}) => {
             }
             myBucket.upload(params, (err) => {
                 if(err){
-                    console.log(err);
+                    alert("업로드 오류");
                 } else {
                     inputData.image="https://naksam.s3.ap-northeast-2.amazonaws.com/img/"+name;
                     inputData.amount=Number(inputData.amount);
-                    // axios.post('https://naksam.169.56.174.130.nip.io/club/register',{
-                    //     amount: inputData.amount,
-                    //     category: inputData.category,
-                    //     description: inputData.description,
-                    //     image: inputData.image,
-                    //     location: inputData.location,
-                    //     maxMemberNum: inputData.maxMemberNum,
-                    //     name: inputData.name
-                    // })
                     axios({
                         method:"post",
                         url:"https://naksam.169.56.174.130.nip.io/club/register",
@@ -129,6 +122,9 @@ const CreateClub = ({open, handleClose}) => {
                             location: inputData.location,
                             maxMemberNum: inputData.maxMemberNum,
                             name: inputData.name
+                        },
+                        headers:{
+                            Authorization:cookies['naksam']
                         }
                     })
                     .then((res)=>{
