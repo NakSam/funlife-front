@@ -8,6 +8,8 @@ import logo from "../static/img/logo.png";
 import axiosUtils from "../utils/axiosUtils";
 import { loginStatus } from "../states/state";
 import { MainTitleWrapper, MainLogo, Button, MainAddClub, MyClubList, SectionTitle, SectionTitle1, LatestClub } from "./styled/Main.styled";
+import {useCookies} from 'react-cookie';
+
 
 export default function Main(){
     const userStatus = useRecoilValue(loginStatus);
@@ -16,12 +18,13 @@ export default function Main(){
     const [ newClubList, setNewClubList ] = useState();
     const [ createClubOpen, setCreateClubOpen ] = useState(false);
     const [ open, setOpen ] = useState({signIn:false, signUp:false});
+    const [cookies] = useCookies();
     
     const handleCreate = () => setCreateClubOpen(false);
 
     useEffect(() => {
-        axiosUtils.get("/club/myClub").then((res) => setMyClubList(res.data));
-        axiosUtils.get("/club/home").then((res) => setNewClubList(res.data));
+        axiosUtils.get("/club/myClub",{headers:{Authorization:cookies['naksam']}}).then((res) => setMyClubList(res.data));
+        axiosUtils.get("/club/home", {headers:{Authorization:cookies['naksam']}}).then((res) => setNewClubList(res.data));
     }, []);
 
     return(

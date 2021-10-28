@@ -8,27 +8,28 @@ import distribute from '../../static/img/distribute.png'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useLocation } from "react-router";
 import { isEmpty, moneyLimit } from '../../utils/ValidationCheck'
-
+import {useCookies} from 'react-cookie';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function UserWalletModal({ showModal, setShowModal, club }){
     let query = new URLSearchParams(useLocation().search);
-
     const [myWalletHistory, setMyWalletHistory] = useState("");
     const [clubWalletHistory, setClubWalletHistory] = useState("");
     const [money, setMoney] = useState();
     const [storeName, setStoreName] = useState('');
+    const [cookies] = useCookies();
+    
     
     useEffect(() => {
         if (showModal.type < 4) {
-            axiosUtils.get("/wallet/my/history")
+            axiosUtils.get("/wallet/my/history",{headers:{Authorization:cookies['naksam']}})
                 .then((res) => {
                     setMyWalletHistory(res.data.depositHistories);
                 });
         } else {
-            axiosUtils.get("/wallet/club/" + query.get("clubId") + "/history")
+            axiosUtils.get("/wallet/club/" + query.get("clubId") + "/history",{headers:{Authorization:cookies['naksam']}})
                 .then((res) => {
                     setClubWalletHistory(res.data.depositHistories);
                 });
@@ -53,7 +54,7 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
         }
 
         if (showModal.type === 1) {
-            axiosUtils.post("/wallet/my/deposit", { money: money })
+            axiosUtils.post("/wallet/my/deposit", { money: money },{headers:{Authorization:cookies['naksam']}})
                 .then(() => {
                     alert("충전이 완료되었습니다.");
                     setShowModal({ ...showModal, show: !showModal.show });
@@ -61,7 +62,7 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                 })
             .catch((err) => alert(err.data));
         } else if (showModal.type === 2) {
-            axiosUtils.post("/wallet/my/exchange", { money: money })
+            axiosUtils.post("/wallet/my/exchange", { money: money },{headers:{Authorization:cookies['naksam']}})
                 .then(() => {
                     alert("환전이 완료되었습니다.");
                     setShowModal({ ...showModal, show: !showModal.show });
@@ -69,14 +70,14 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                 })
             .catch((err) => alert(err.data));
         } else if (showModal.type === 5) {
-            axiosUtils.post('/wallet/club/' + club.id + '/deposit')
+            axiosUtils.post('/wallet/club/' + club.id + '/deposit',{},{headers:{Authorization:cookies['naksam']}})
                 .then(() => {
                     alert("송금이 완료되었습니다.");
                     setShowModal({ ...showModal, show: !showModal.show });
                 })
             .catch((err) => alert(err.data));
         } else if (showModal.type === 6) {
-            axiosUtils.post('/wallet/club/' + club.id + '/payment', { storeName:storeName, money: money })
+            axiosUtils.post('/wallet/club/' + club.id + '/payment', { storeName:storeName, money: money },{headers:{Authorization:cookies['naksam']}})
                 .then(() => {
                     alert("결제가 완료되었습니다.");
                     setShowModal({ ...showModal, show: !showModal.show });
@@ -85,7 +86,7 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                 })
             .catch((err) => alert(err.data));
         } else if (showModal.type === 7) {
-            axiosUtils.post('/wallet/club/' + club.id + '/distribute')
+            axiosUtils.post('/wallet/club/' + club.id + '/distribute',{},{headers:{Authorization:cookies['naksam']}})
                 .then(() => {
                     alert("정산이 완료되었습니다.");
                     setShowModal({ ...showModal, show: !showModal.show });
@@ -128,7 +129,7 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                         <CreateButton onClick={HandleApply}>환전하기</CreateButton>
                     </>}
                     {showModal.type === 5 && <>
-                        <InputBox2 readOnly placeholder="3000원을 송금합니다." name="money" />
+                        <InputBox2 readOnly placeholder={club.dues + "원을 송금합니다."} name="money" />
                         <CreateButton onClick={HandleApply}>송금하기</CreateButton>
                     </>}
                     {showModal.type === 6 && <>

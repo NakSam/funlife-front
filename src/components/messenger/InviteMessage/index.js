@@ -3,6 +3,7 @@ import moment from 'moment';
 import './InviteMessage.css';
 import {Button} from '../../../pages/styled/Main.styled';
 import axiosUtils from '../../../utils/axiosUtils';
+import {useCookies} from 'react-cookie';
 
 const dummy1 = "모임에서 회원님을 초대하였습니다."
 const dummy2 = "가입하기를 눌러 모임을 시작해보세요.";
@@ -16,12 +17,12 @@ export default function Message(props) {
       showTimestamp,
       prevCompare
     } = props;
-
+    const [cookies] = useCookies();
     const friendlyTimestamp = moment(data.timestamp).format('LL') + ' ' +moment(data.timestamp).format('dddd');
     const sendTimestamp = moment(data.timestamp).format('LT');
 
     const handleRegister = () => {
-      axiosUtils.post('/club/join/'+data.clubId)
+      axiosUtils.post('/club/join/'+data.clubId,{},{headers:{Authorization:cookies['naksam']}})
       .then(()=>{
         alert("가입완료!")
       })

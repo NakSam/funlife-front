@@ -15,7 +15,6 @@ import SockJsClient from 'react-stomp';
 import { useSelector, useDispatch} from 'react-redux';
 import { insertMessage, receive } from './modules/ConversationList'
 import { countMessage } from "./modules/UserData";
-import axios from "axios";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,13 +28,7 @@ export default function App() {
   const $websocket = useRef(null);   
   const dispatch = useDispatch();
   const userData = useSelector(state => state.userdata);
-  let topics = ['/topic/'+userData.userId];
-
-  // useEffect(() => {
-  //   if(userData.isLogin){
-  //     getConversations();
-  //   }    
-  // }, [])
+  let topics = ['/topic/'+userData.userId];  
 
   const sendToMessage = (from, to, msg, status) =>{
     if(status===0){
@@ -45,46 +38,18 @@ export default function App() {
     }
     if(status===1){
       const invite = {message:"초대", author:"naksam", to:to, clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:1, timestamp: new Date().getTime()};
-      $websocket.current.sendMessage("/app/send", JSON.stringify(invite));
-      //dispatch(insertMessage(invite));
+      $websocket.current.sendMessage("/app/send", JSON.stringify(invite));      
     }
     if(status===2){
       const accept = {message:"가입신청", author:"naksam", to:to, clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:2, timestamp: new Date().getTime()};
-      $websocket.current.sendMessage("/app/send", JSON.stringify(accept));
-      //dispatch(insertMessage(accept));
+      $websocket.current.sendMessage("/app/send", JSON.stringify(accept));      
     }
-    // console.log(msg);
-    // console.log(to);
   }
 
   const recevieMessage = (msg) => {
-    //console.log(msg);
     dispatch(receive(msg));    
     dispatch(countMessage(1));
   }
-
-  // const getConversations = () => {
-  //   axios({
-  //     method:"get",
-  //     url:process.env.REACT_APP_USER_BASE_URL+'/fetchAllUsers/'+userData.userId
-  //   })
-  //   .then((response) => {
-  //     console.log(response);
-  //     for (const key in response.data) {
-  //       dispatch(insertPartner(
-  //         {
-  //           photo:process.env.REACT_APP_USER_BASE_IMAGE,
-  //           partner: response.data[key].partner,
-  //           list:[...response.data[key].messageList]
-  //         }
-  //       ))
-  //     }           
-  //   })
-  //   .catch((error) => {
-      
-  //   })
-  // }    
-
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>

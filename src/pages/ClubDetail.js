@@ -9,6 +9,7 @@ import ClubInfoBox from '../components/clubdetail/ClubInfoBox';
 import './styled/ClubDetail.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TitleWrapper, DetailTitle, InviteButton } from "./styled/ClubDetail.styled";
+import {useCookies} from 'react-cookie';
 
 export default function ClubDetail({sendToMessage}){
     let query = new URLSearchParams(useLocation().search);
@@ -16,13 +17,14 @@ export default function ClubDetail({sendToMessage}){
     const [clubWallet, setClubWallet] = useState();
     const [club, setClub] = useState();
     const [tab, setTab] = useState(1);
+    const [cookies] = useCookies();
 
     useEffect(() => {
-        axiosUtils.get('/wallet/club/' + query.get("clubId") + '/history')
+        axiosUtils.get('/wallet/club/' + query.get("clubId") + '/history',{headers:{Authorization:cookies['naksam']}})
         .then((res) => { setClubWallet(res.data.amount) });
         axiosUtils.get('/club/search/' + query.get("clubId"))
         .then((res) => { setClub(res.data) });
-    }, [club])
+    }, [])
 
     return(
         <>

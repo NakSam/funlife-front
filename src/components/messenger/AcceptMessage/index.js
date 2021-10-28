@@ -3,10 +3,10 @@ import moment from 'moment';
 import './AcceptMessage.css';
 import {Button} from '../../../pages/styled/Main.styled';
 import axiosUtils from '../../../utils/axiosUtils';
+import {useCookies} from 'react-cookie';
 
 const dummy1 = "에 참여하기를 원합니다."
 const dummy2 = "수락하여 참여시켜주세요.";
-const user = "수습행원"
 
 export default function Message(props) {
     const {
@@ -17,6 +17,7 @@ export default function Message(props) {
       showTimestamp,
       prevCompare
     } = props;
+    const [cookies] = useCookies();
     
     const friendlyTimestamp = moment(data.timestamp).format('LL') + ' ' +moment(data.timestamp).format('dddd');
     const sendTimestamp = moment(data.timestamp).format('LT');
@@ -25,7 +26,9 @@ export default function Message(props) {
       axiosUtils.post('/club/invite', {
         clubId:data.clubId,
         emails:[data.email]
-      })
+      },
+      {headers:cookies['naksam']}      
+      )
     }
 
     return (
