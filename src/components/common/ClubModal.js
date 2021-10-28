@@ -5,7 +5,6 @@ import { ModalWrapper, ModalHeader, ModalImg, ModalLocWrapper, ModalTitle, Modal
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useClubModal from "../../hooks/useClubModal";
 import { loginStatus } from "../../states/state";
-import { useSelector } from "react-redux";
 import axiosUtils from "../../utils/axiosUtils";
 import {useCookies} from 'react-cookie';
 
