@@ -17,6 +17,9 @@
   transition: 0.3s;
   font-size: 17px;
 }
+.tab-color {
+  color:#ffb300;
+}
 
 .setting {
     float: right;
@@ -62,10 +65,18 @@
     padding: 6px 12px;
     border-top: none;
   }
-
-  .calendar {
-    margin-left: 20px;
+ 
+  .react-calendar {
+    border:0;
+    color: #58555A;
+    font-family: 'S-CoreDream-4Regular';
+    font-size: 0.9rem;
   }
+  .react-calendar__navigation__label {
+    
+    font-family: 'S-CoreDream-6Bold';
+  }
+
   .cardBox {
     border-bottom: 1px solid #f0f2f4;
     padding-bottom: 14px;

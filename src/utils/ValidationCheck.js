@@ -21,10 +21,9 @@ export const isEmptyList = (value) => {
     var result = '';
     
     Object.entries(value).map(([key, value]) => {
-        if(result == ''){
+        if(result === ''){
             result = value ? '' : key + ' 값을 입력해주세요.'
         }
-       return;
     });
 
     return result; 
@@ -32,6 +31,5 @@ export const isEmptyList = (value) => {
 
 export const isEmpty = (value) => {
     var result = value ? '' : '값을 입력해주세요.';
-    console.log(result);
     return result; 
 }
