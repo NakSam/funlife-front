@@ -12,6 +12,13 @@ export const DialogWrapper = styled.div`
     color: #58555A;
 `;
 
+export const DialogWrapper1 = styled.div`
+    height : 12rem;
+    font-family: 'S-CoreDream-4Regular';
+    padding: 0 1.5rem;
+    color: #58555A;
+`;
+
 export const InputBox = styled.input`
     width: 100%;
     height: 3rem;
@@ -52,4 +59,10 @@ export const CancleButton = styled.button`
     background-color: #a1a1a1;
     color: white;
     border:0;
+`;
+export const LabelInputBox = styled.label`
+    font-family: 'S-CoreDream-6Bold';
+    text-align:left;
+    display: block;
+    margin: 1rem 0.5rem 0.2rem 0.5rem;
 `;

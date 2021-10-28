@@ -14,7 +14,7 @@ export default function ClubInfoBox({ club, clubWallet }) {
                 <RightWalletInfo>
                     {parseInt(clubWallet).toLocaleString()} P
                     <UserButton1 onClick={() => setShowModal({show: !showModal.show, type:4})}>내역</UserButton1>
-                    {showModal.show && <UserWalletModal showModal={showModal} setShowModal={setShowModal} />}
+                    {showModal.show && <UserWalletModal showModal={showModal} setShowModal={setShowModal} club={club} />}
                 </RightWalletInfo>
             </UserWalletInfoWrapper>
             <Row style={{margin:"1.3rem 0"}}>

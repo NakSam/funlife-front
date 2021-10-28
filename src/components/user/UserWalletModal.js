@@ -4,8 +4,8 @@ import WalletHistory from "../common/WalletHistory"
 import { Slide, Dialog, Toolbar, IconButton } from "@mui/material";
 import { DialogTitle, DialogWrapper, InputBox, InputBox2, CreateButton, CancleButton } from "./styled/UserWalletModal.styled";
 import card from '../../static/img/kbcard.png'
+import distribute from '../../static/img/distribute.png'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Query } from "react-query";
 import { useLocation } from "react-router";
 import { isEmpty, moneyLimit } from '../../utils/ValidationCheck'
 
@@ -19,6 +19,7 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
     const [myWalletHistory, setMyWalletHistory] = useState("");
     const [clubWalletHistory, setClubWalletHistory] = useState("");
     const [money, setMoney] = useState();
+    const [storeName, setStoreName] = useState('');
     
     useEffect(() => {
         if (showModal.type < 4) {
@@ -32,9 +33,11 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                     setClubWalletHistory(res.data.depositHistories);
                 });
         }
-    }, []);
+    }, [club]);
 
     const onChange = (e) => { setMoney(e.target.value);}
+    
+    const onChangeStore = (e) => { setStoreName(e.target.value);}
 
     const HandleApply = () => {
         var emptyCheck = isEmpty(money);
@@ -73,10 +76,11 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                 })
             .catch((err) => alert(err.data));
         } else if (showModal.type === 6) {
-            axiosUtils.post('/wallet/club/' + club.id + '/payment', { money: money })
+            axiosUtils.post('/wallet/club/' + club.id + '/payment', { storeName:storeName, money: money })
                 .then(() => {
                     alert("결제가 완료되었습니다.");
                     setShowModal({ ...showModal, show: !showModal.show });
+                    setStoreName('');
                     setMoney('');
                 })
             .catch((err) => alert(err.data));
@@ -107,9 +111,14 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                 style={{ textAlign: "center" }}
             >
                 <DialogWrapper>
-                    <div>
+                    {showModal.type === 7 ?
+                    <div style={{width:"70%", margin:"auto"}}>
+                        <img src={distribute} alt="dis" />
+                    </div> : <div>
                         <img src={card} alt="card" />
                     </div>
+                    }
+                    
                     {showModal.type === 1 && <>
                         <InputBox placeholder="충전할 금액을 숫자로 입력하세요" type="number" maxLength="10" name="money" value={money} onChange={onChange} />
                         <CreateButton onClick={HandleApply}>충전하기</CreateButton>
@@ -123,6 +132,7 @@ export default function UserWalletModal({ showModal, setShowModal, club }){
                         <CreateButton onClick={HandleApply}>송금하기</CreateButton>
                     </>}
                     {showModal.type === 6 && <>
+                        <InputBox placeholder="상호명을 입력하세요" maxLength="12" name="storeName" value={storeName} onChange={onChangeStore} />
                         <InputBox placeholder="결제할 금액을 숫자로 입력하세요" type="number" maxLength="10" name="money" value={money} onChange={onChange} />
                         <CreateButton onClick={HandleApply}>결제하기</CreateButton>
                     </>}
