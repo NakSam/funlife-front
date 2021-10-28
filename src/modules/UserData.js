@@ -4,7 +4,9 @@ const REMOVE = 'userdata/REMOVE';
 const MESSAGE = 'userdata/MESSAGE';
 const SETUSERID = 'userdata/SETUSERID';
 const SETUSEREMAIL = 'userdata/SETUSEREMAIL';
-const SETLIST = 'userdata/SETLIST'
+const SETLIST = 'userdata/SETLIST';
+const COUNT = 'userdata/COUNT';
+const RESET = 'userdata/RESET';
 
 export const login = () => ({type: LOGIN, payload:true});
 export const insert = (input) => ({type:INSERT, payload:input});
@@ -13,8 +15,10 @@ export const message = (msg) => ({type:MESSAGE, payload:msg});
 export const userid = (id) => ({type:SETUSERID, payload:id});
 export const email = (email) => ({type:SETUSEREMAIL, payload:email});
 export const setlist = (conversation) => ({type:SETLIST, payload:conversation});
+export const countMessage = (count) => ({type:COUNT, payload:count});
+export const countReset = (reset) => ({type:RESET, payload:reset});
 
-const initialState = {isLogin:false, userId:"", email:"", conversation:[]};
+const initialState = {isLogin:false, userId:"", email:"", conversation:[], count:0};
 
 const UserData = (state=initialState, action) => {
     switch (action.type) {
@@ -42,6 +46,12 @@ const UserData = (state=initialState, action) => {
         case SETLIST:            
             state.conversation.push(action.payload);
             return {...state, conversation:[...state.conversation]};
+        case COUNT:
+            let num = state.count + 1;
+            return {...state, count:num};
+        case RESET:
+            let zero = 0;
+            return {...state, count:zero};
         default:
             return state;
     }

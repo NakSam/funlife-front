@@ -13,7 +13,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppWrapper } from "./App.styled";
 import SockJsClient from 'react-stomp';
 import { useSelector, useDispatch} from 'react-redux';
-import { insertPartner, insertMessage, receive } from './modules/ConversationList'
+import { insertMessage, receive } from './modules/ConversationList'
+import { countMessage } from "./modules/UserData";
 import axios from "axios";
 
 const queryClient = new QueryClient({
@@ -49,17 +50,18 @@ export default function App() {
       //dispatch(insertMessage(invite));
     }
     if(status===2){
-      const accept = {message:"초대", author:"naksam", to:to, clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:2, timestamp: new Date().getTime()};
+      const accept = {message:"가입신청", author:"naksam", to:to, clubId:msg.clubId, email:msg.email, clubName:msg.clubName, status:2, timestamp: new Date().getTime()};
       $websocket.current.sendMessage("/app/send", JSON.stringify(accept));
       //dispatch(insertMessage(accept));
     }
-    console.log(msg);
-    console.log(to);
+    // console.log(msg);
+    // console.log(to);
   }
 
   const recevieMessage = (msg) => {
-    console.log(msg);
+    //console.log(msg);
     dispatch(receive(msg));    
+    dispatch(countMessage(1));
   }
 
   // const getConversations = () => {
@@ -96,7 +98,7 @@ export default function App() {
             <Route path="/" render={()=><Main sendToMessage={sendToMessage}/>}/>
           </Switch>   
           <Navbar />
-          <ClubModal />
+          <ClubModal sendToMessage={sendToMessage}/>
         </AppWrapper>
       </RecoilRoot>
       <SockJsClient

@@ -1,4 +1,5 @@
 .conversation-list-item {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 10px 5px 10px 5px;
@@ -26,8 +27,39 @@
   color: black;
 }
 
-.conversation-snippet {
+.conversation-snippet {  
   font-size: 14px;
   color: #888;
   margin: 0;
+}
+
+.conversation-last {  
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+.badge-content{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #d32f2f;
+  position: absolute;
+  right: 20px;
+  text-align: center;
+  line-height: 28px;
+}
+
+.badge-content-text{
+  font-size: 12px;
+  color:white;
+  margin: 0;
+}
+
+/* .js-shave-char {
+  display: none;
+} */
+
+.js-shave {
+  display: block;
 }

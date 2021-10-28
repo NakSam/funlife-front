@@ -1,23 +1,33 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { modalStatus } from "../../states/state";
 import { Modal, Col } from "react-bootstrap";
 import { ModalWrapper, ModalHeader, ModalImg, ModalLocWrapper, ModalTitle, ModalLocIcon, ModalLoc, ModalCatBadge, ModalImgWrapper, ModalRow, ModalCol, ModalColLabel, ClubButton } from "./styled/ClubModal.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useClubModal from "../../hooks/useClubModal";
-import axiosUtils from "../../utils/axiosUtils";
+import { loginStatus } from "../../states/state";
+import { useSelector } from "react-redux";
 
-export default function ClubModal(){
+export default function ClubModal({sendToMessage}){
     const [ showModal, setShowModal ] = useRecoilState(modalStatus);
     const { data } = useClubModal(showModal);
+    const userStatus = useRecoilValue(loginStatus);
+    const userData = useSelector(state => state.userdata);
 
     const handleClose = () => setShowModal({...showModal, show: !showModal.show});
-    const handleClubApply = () => {
-        axiosUtils.post('/club/join/'+data.id ).then((response) => {
-
-          })
-          .catch((error) => {
-            
-          })
+    const handleClubApply = () => {        
+        if(!userStatus){
+            return alert("로그인 후 신청하세요.")
+        }
+        if(userStatus){
+            const msg = {
+                clubId: data.id,
+                clubName: data.name,
+                email: userData.email,
+            }
+            sendToMessage("naksam", data.clubMasterId, msg, 2);
+            alert("신청완료! 모임장의 수락 후 참여가능합니다.");
+        }
+        
     };
     return(
         <>

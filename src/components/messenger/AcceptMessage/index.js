@@ -3,7 +3,7 @@ import moment from 'moment';
 import './AcceptMessage.css';
 import {Button} from '../../../pages/styled/Main.styled';
 
-const dummy1 = "KB모임에 참여하기를 원합니다."
+const dummy1 = "에 참여하기를 원합니다."
 const dummy2 = "수락하여 참여시켜주세요.";
 const user = "수습행원"
 
@@ -42,13 +42,13 @@ export default function Message(props) {
           }
           <div className="bubble" title={friendlyTimestamp}>
             <div style={{textAlign:"center"}}>
-              <img className="conversation-photo" src={'https://naksam.s3.ap-northeast-2.amazonaws.com/user-img/blank.png'} alt="conversation" />
+              <img className="message-photo" src={'https://naksam.s3.ap-northeast-2.amazonaws.com/user-img/blank.png'} alt="conversation" />
             </div>
             <div style={{textAlign:"center", fontSize:"15px", marginTop:"7px", marginBottom:"7px"}}>
-              <strong>{user}</strong>
+              <strong>{data.email}</strong>
             </div>
             <div style={{marginTop:"7px", marginBottom:"7px"}}>
-              { dummy1 }
+              {data.clubName}{ dummy1 }
             </div>
             <div style={{marginTop:"7px", marginBottom:"7px"}}>
               { dummy2 }

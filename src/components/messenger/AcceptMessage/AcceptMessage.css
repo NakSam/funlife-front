@@ -16,6 +16,7 @@
 .accept .bubble-container {
   font-size: 14px;
   display: flex;
+  margin: 5px 0px;
 }
 
 .accept.mine .bubble-container {
@@ -73,7 +74,7 @@
   font-size: 0.8em;
   color: #999;
   margin: 2px 5px;
-  padding-top: 160px;
+  padding-top: 180px;
   text-transform: uppercase;
   vertical-align: bottom;
 }
@@ -82,7 +83,7 @@
   font-size: 0.8em;
   color: #999;
   margin: 8px 5px;
-  padding-top: 160px;
+  padding-top: 180px;
   text-transform: uppercase;
 }
 
@@ -99,5 +100,13 @@
   border-radius: 50%;
   object-fit: cover;
   margin-right: 10px;
+  border: 0.2px solid thistle;
+}
+
+.message-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
   border: 0.2px solid thistle;
 }

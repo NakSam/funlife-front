@@ -4,12 +4,14 @@ import MessageList from '../MessageList';
 import {useSelector,useDispatch} from 'react-redux';
 import { leaveChat } from '../../../modules/ConversationList';
 import axios from 'axios';
+import { countReset } from '../../../modules/UserData';
 
 import './ConversationListItem.css';
 
 export default function ConversationListItem ({ partner, host, sendToMessage}){
   const [showMessage, setShowMessage] = useState(false);  
   const conversationList = useSelector(state => state.conversationlist);
+  const userData = useSelector(state => state.userdata);
   const dispatch = useDispatch();
   const baseImg = 'https://naksam.s3.ap-northeast-2.amazonaws.com/user-img/base.png';
   const [last, setLast] = useState("");  
@@ -19,6 +21,7 @@ export default function ConversationListItem ({ partner, host, sendToMessage}){
   })  
 
   const openMessage = () =>{
+    dispatch(countReset(0));
     setShowMessage(true);
   }
 
@@ -59,8 +62,12 @@ export default function ConversationListItem ({ partner, host, sendToMessage}){
         <img className="conversation-photo" src={baseImg} alt="conversation" />
         <div className="conversation-info">
           <h1 className="conversation-title">{ partner }</h1>
-          <p className="conversation-snippet">{ last }</p>
-        </div>        
+          <p className="conversation-last">{ last }</p>                    
+        </div>
+        {userData.count > 0 ? 
+          <div className="badge-content"><p className="badge-content-text">{userData.count}</p></div> : <div/>
+        }
+               
       </div>
       <MessageList 
         showMessage={showMessage} 
