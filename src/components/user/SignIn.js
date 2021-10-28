@@ -69,7 +69,6 @@ export default function SignIn({ open, setOpen }){
                 url:process.env.REACT_APP_USER_BASE_URL+'/fetchAllUsers/'+String(res.data.userId)
               })
               .then((response) => {
-                console.log(response);
                 for (const key in response.data) {
                   dispatch(insertPartner(
                     {
