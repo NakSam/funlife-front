@@ -29,7 +29,8 @@ export default function ClubModal({sendToMessage}){
                 }
                 sendToMessage("naksam", data.clubMasterId, msg, 2);
                 alert("신청완료! 모임장의 수락 후 참여가능합니다.");
-            });            
+            })
+            .catch(()=>alert("잠시후 다시 시도해주세요."));            
         }
         
     };
