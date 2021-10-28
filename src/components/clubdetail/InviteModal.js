@@ -1,18 +1,31 @@
 import React, { useState } from "react";
 import { Slide, Dialog, Toolbar } from "@mui/material";
 import { DialogTitle, DialogWrapper1, InputBox, LabelInputBox, CreateButton  } from "../user/styled/UserWalletModal.styled"
+import axiosUtils from "../../utils/axiosUtils";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function InviteModal({ inviteModal, setInviteModal }) {
+export default function InviteModal({ clubId, name, inviteModal, setInviteModal, sendToMessage }) {
     const [inviteData, setInviteData] = useState({email:''})
 
     const handleClose = () => setInviteModal(false);
     const handleChange = (e) => setInviteData({email: e.target.value})
     const inviteMember = (e) => {
-
+        e.preventDefault();
+        axiosUtils.get('/user/search?email='+inviteData.email)
+        .then((res)=>{            
+            const msg = {
+                clubName:name,
+                clubId:clubId,
+                email:inviteData.email
+            }
+            sendToMessage("naksam", res.data.id, msg, 1);
+            alert("초대하였습니다.");
+            setInviteModal(false);
+        })
+        .catch(()=>{alert('존재하지 않는 사용자입니다.')});
     }
 
     return(

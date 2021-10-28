@@ -4,9 +4,12 @@ import '../../static/icons/FontAwesome'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import { useSelector } from 'react-redux';
 
 
 const BottomNav = () => {
+    const userData = useSelector(state => state.userdata);
     return (
         <nav className="wrapper">
             <div>
@@ -20,6 +23,15 @@ const BottomNav = () => {
                 <Link to='/search'>
                     <IconButton size="small">
                         <FontAwesomeIcon icon="magnifying-glass"/>
+                    </IconButton>                    
+                </Link>
+            </div>
+            <div>
+                <Link to='/messenger'>
+                    <IconButton size="small">
+                        <Badge color="error" badgeContent={userData.count} max={99}>
+                            <FontAwesomeIcon icon="comment"/>
+                        </Badge>
                     </IconButton>                    
                 </Link>
             </div>

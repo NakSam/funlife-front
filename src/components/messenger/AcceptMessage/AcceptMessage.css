@@ -1,0 +1,112 @@
+.accept {
+  display: flex;
+  flex-direction: column;
+}
+
+.accept .timestamp {
+  display: flex;
+  justify-content: center;
+  color: #999;
+  font-weight: 600;
+  font-size: 12px;
+  margin: 10px 0px;
+  text-transform: uppercase;
+}
+
+.accept .bubble-container {
+  font-size: 14px;
+  display: flex;
+  margin: 5px 0px;
+}
+
+.accept.mine .bubble-container {
+  justify-content: flex-end;
+}
+
+.accept.start .bubble-container .bubble {
+  /* margin-top: 10px; */
+  border-top-left-radius: 20px;
+}
+
+.accept.end .bubble-container .bubble {
+  border-bottom-left-radius: 20px;
+  /* margin-bottom: 10px; */
+}
+
+.accept.mine.start .bubble-container .bubble {
+  margin-top: 10px;
+  border-top-right-radius: 20px;
+}
+
+.accept.mine.end .bubble-container .bubble {
+  border-bottom-right-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.accept .bubble-container .bubble {
+  margin: 1px 0px;
+  background: #f4f4f8;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 75%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.accept.mine .bubble-container .bubble {
+  background: #007aff;
+  color: white;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.timezone {
+  font-size: 0.8em;
+  flex-direction: row;
+  flex-flow: row-reverse;
+}
+
+.accept .sendtime {
+  font-size: 0.8em;
+  color: #999;
+  margin: 2px 5px;
+  padding-top: 180px;
+  text-transform: uppercase;
+  vertical-align: bottom;
+}
+
+.accept.mine .sendtime {
+  font-size: 0.8em;
+  color: #999;
+  margin: 8px 5px;
+  padding-top: 180px;
+  text-transform: uppercase;
+}
+
+.accept.mine.start .sendtime {
+  font-size: 0.8em;
+  color: #999;
+  margin: 12px 5px;
+  text-transform: uppercase;
+}
+
+.conversation-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  border: 0.2px solid thistle;
+}
+
+.message-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 0.2px solid thistle;
+}

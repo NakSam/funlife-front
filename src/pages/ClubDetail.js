@@ -10,7 +10,7 @@ import './styled/ClubDetail.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TitleWrapper, DetailTitle, InviteButton } from "./styled/ClubDetail.styled";
 
-export default function ClubDetail(){
+export default function ClubDetail({sendToMessage}){
     let query = new URLSearchParams(useLocation().search);
     const [inviteModal, setInviteModal] = useState(false);
     const [clubWallet, setClubWallet] = useState();
@@ -29,7 +29,7 @@ export default function ClubDetail(){
         {club && <div>
             <TitleWrapper>
                 <DetailTitle>{club.name}</DetailTitle>
-                <InviteButton onClick={() => setInviteModal({show:!inviteModal})}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</InviteButton>
+                <InviteButton onClick={() => setInviteModal({show:!inviteModal.show})}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</InviteButton>                
             </TitleWrapper>
             <ClubInfoBox club={club} clubWallet={clubWallet} />
 
@@ -73,7 +73,7 @@ export default function ClubDetail(){
                 </div>}
                 </div>
             </div>
-            <InviteModal inviteModal={inviteModal} setInviteModal={setInviteModal} />
+            <InviteModal clubId={query.get("clubId")} name={club.name} inviteModal={inviteModal} setInviteModal={setInviteModal} sendToMessage={sendToMessage} />
         </div>}
         </>  
     );
