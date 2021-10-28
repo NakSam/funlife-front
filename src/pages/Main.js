@@ -14,7 +14,7 @@ import {useCookies} from 'react-cookie';
 export default function Main(){
     const userStatus = useRecoilValue(loginStatus);
     // const [ loginModal, setLoginModal ] = useState({modal:false, login:cookie.load("naksam")});
-    const [ myClubList, setMyClubList ] = useState();
+    const [ myClubList, setMyClubList ] = useState([]);
     const [ newClubList, setNewClubList ] = useState();
     const [ createClubOpen, setCreateClubOpen ] = useState(false);
     const [ open, setOpen ] = useState({signIn:false, signUp:false});
@@ -43,7 +43,7 @@ export default function Main(){
             <CreateClub open={createClubOpen} handleClose={handleCreate}/>
             {userStatus && <MyClubList>
                 <SectionTitle1>내가 가입한 모임</SectionTitle1>
-                {myClubList ? <CardSlider data={myClubList} /> : <small style={{fontSize:"0.8rem", display:"block",padding:"0.5rem 2rem 3rem 2rem"}}>아직 가입한 모임이 없습니다.<br />원하는 모임에 가입해보세요 :)</small> }
+                {myClubList.length > 0 ? <CardSlider data={myClubList} /> : <small style={{fontSize:"0.8rem", display:"block",padding:"0.5rem 2rem 3rem 2rem"}}>아직 가입한 모임이 없습니다.<br />원하는 모임에 가입해보세요 :)</small> }
             </MyClubList>}
             <LatestClub>
                 <SectionTitle>최근 개설된 모임</SectionTitle>
