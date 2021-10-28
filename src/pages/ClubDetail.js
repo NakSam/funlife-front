@@ -1,5 +1,3 @@
-import './styled/ClubDetail.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -7,12 +5,13 @@ import { Row, Col} from "react-bootstrap";
 import axiosUtils from "../utils/axiosUtils";
 import { useLocation } from "react-router-dom";
 import InviteModal from '../components/clubdetail/InviteModal';
-import { TitleWrapper, DetailTitle, InviteButton } from "./styled/ClubDetail.styled";
 import ClubInfoBox from '../components/clubdetail/ClubInfoBox';
+import './styled/ClubDetail.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TitleWrapper, DetailTitle, InviteButton } from "./styled/ClubDetail.styled";
 
 export default function ClubDetail({sendToMessage}){
     let query = new URLSearchParams(useLocation().search);
-
     const [inviteModal, setInviteModal] = useState(false);
     const [clubWallet, setClubWallet] = useState();
     const [club, setClub] = useState();
@@ -30,15 +29,14 @@ export default function ClubDetail({sendToMessage}){
         {club && <div>
             <TitleWrapper>
                 <DetailTitle>{club.name}</DetailTitle>
-                <InviteButton onClick={() => setInviteModal({show:!inviteModal.show})}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</InviteButton>
-                <InviteModal clubId={query.get("clubId")} name={club.name} inviteModal={inviteModal} setInviteModal={setInviteModal} sendToMessage={sendToMessage} />
+                <InviteButton onClick={() => setInviteModal({show:!inviteModal.show})}><FontAwesomeIcon icon="fa-solid fa-circle-plus" /> 초대</InviteButton>                
             </TitleWrapper>
             <ClubInfoBox club={club} clubWallet={clubWallet} />
 
             <div style={{ marginBottom:"3rem", borderRadius:"0.7rem", fontFamily:"S-CoreDream-4Regular", border:"2px solid #ededed"}}>
                 <div style={{ display:"flex", backgroundColor:"#ededed", cursor:"pointer"}}>
-                    <div style={{ padding:"0.7rem", width:"50%", fontFamily:"S-CoreDream-6Bold", textAlign:"center" }} tab={tab} onClick={() => setTab(1)}>정보</div>
-                    <div style={{ padding:"0.7rem", width:"50%", fontFamily:"S-CoreDream-6Bold", textAlign:"center" }} tab={tab} onClick={() => setTab(2)}>일정</div>
+                    <div className={tab===1?'tab-color':'tab'} style={{ padding:"0.7rem", width:"50%", fontFamily:"S-CoreDream-6Bold", textAlign:"center" }} tab={tab} onClick={() => setTab(1)}>정보</div>
+                    <div className={tab!==1?'tab-color':'tab'} style={{ padding:"0.7rem", width:"50%", fontFamily:"S-CoreDream-6Bold", textAlign:"center" }} tab={tab} onClick={() => setTab(2)}>일정</div>
                 </div>
                 <div>
                 {tab === 1 
@@ -68,13 +66,14 @@ export default function ClubDetail({sendToMessage}){
                     </div>
                 </div> 
                 : <div style={{fontFamily:"S-CoreDream-4Regular", padding:"0.5rem"}}>
-                    <div id="Schedule" className="tabcontent calendar">
+                    <div id="Schedule" className="calendar">
                      <Calendar
                      />
                      </div>
                 </div>}
                 </div>
             </div>
+            <InviteModal clubId={query.get("clubId")} name={club.name} inviteModal={inviteModal} setInviteModal={setInviteModal} sendToMessage={sendToMessage} />
         </div>}
         </>  
     );
