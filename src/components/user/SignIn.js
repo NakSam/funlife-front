@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import {login, userid, email} from '../../modules/UserData';
 import axios from "axios";
 import { insertPartner } from "../../modules/ConversationList";
+import {Cookies} from "react-cookie";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -20,6 +21,12 @@ export default function SignIn({ open, setOpen }){
     const setUserStatus = useSetRecoilState(loginStatus);
     const [ signInData, setSignInData ] = useState({ email: '', password:'' });
     const dispatch = useDispatch();
+    
+    // 쿠키설정
+    const cookies = new Cookies();
+    const setCookies = (value) => {
+        cookies.set("naksam", value);
+    }
 
     const handleChange = (e) => {
         setSignInData({ ...signInData, [e.target.id] : e.target.value }) 
@@ -52,7 +59,7 @@ export default function SignIn({ open, setOpen }){
         // axios 하기
         axiosUtils.post("/user/session/login", signInData)
         .then((res) => { 
-            console.log(res);
+            setCookies(res.data.jwt)
             setUserStatus(true);
             dispatch(login(true));
             dispatch(userid(String(res.data.userId)));
